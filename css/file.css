@@ -1,0 +1,1081 @@
+/* General Styles */
+body {
+    color: #40514E;
+    margin: 0;
+    text-align: center;
+    font-family: 'Merriweather', serif;
+}
+
+h1 {
+    font-size: 4.5rem;
+    margin: 50px auto 0 auto;
+    font-family: 'Sacramento', cursive;
+    color: #66BFBF;
+}
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    color: #000000;
+    font-weight: normal;
+    padding-bottom: 10px;
+}
+
+h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: #011212;
+}
+
+p {
+    line-height: 2;
+}
+
+a {
+    color: #11999E;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #EAF6F6;
+}
+
+hr {
+    border: dotted #EAF6F6 6px;
+    border-bottom: none;
+    width: 4%;
+    margin: 100px auto;
+}
+
+/* General image styling */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Top Container */
+.top-container {
+    position: relative;
+    text-align: center;
+    padding: 300px 20px 200px; /* Keep the increased padding for spacing */
+    transition: background-color 0.5s ease, color 0.5s ease;
+    overflow: visible; /* Ensure no clipping of elements */
+}
+
+/* Day Mode Background */
+body:not(.dark-mode) .top-container {
+    background: linear-gradient(to bottom, #B9FFF8, #EAF6F6); /* Light blue to white */
+    color: #40514E; /* Dark text for day mode */
+}
+
+/* Night Mode Background */
+body.dark-mode .top-container {
+    background: linear-gradient(to bottom, #121212, #1A1A2E); /* Dark blue to black */
+    color: #E0E0E0; /* Light text for night mode */
+}
+
+/* Sun Image (Day Mode) */
+.sun {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    width: 80px;
+    height: auto;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+body.dark-mode .sun {
+    opacity: 0; /* Hide sun in night mode */
+}
+
+/* Moon Image (Night Mode) */
+.moon {
+    position: absolute;
+    top: 20px;
+    right: 50px; /* Ensure it doesn't overlap with the edge */
+    width: 80px;
+    height: auto;
+    opacity: 0; /* Hidden in light mode */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition for position */
+}
+
+body.dark-mode .moon {
+    opacity: 1; /* Show moon in night mode */
+    top: 20px; /* Align with the sun's position */
+    right: 50px; /* Align with the sun's position */
+}
+
+body.dark-mode .sun {
+    opacity: 0; /* Hide sun in night mode */
+}
+
+/* Stars */
+.star {
+    position: absolute;
+    width: 30px; /* Default size */
+    height: auto;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.3s ease;
+}
+
+body.dark-mode .star {
+    opacity: 1; /* Show stars in night mode */
+}
+
+.star:hover {
+    transform: scale(1.2); /* Slightly enlarge on hover */
+}
+
+/* Individual Star Positions */
+.star-1 {
+    top: 50px;
+    left: 10%; /* Positioned 10% from the left */
+}
+
+.star-2 {
+    top: 100px;
+    right: 15%; /* Positioned 15% from the right */
+}
+
+.star-3 {
+    top: 150px;
+    left: 30%; /* Positioned 30% from the left */
+}
+
+.star-4 {
+    top: 200px;
+    right: 25%; /* Positioned 25% from the right */
+}
+
+.star-5 {
+    top: 250px;
+    left: 50%; /* Centered horizontally */
+    transform: translateX(-50%);
+}
+
+.star-6 {
+    top: 300px;
+    right: 40%; /* Positioned 40% from the right */
+}
+
+.star-7 {
+    top: 350px;
+    left: 70%; /* Positioned 70% from the left */
+}
+
+.star-8 {
+    top: 400px;
+    right: 5%; /* Positioned 5% from the right */
+}
+
+.star-9 {
+    top: 450px;
+    left: 20%; /* Positioned 20% from the left */
+}
+
+.star-10 {
+    top: 500px;
+    right: 50%; /* Centered horizontally */
+    transform: translateX(50%);
+}
+
+/* Clouds */
+.top-cloud,
+.bottom-cloud,
+.extra-cloud-1,
+.extra-cloud-2 {
+    position: absolute;
+    width: 150px;
+    height: auto;
+    transition: opacity 0.5s ease;
+}
+
+.top-cloud {
+    top: 40px;
+    right: 300px;
+}
+
+.bottom-cloud {
+    bottom: 300px;
+    left: 250px;
+}
+
+/* New Clouds */
+.extra-cloud-1 {
+    top: 100px;
+    left: 100px;
+}
+
+.extra-cloud-2 {
+    top: 150px;
+    right: 150px;
+}
+
+body.dark-mode .top-cloud,
+body.dark-mode .bottom-cloud,
+body.dark-mode .extra-cloud-1,
+body.dark-mode .extra-cloud-2 {
+    opacity: 0.5; /* Dim clouds in night mode */
+}
+
+/* Remove Mountain */
+.mountain {
+    position: absolute;
+    width: 250px; /* Adjusted size for visibility */
+    height: auto;
+    bottom: 0; /* Align with the bottom of the container */
+    z-index: 0; /* Behind trees but above the jungle floor */
+    opacity: 1; /* Ensure visibility */
+    visibility: visible; /* Ensure it's visible */
+    display: block; /* Ensure it's displayed */
+}
+
+/* Heading and Subheading */
+.top-container h1,
+.top-container .pro {
+    position: relative; /* Restore relative positioning */
+    z-index: 1; /* Ensure text is above other elements */
+    margin: 0 auto;
+}
+
+.top-container h1 {
+    font-size: 4.5rem;
+    font-family: 'Sacramento', cursive;
+    margin-bottom: 30px; /* Add spacing below the heading */
+    color: #66BFBF; /* Keep the original color */
+}
+
+.top-container .pro {
+    font-size: 1.5rem;
+    color: inherit; /* Inherit color from the container */
+    margin-bottom: 50px; /* Add spacing below the subheading */
+}
+
+/* Middle Container */
+.middle-container {
+    margin: 150px 0; /* Add spacing above and below the middle container */
+}
+
+/* Profile Image Styling */
+.profile-img {
+    width: 150px; /* Adjust size as needed */
+    height: 150px; /* Ensure it's a square */
+    border-radius: 50%; /* Makes the image round */
+    object-fit: cover; /* Ensures the image is cropped to fit */
+    object-position: top; /* Adjusts the focus to the top (head and upper body) */
+    border: none; /* Removes the blue border */
+    box-shadow: 0 0 10px rgba(48, 227, 203, 0.8); /* Optional: Add a shadow for a modern look */
+    margin: 0 auto; /* Centers the image */
+}
+
+.intro {
+    width: 30%;
+    margin: auto;
+}
+
+.skill-row {
+    width: 50%;
+    margin: 100px auto;
+    text-align: left;
+}
+
+.skill-img-left {
+    width: 100px; /* Adjust size as needed */
+    float: left;
+    margin: 10px;
+}
+
+.skill-img-right {
+    width: 100px; /* Adjust size as needed */
+    float: right;
+    margin: 10px;
+}
+
+/* Bottom Container */
+.bottom-container {
+    background-color: #121212;
+    padding: 60px 0; /* Increased padding for spacing */
+    text-align: center;
+    margin-top: 100px; /* Adds space above the footer */
+}
+
+.footer-link {
+    display: inline-block;
+}
+
+.footer-link:hover {
+    color: #30E3CB; /* Highlight color on hover */
+}
+
+.social-icon {
+    width: 40px; /* Adjust size as needed */
+    height: 40px;
+    vertical-align: middle;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center; /* Center the icons horizontally */
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    gap: 20px; /* Add spacing between icons */
+}
+
+.copyright {
+    color: #EAF6F6;
+    font-size: 0.75rem;
+    margin-top: 20px;
+}
+
+/* Button Styles */
+.btn {
+    background: #88e3e6;
+    background-image: linear-gradient(to bottom, #11CDD4, #11999E);
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    color: #FFFFFF;
+    font-size: 20px;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: #30E3CB;
+    background-image: linear-gradient(to bottom, #30E3CB, #2BC4AD);
+}
+
+.btn-resume {
+    background: #11999E;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.btn-resume:hover {
+    background: #30E3CB;
+}
+
+/* Modern Button Styles */
+.btn-modern {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #ffffff; /* Ensure text is white */
+    background: linear-gradient(135deg, #11CDD4, #11999E); /* Teal gradient */
+    border: none;
+    border-radius: 30px;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.btn-modern:hover {
+    transform: scale(1.05); /* Slight scaling */
+    background: linear-gradient(135deg, #30E3CB, #2BC4AD); /* Lighter hover gradient */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Reduced glow intensity */
+}
+
+/* Mobile Compatibility */
+@media (max-width: 768px) {
+    .profile-img {
+        width: 100px; /* Smaller size for mobile */
+        height: 100px; /* Ensure it's still a square */
+    }
+}
+
+/* Resume Section Styling */
+.resume-section {
+    margin: 100px 0; /* Add spacing above and below the resume section */
+}
+
+.resume-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.resume-section .btn {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.resume-section .btn:hover {
+    background-color: #0056b3;
+    transition: 0.3s;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #121212; /* Consistent dark background */
+    color: #ffffff; /* Light text for readability */
+}
+
+body.dark-mode .top-container,
+body.dark-mode .middle-container,
+body.dark-mode .bottom-container {
+    background-color: #121212; /* Same dark background for all sections */
+}
+
+body.dark-mode a {
+    color: #30E3CB; /* Light teal links */
+}
+
+body.dark-mode hr {
+    border-color: #333333; /* Subtle divider color */
+    width: 80%; /* Extend the divider width */
+    margin: 50px auto; /* Adjust spacing */
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+    color: #e0e0e0; /* Light gray for headings */
+}
+
+body.dark-mode p,
+body.dark-mode a {
+    color: #b0b0b0; /* Softer gray for paragraphs and links */
+}
+
+body.dark-mode a:hover {
+    color: #30E3CB; /* Highlight links on hover */
+}
+
+/* Dark Mode Button Styles */
+body.dark-mode .btn-modern {
+    background: linear-gradient(135deg, #2BC4AD, #1A5E63); /* Darker teal gradient */
+    color: #E0E0E0; /* Soft light gray text */
+    border: 2px solid #30E3CB; /* Subtle border */
+    box-shadow: 0 4px 8px rgba(48, 227, 203, 0.2); /* Subtle glow */
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .btn-modern:hover {
+    background: linear-gradient(135deg, #3DF5E3, #2BC4AD); /* Lighter hover gradient */
+    box-shadow: 0 4px 8px rgba(48, 227, 203, 0.4); /* Reduced glow intensity */
+    transform: scale(1.05); /* Slight scaling */
+}
+
+/* Stylish Toggle Button */
+#dark-mode-btn {
+    background-color: #30E3CB; /* Teal background */
+    color: #ffffff; /* White text */
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+#dark-mode-btn:hover {
+    background-color: #11999E; /* Darker teal on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+}
+
+/* Dark Mode Toggle Container */
+.dark-mode-toggle {
+    position: absolute;
+    top: 20px; /* Distance from the top */
+    right: 20px; /* Distance from the right */
+    z-index: 1000; /* Ensure it stays on top of other elements */
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 30px;
+    transition: background-color 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 24px;
+    width: 24px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.4s;
+}
+
+/* Light/Dark Icons */
+.light-icon,
+.dark-icon {
+    position: absolute;
+    font-size: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: opacity 0.4s;
+}
+
+.light-icon {
+    left: 10px;
+    color: #f39c12; /* Sun color */
+}
+
+.dark-icon {
+    right: 10px;
+    color: #2c3e50; /* Moon color */
+    opacity: 0; /* Hidden by default */
+}
+
+/* When Checked (Dark Mode) */
+input:checked + .slider {
+    background-color: #4a4a6a; /* Darker background for dark mode */
+}
+
+input:checked + .slider:before {
+    transform: translateX(30px); /* Move the toggle to the right */
+}
+
+input:checked + .slider .light-icon {
+    opacity: 0; /* Hide the sun icon */
+}
+
+input:checked + .slider .dark-icon {
+    opacity: 1; /* Show the moon icon */
+}
+
+body:not(.dark-mode) .bottom-container {
+    background-color: #B9FFF8; /* Match the top container background in light mode */
+}
+
+body:not(.dark-mode) .copyright {
+    color: #66bfbf; /* Light teal color for light mode */
+}
+
+/* Stylish Download Button */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.group {
+    position: relative;
+}
+
+.group:hover .group-hover\:opacity-100 {
+    opacity: 1;
+}
+
+.relative {
+    position: relative;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+
+
+.transition {
+    transition: all 0.3s ease;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.shadow-md {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.absolute {
+    position: absolute;
+}
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.-bottom-full {
+    bottom: -100%;
+}
+
+.rounded-md {
+    border-radius: 0.375rem;
+}
+
+.bg-opacity-70 {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.left-1\/2 {
+    left: 50%;
+}
+
+
+
+.group-hover\:opacity-100 {
+    opacity: 1;
+}
+
+.transition-opacity {
+    transition: opacity 0.3s ease;
+}
+
+.shadow-lg {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.left-1-2 {
+    left: 50%;
+}
+
+.hover-bg-30E3CB:hover {
+    background-color: #30E3CB;
+}
+
+.bg-teal {
+    background-color: #11999E;
+}
+
+body .copyright {
+    color: #66bfbf;
+}
+
+.left-half {
+    left: 50%;
+}
+
+.hover-bg-light-teal:hover {
+    background-color: #30E3CB;
+}
+
+.group-hover-opacity {
+    opacity: 1;
+}
+
+.rounded-large {
+    border-radius: 1.5rem;
+}
+
+.text-white {
+    color: #ffffff;
+}
+
+.contact-me {
+    margin-bottom: 50px; /* Adds space below the Contact Me section */
+}
+
+/* Birds (Light Mode) */
+.bird {
+    position: absolute;
+    width: 50px;
+    height: auto;
+    opacity: 1; /* Visible in light mode */
+    transition: opacity 0.5s ease;
+}
+
+body.dark-mode .bird {
+    opacity: 0; /* Hide birds in dark mode */
+}
+
+/* Individual Bird Positions */
+.bird-1 {
+    top: 100px;
+    left: 200px;
+}
+
+.bird-2 {
+    top: 150px;
+    right: 250px;
+}
+
+.bird-3 {
+    top: 120px;
+    left: 350px;
+}
+
+/* Bats (Dark Mode) */
+.bat {
+    position: absolute;
+    width: 50px;
+    height: auto;
+    opacity: 0; /* Hidden in light mode */
+    transition: opacity 0.5s ease;
+}
+
+body.dark-mode .bat {
+    opacity: 1; /* Show bats in dark mode */
+}
+
+/* Individual Bat Positions */
+.bat-1 {
+    top: 100px;
+    left: 250px;
+}
+
+.bat-2 {
+    top: 140px;
+    right: 200px;
+}
+
+.bat-3 {
+    top: 160px;
+    left: 300px;
+}
+
+/* Trees */
+.tree {
+    position: absolute;
+    width: 150px; /* Large tree size */
+    height: auto;
+    bottom: 0; /* Align trees with the bottom of the container */
+    z-index: 1; /* Above mountains */
+}
+
+.tree-1 {
+    left: 20px;
+}
+
+.tree-2 {
+    right: 150px; /* Adjusted to avoid overlap */
+}
+
+.tree-3 {
+    left: 250px;
+}
+
+.tree-4 {
+    right: 400px; /* Adjusted to avoid overlap with the mountain */
+}
+
+.tree-5 {
+    left: 500px;
+}
+
+/* Small Trees */
+.tree.small-tree-1 {
+    width: 80px; /* Smaller size for variety */
+    left: 150px;
+    bottom: 0;
+}
+
+.tree.small-tree-2 {
+    width: 80px; /* Smaller size for variety */
+    right: 250px;
+    bottom: 0;
+}
+
+.tree.small-tree-3 {
+    width: 80px;
+    left: 400px;
+    bottom: 0;
+}
+
+.tree.small-tree-4 {
+    width: 80px;
+    right: 350px;
+    bottom: 0;
+}
+
+/* Large Mountains */
+.mountain {
+    position: absolute;
+    width: 250px; /* Adjusted size for visibility */
+    height: auto;
+    bottom: 0; /* Align with the bottom of the container */
+    z-index: 0; /* Behind trees but above the jungle floor */
+    opacity: 1; /* Ensure visibility */
+    visibility: visible; /* Ensure it's visible */
+    display: block; /* Ensure it's displayed */
+}
+
+.mountain-1 {
+    left: 50px; /* Position on the left */
+    bottom: 0; /* Align with the bottom of the container */
+}
+
+.mountain-2 {
+    right: 200px; /* Adjusted to avoid overlap */
+    bottom: 0; /* Align with the bottom of the container */
+}
+
+/* Small Mountains */
+.mountain.small-mountain-1 {
+    position: absolute;
+    width: 200px; /* Smaller size for variety */
+    height: auto;
+    bottom: 0;
+    z-index: 0; /* Behind trees but above the jungle floor */
+    left: 600px; /* Add space to avoid overlap */
+}
+
+.mountain.small-mountain-2 {
+    position: absolute;
+    width: 200px; /* Smaller size for variety */
+    height: auto;
+    bottom: 0;
+    z-index: 0; /* Behind trees but above the jungle floor */
+    right: 250px; /* Adjusted to avoid overlap */
+}
+
+/* Jungle Floor */
+.jungle-floor {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to top, #2E8B57, #3CB371); /* Gradient for jungle floor */
+    z-index: -1; /* Below everything */
+}
+
+/* Jungle Sky */
+.jungle-sky {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 70%;
+    background: linear-gradient(to bottom, #87CEEB, #B9FFF8); /* Gradient for sky */
+    z-index: -2; /* Place behind everything */
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider img {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 7px;
+    transition: opacity 0.4s ease;
+}
+
+.sun {
+    left: 10px;
+    opacity: 1; /* Visible in light mode */
+}
+
+.moon {
+    right: 50px; /* Ensure it doesn't overlap with the edge */
+    opacity: 0; /* Hidden in light mode */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+input:checked + .slider {
+    background-color: #4a4a6a; /* Darker background for dark mode */
+}
+
+input:checked + .slider .sun {
+    opacity: 0; /* Hide the sun in dark mode */
+}
+
+input:checked + .slider .moon {
+    opacity: 1; /* Show the moon in dark mode */
+}
+
+/* Jungle Background */
+
+/* Large Trees */
+.tree {
+    position: absolute;
+    width: 150px; /* Large tree size */
+    height: auto;
+    bottom: 0; /* Align trees with the bottom of the container */
+    z-index: 1; /* Above mountains */
+}
+
+.tree-1 {
+    left: 50px;
+}
+
+.tree-2 {
+    right: 150px;
+}
+
+.tree-3 {
+    left: 300px;
+}
+
+/* Small Trees */
+.tree.small-tree-1 {
+    width: 80px; /* Smaller size for variety */
+    left: 150px;
+    bottom: 0;
+}
+
+.tree.small-tree-2 {
+    width: 80px; /* Smaller size for variety */
+    right: 200px;
+    bottom: 0;
+}
+
+/* Large Mountains */
+.mountain {
+    position: absolute;
+    width: 250px; /* Adjusted size for visibility */
+    height: auto;
+    bottom: 0; /* Align with the bottom of the container */
+    z-index: 0; /* Behind trees but above the jungle floor */
+    opacity: 1; /* Ensure visibility */
+    visibility: visible; /* Ensure it's visible */
+    display: block; /* Ensure it's displayed */
+}
+
+.mountain-1 {
+    left: 100px; /* Position on the left */
+    bottom: 0; /* Align with the bottom of the container */
+}
+
+.mountain-2 {
+    right: 150px; /* Position on the right */
+    bottom: 0; /* Align with the bottom of the container */
+}
+
+/* Small Mountains */
+.mountain.small-mountain-1 {
+    position: absolute;
+    width: 150px; /* Smaller size for variety */
+    height: auto;
+    bottom: 0;
+    z-index: 0; /* Behind trees but above the jungle floor */
+    left: 200px; /* Position slightly to the left */
+}
+
+.mountain.small-mountain-2 {
+    position: absolute;
+    width: 150px; /* Smaller size for variety */
+    height: auto;
+    bottom: 0;
+    z-index: 0; /* Behind trees but above the jungle floor */
+    right: 250px; /* Adjusted to avoid overlap */
+}
+
+/* Small Mountains */
+.mountain.small-mountain-1 {
+    width: 120px; /* Smaller mountain size */
+    left: 250px;
+    bottom: 0;
+    z-index: 0; /* Behind trees but above the jungle floor */
+}
+
+.mountain.small-mountain-2 {
+    width: 120px; /* Smaller mountain size */
+    right: 300px;
+    bottom: 0;
+    z-index: 0; /* Behind trees but above the jungle floor */
+}
+
+/* Jungle Floor */
+.jungle-floor {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to top, #2E8B57, #3CB371); /* Gradient for jungle floor */
+    z-index: -1; /* Below everything */
+}
+
+/* Jungle Sky */
+.jungle-sky {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 70%;
+    background: linear-gradient(to bottom, #87CEEB, #B9FFF8); /* Gradient for sky */
+    z-index: -3; /* Place behind everything */
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.jungle-sky {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Ensure it spans the full width */
+    height: 70%;
+    background: linear-gradient(to bottom, #87CEEB, #B9FFF8); /* Gradient for sky */
+    z-index: -3; /* Place behind everything */
+}
+
+.jungle-floor {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Ensure it spans the full width */
+    height: 100px;
+    background: linear-gradient(to top, #2E8B57, #3CB371); /* Gradient for jungle floor */
+    z-index: -1; /* Below everything */
+}
