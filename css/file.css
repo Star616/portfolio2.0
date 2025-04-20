@@ -260,14 +260,14 @@ body.dark-mode .extra-cloud-2 {
 
 /* Profile Image Styling */
 .profile-img {
-    width: 150px; /* Adjust size as needed */
-    height: 150px; /* Ensure it's a square */
-    border-radius: 50%; /* Makes the image round */
-    object-fit: cover; /* Ensures the image is cropped to fit */
-    object-position: top; /* Adjusts the focus to the top (head and upper body) */
-    border: none; /* Removes the blue border */
-    box-shadow: 0 0 10px rgba(48, 227, 203, 0.8); /* Optional: Add a shadow for a modern look */
-    margin: 0 auto; /* Centers the image */
+    width: 150px; /* Adjust the size if needed */
+    height: 150px; /* Ensure it's a perfect circle */
+    border-radius: 50%; /* Make the image circular */
+    margin-bottom: 20px; /* Add space below the image */
+    margin-top: -10px; /* Slightly adjust the position */
+    object-fit: cover; /* Ensure the image fills the circle without white spaces */
+    object-position: top; /* Focus on the top part of the image */
+    box-shadow: 0 0 10px rgba(48, 227, 203, 0.8); /* Optional: Add a glow effect */
 }
 
 .intro {
