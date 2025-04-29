@@ -58,7 +58,7 @@ img {
 .top-container {
     position: relative;
     text-align: center;
-    padding: 300px 20px 200px; /* Keep the increased padding for spacing */
+    padding: 300px 20px 250px; /* Keep the increased padding for spacing */
     transition: background-color 0.5s ease, color 0.5s ease;
     overflow: visible; /* Ensure no clipping of elements */
 }
@@ -93,22 +93,18 @@ body.dark-mode .sun {
 /* Moon Image (Night Mode) */
 .moon {
     position: absolute;
-    top: 20px;
-    right: 50px; /* Ensure it doesn't overlap with the edge */
-    width: 80px;
+    top: 30%; /* Adjust this value to move the moon vertically */
+    left: 40%; /* Adjust this value to move the moon horizontally */
+    transform: translate(-50%, -50%); /* Center the moon at the specified position */
+    width: 80px; /* Adjust size as needed */
     height: auto;
+    z-index: 1; /* Ensure it appears above other elements */
     opacity: 0; /* Hidden in light mode */
     transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition for position */
 }
 
 body.dark-mode .moon {
-    opacity: 1; /* Show moon in night mode */
-    top: 20px; /* Align with the sun's position */
-    right: 50px; /* Align with the sun's position */
-}
-
-body.dark-mode .sun {
-    opacity: 0; /* Hide sun in night mode */
+    opacity: 1; /* Show moon in dark mode */
 }
 
 /* Stars */
@@ -880,12 +876,32 @@ body.dark-mode .bat {
 
 /* Dark Mode Toggle */
 .dark-mode-toggle {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 10;
+    position: fixed; /* Keep it fixed on the screen */
+    top: 20px; /* Distance from the top */
+    right: 20px; /* Distance from the right */
+    z-index: 9999; /* Ensure it stays above other elements */
+    display: flex; /* Ensure it is always displayed */
+    align-items: center;
+    justify-content: center;
 }
 
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    width: 40px; /* Reduced size for the button */
+    height: 40px; /* Reduced size for the button */
+}
+
+.theme-toggle img {
+    width: 100%; /* Ensure the icon scales properly within the button */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 40px; /* Prevent the icon from exceeding the button size */
+    max-height: 40px; /* Prevent the icon from exceeding the button size */
+}
+
+/* Toggle Switch */
 .switch {
     position: relative;
     display: inline-block;
@@ -1078,4 +1094,268 @@ body, html {
     height: 100px;
     background: linear-gradient(to top, #2E8B57, #3CB371); /* Gradient for jungle floor */
     z-index: -1; /* Below everything */
+}
+
+/* Default Light Mode Variables */
+:root {
+  --bg-color: white;
+  --text-color: black;
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+}
+
+/* Apply Variables */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Toggle Button Styling */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Toggle Switch Container */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide the default checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+/* Slider before toggle */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+/* Toggle ON */
+input:checked + .slider {
+  background-color: #66bfbf;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Light and Dark Icons */
+.light-icon,
+.dark-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  transition: opacity 0.4s;
+}
+
+.light-icon {
+  left: 10px;
+  opacity: 1;
+}
+
+.dark-icon {
+  right: 10px;
+  opacity: 0;
+}
+
+input:checked + .slider .light-icon {
+  opacity: 0;
+}
+
+input:checked + .slider .dark-icon {
+  opacity: 1;
+}
+
+/* Toggle Button Styling */
+.dark-mode-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999; /* Ensure it stays above all other elements */
+  display: flex; /* Ensure it is always displayed */
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  width: 50px; /* Fixed size for the button */
+  height: 50px; /* Fixed size for the button */
+  display: flex; /* Ensure it is always displayed */
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle img {
+  width: 100%; /* Ensure the icon scales properly */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Ensure the icon is always visible on smaller screens */
+@media (max-width: 600px) {
+  .dark-mode-toggle {
+    top: 20px; /* Keep the same position for smaller screens */
+    right: 20px;
+  }
+
+  /* Do not resize the icon */
+  .theme-toggle {
+    width: 50px; /* Keep the original size */
+    height: 50px;
+  }
+}
+
+/* Skill Image Styling */
+.skill-image {
+  width: 180px; /* Increase the width */
+  height: auto; /* Maintain aspect ratio */
+  transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
+
+.skill-image:hover {
+  transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+/* Programming Image */
+.programming {
+  width: 180px; /* Adjust size for the programming image */
+}
+
+/* Lifting Image */
+.lifting {
+  width: 180px; /* Adjust size for the lifting image */
+}
+
+/* Light/Dark Mode Toggle */
+.dark-mode-toggle {
+  position: fixed; /* Keep it fixed on the screen */
+  top: 20px; /* Distance from the top */
+  right: 20px; /* Distance from the right */
+  z-index: 9999; /* Ensure it stays above other elements */
+  display: flex; /* Ensure it is always displayed */
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  width: 50px; /* Fixed size for the button */
+  height: 50px; /* Fixed size for the button */
+}
+
+.theme-toggle img {
+  width: 100%; /* Ensure the icon scales properly within the button */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Ensure the icon is always visible on smaller screens */
+@media (max-width: 600px) {
+  .dark-mode-toggle {
+    top: 10px; /* Adjust for smaller screens */
+    right: 10px;
+  }
+
+  .theme-toggle {
+    width: 40px; /* Slightly smaller size for mobile */
+    height: 40px;
+  }
+}
+
+/* Light/Dark Mode Toggle */
+.dark-mode-toggle {
+  position: fixed; /* Keep it fixed on the screen */
+  top: 20px; /* Distance from the top */
+  right: 20px; /* Distance from the right */
+  z-index: 9999; /* Ensure it stays above other elements */
+  display: flex; /* Ensure it is always displayed */
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  width: 40px; /* Reduced size for the button */
+  height: 40px; /* Reduced size for the button */
+}
+
+.theme-toggle img {
+  width: 100%; /* Ensure the icon scales properly within the button */
+  height: auto; /* Maintain aspect ratio */
+  max-width: 40px; /* Prevent the icon from exceeding the button size */
+  max-height: 40px; /* Prevent the icon from exceeding the button size */
+}
+
+/* Prevent scaling on larger screens */
+@media (min-width: 1024px) {
+  .theme-toggle {
+    width: 50px; /* Keep the original size */
+    height: 50px;
+  }
+
+  .theme-toggle img {
+    max-width: 50px; /* Ensure the icon does not shrink */
+    max-height: 50px;
+  }
+}
+
+/* Add animation for the light/dark mode icon */
+.theme-toggle img {
+  transition: transform 0.3s ease; /* Smooth transition for rotation */
+}
+
+.theme-toggle img.clicked {
+  transform: rotate(360deg); /* Rotate the icon */
+}
+
+/* Enable smooth scrolling for the website */
+html {
+  scroll-behavior: smooth;
 }
