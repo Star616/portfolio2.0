@@ -11,7 +11,6 @@
   <link rel="icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital@1&family=Montserrat&family=Sacramento&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
   <meta name="description" content="Portfolio of Anand Raj, a Computer Science graduate entering Tech-Sales.">
   <meta name="keywords" content="Anand Raj, Portfolio, Tech-Sales, Computer Science">
   <meta name="author" content="Anand Raj">
@@ -19,13 +18,13 @@
 <body>
   <!-- Top Section -->
   <div class="top-container">
-    <!-- Existing Clouds -->
-    <img class="top-cloud" src="images/cloud.png" alt="Cloud">
-    <img class="bottom-cloud" src="images/cloud.png" alt="Cloud">
-
-    <!-- New Clouds -->
-    <img class="extra-cloud-1" src="images/cloud.png" alt="Cloud">
-    <img class="extra-cloud-2" src="images/cloud.png" alt="Cloud">
+    <!-- Clouds -->
+    <div id="cloud-container">
+      <img src="images/cloud.png" alt="Cloud" class="cloud" style="top: 50px; left: -150px; animation-duration: 60s, 15s;">
+      <img src="images/cloud.png" alt="Cloud" class="cloud" style="top: 150px; left: -300px; animation-duration: 80s, 20s;">
+      <img src="images/cloud.png" alt="Cloud" class="cloud" style="top: 100px; left: -500px; animation-duration: 70s, 18s;">
+      <img src="images/cloud.png" alt="Cloud" class="cloud" style="top: 200px; left: -700px; animation-duration: 90s, 22s;">
+    </div>
 
     <!-- Sun and Moon -->
     <img class="sun" src="images/sun.png" alt="Sun">
@@ -39,9 +38,15 @@
     <img class="star star-5" src="images/stars.png" alt="Star">
 
     <!-- Birds (Light Mode) -->
-    <img class="bird bird-1" src="images/bird.png" alt="Bird">
-    <img class="bird bird-2" src="images/bird.png" alt="Bird">
-    <img class="bird bird-3" src="images/bird.png" alt="Bird">
+    <!-- Birds Container -->
+    <div id="bird-container">
+      <img class="bird bird-1" src="images/bird.png" alt="Bird">
+      <img class="bird bird-2" src="images/bird.png" alt="Bird">
+      <img class="bird bird-3" src="images/bird.png" alt="Bird">
+      <img class="bird bird-4" src="images/bird.png" alt="Bird">
+      <img class="bird bird-5" src="images/bird.png" alt="Bird">
+      <img class="bird bird-6" src="images/bird.png" alt="Bird">
+    </div>
 
     <!-- Bats (Dark Mode) -->
     <img class="bat bat-1" src="images/bat.png" alt="Bat">
