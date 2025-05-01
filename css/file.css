@@ -77,17 +77,25 @@ body.dark-mode .top-container {
 
 /* Sun Image (Day Mode) */
 .sun {
-    position: absolute;
-    top: 20px;
-    right: 50px;
-    width: 80px;
-    height: auto;
-    opacity: 1;
-    transition: opacity 0.5s ease;
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  width: 80px;
+  height: auto;
+  opacity: 1; /* Fully visible in light mode */
+  transition: opacity 0.5s ease, box-shadow 0.5s ease; /* Smooth transition for glow effect */
+  animation: pulsate 3s infinite; /* Add pulsating animation */
+  border-radius: 50%; /* Ensure the glow is circular */
+  background: radial-gradient(circle, rgba(255, 223, 0, 1) 50%, rgba(255, 223, 0, 0) 100%);
+  box-shadow: 0 0 40px 20px rgba(255, 223, 0, 0.6), 0 0 80px 40px rgba(255, 223, 0, 0.3); /* Glowing effect */
 }
 
 body.dark-mode .sun {
-    opacity: 0; /* Hide sun in night mode */
+  opacity: 0; /* Hide the sun in dark mode */
+  box-shadow: none; /* Remove the glow in dark mode */
+  animation: none; /* Stop the pulsating animation in dark mode */
+  transition: opacity 0.5s ease 0.2s, box-shadow 0.5s ease; /* Add a slight delay to the opacity transition */
+  z-index: -1; /* Move the sun behind other elements */
 }
 
 /* Moon Image (Night Mode) */
@@ -177,44 +185,48 @@ body.dark-mode .star {
     transform: translateX(50%);
 }
 
-/* Clouds */
-.top-cloud,
-.bottom-cloud,
-.extra-cloud-1,
-.extra-cloud-2 {
-    position: absolute;
-    width: 150px;
-    height: auto;
-    transition: opacity 0.5s ease;
+
+
+/* Cloud Styling */
+.cloud {
+  width: 150px; /* Default size for clouds */
+  height: auto; /* Maintain aspect ratio */
+  position: absolute; /* Position clouds for floating effect */
+  animation: floatAndMove 15s infinite ease-in-out, moveHorizontally 60s infinite linear; /* Combine animations */
+  opacity: 0.8; /* Slight transparency for a background feel */
+  z-index: 1; /* Ensure clouds overlap with birds */
+  display: block; /* Ensure clouds are visible */
+  filter: none; /* Default filter for light mode */
+  transition: filter 0.5s ease; /* Smooth transition for filter changes */
 }
 
-.top-cloud {
-    top: 40px;
-    right: 300px;
+/* Floating Animation (Vertical Movement) */
+@keyframes floatAndMove {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px); /* Move up */
+  }
+  100% {
+    transform: translateY(0px); /* Return to original position */
+  }
 }
 
-.bottom-cloud {
-    bottom: 300px;
-    left: 250px;
+/* Horizontal Movement Animation */
+@keyframes moveHorizontally {
+  0% {
+    transform: translateX(-150px); /* Start off-screen to the left */
+  }
+  100% {
+    transform: translateX(100vw); /* Move across the entire viewport width */
+  }
 }
 
 /* New Clouds */
-.extra-cloud-1 {
-    top: 100px;
-    left: 100px;
-}
 
-.extra-cloud-2 {
-    top: 150px;
-    right: 150px;
-}
 
-body.dark-mode .top-cloud,
-body.dark-mode .bottom-cloud,
-body.dark-mode .extra-cloud-1,
-body.dark-mode .extra-cloud-2 {
-    opacity: 0.5; /* Dim clouds in night mode */
-}
+
 
 /* Remove Mountain */
 .mountain {
@@ -291,10 +303,18 @@ body.dark-mode .extra-cloud-2 {
 
 /* Bottom Container */
 .bottom-container {
-    background-color: #121212;
-    padding: 60px 0; /* Increased padding for spacing */
-    text-align: center;
-    margin-top: 100px; /* Adds space above the footer */
+  background-color: #121212; /* Default dark background */
+  padding: 60px 0; /* Consistent padding for both modes */
+  text-align: center;
+  margin-top: 100px; /* Adds space above the footer */
+}
+
+/* Light Mode Bottom Container */
+body:not(.dark-mode) .bottom-container {
+  background-color: #B9FFF8; /* Match the top container background in light mode */
+  /* Ensure padding and margin are consistent */
+  padding: 60px 0;
+  margin-top: 100px;
 }
 
 .footer-link {
@@ -703,33 +723,53 @@ body .copyright {
 
 /* Birds (Light Mode) */
 .bird {
-    position: absolute;
-    width: 50px;
-    height: auto;
-    opacity: 1; /* Visible in light mode */
-    transition: opacity 0.5s ease;
+  position: absolute;
+  width: 50px;
+  height: auto;
+  opacity: 1; /* Fully visible in light mode */
+  visibility: visible; /* Ensure birds are visible in light mode */
+  transition: opacity 0.5s ease, visibility 0.5s ease; /* Smooth transition for opacity and visibility */
+  animation: flyHorizontally 20s infinite linear, flutterWings 0.6s infinite ease-in-out; /* Add animations */
 }
 
 body.dark-mode .bird {
-    opacity: 0; /* Hide birds in dark mode */
+  opacity: 0; /* Hide birds in dark mode */
+  visibility: hidden; /* Completely remove birds from view in dark mode */
+  animation: none; /* Stop all animations in dark mode */
+  transition: opacity 0.5s ease, visibility 0.5s ease 0.2s; /* Add a slight delay to visibility for smooth hiding */
 }
 
 /* Individual Bird Positions */
 .bird-1 {
-    top: 100px;
-    left: 200px;
+    top: 50px;
+    left: 10%; /* Positioned 10% from the left */
 }
 
 .bird-2 {
-    top: 150px;
-    right: 250px;
+    top: 100px;
+    right: 15%; /* Positioned 15% from the right */
 }
 
 .bird-3 {
-    top: 120px;
-    left: 350px;
+    top: 150px;
+    left: 30%; /* Positioned 30% from the left */
 }
 
+.bird-4 {
+    top: 200px;
+    right: 25%; /* Positioned 25% from the right */
+}
+
+.bird-5 {
+    top: 20px;
+    left: 50%; /* Centered horizontally */
+    transform: translateX(-50%);
+}
+
+.bird-6 {
+    top: 250px;
+    right: 40%; /* Positioned 40% from the right */
+}
 /* Bats (Dark Mode) */
 .bat {
     position: absolute;
@@ -1054,7 +1094,8 @@ input:checked + .slider .moon {
 .jungle-floor {
     position: absolute;
     bottom: 0;
-    width: 100%;
+    left: 0;
+    width: 100%; /* Ensure it spans the full width */
     height: 100px;
     background: linear-gradient(to top, #2E8B57, #3CB371); /* Gradient for jungle floor */
     z-index: -1; /* Below everything */
@@ -1064,7 +1105,8 @@ input:checked + .slider .moon {
 .jungle-sky {
     position: absolute;
     top: 0;
-    width: 100%;
+    left: 0;
+    width: 100%; /* Ensure it spans the full width */
     height: 70%;
     background: linear-gradient(to bottom, #87CEEB, #B9FFF8); /* Gradient for sky */
     z-index: -3; /* Place behind everything */
@@ -1358,4 +1400,105 @@ input:checked + .slider .dark-icon {
 /* Enable smooth scrolling for the website */
 html {
   scroll-behavior: smooth;
+}
+
+/* Floating Animation */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px); /* Move up */
+  }
+  100% {
+    transform: translateY(0px); /* Return to original position */
+  }
+}
+
+/* Cloud Styling */
+.cloud {
+  width: 150px; /* Default size for clouds */
+  height: auto; /* Maintain aspect ratio */
+  position: absolute; /* Position clouds for floating effect */
+  animation: floatAndMove 15s infinite ease-in-out, moveHorizontally 60s infinite linear; /* Combine animations */
+  opacity: 0.8; /* Slight transparency for a background feel */
+  z-index: 1; /* Ensure clouds overlap with birds */
+  display: block; /* Ensure clouds are visible */
+  opacity: 1; /* Ensure clouds are fully visible */
+  filter: none; /* Default filter for light mode */
+  transition: filter 0.5s ease; /* Smooth transition for filter changes */
+}
+
+/* Combined Floating and Horizontal Movement Animation */
+@keyframes floatAndMove {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  50% {
+    transform: translate(30px, -20px); /* Move diagonally */
+  }
+  100% {
+    transform: translate(0px, 0px); /* Return to original position */
+  }
+}
+
+/* Horizontal Movement Animation */
+@keyframes moveHorizontally {
+  0% {
+    transform: translateX(-150px); /* Start off-screen to the left */
+  }
+  100% {
+    transform: translateX(100vw); /* Move across the entire viewport width */
+  }
+}
+
+.theme-toggle img {
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle img.clicked {
+  transform: rotate(360deg);
+}
+
+/* Bird Styling */
+.bird {
+  width: 50px; /* Default size for birds */
+  height: auto; /* Maintain aspect ratio */
+  position: absolute; /* Position birds for movement */
+  animation: flyHorizontally 20s infinite linear, flutterWings 0.6s infinite ease-in-out; /* Combine animations */
+  z-index: 2; /* Ensure birds appear above some clouds */
+  transform-origin: center; /* Set the origin for wing-fluttering */
+  opacity: 0.9; /* Slight transparency for a background feel */
+}
+
+/* Horizontal Movement Animation */
+@keyframes flyHorizontally {
+  0% {
+    transform: translateX(-100px); /* Start off-screen to the left */
+  }
+  100% {
+    transform: translateX(100vw); /* Move across the entire viewport width */
+  }
+}
+
+/* Wing-Fluttering Animation */
+@keyframes flutterWings {
+  0%, 100% {
+    transform: rotate(0deg); /* Neutral position */
+  }
+  50% {
+    transform: rotate(10deg); /* Slight tilt to simulate wing flutter */
+  }
+}
+
+@keyframes pulsate {
+  0% {
+    box-shadow: 0 0 40px 20px rgba(255, 223, 0, 0.6), 0 0 80px 40px rgba(255, 223, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 50px 25px rgba(255, 223, 0, 0.8), 0 0 100px 50px rgba(255, 223, 0, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 40px 20px rgba(255, 223, 0, 0.6), 0 0 80px 40px rgba(255, 223, 0, 0.3);
+  }
 }
