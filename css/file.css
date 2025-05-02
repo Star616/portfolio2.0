@@ -312,9 +312,6 @@ body.dark-mode .star {
 /* Light Mode Bottom Container */
 body:not(.dark-mode) .bottom-container {
   background-color: #B9FFF8; /* Match the top container background in light mode */
-  /* Ensure padding and margin are consistent */
-  padding: 60px 0;
-  margin-top: 100px;
 }
 
 .footer-link {
@@ -342,6 +339,10 @@ body:not(.dark-mode) .bottom-container {
     color: #EAF6F6;
     font-size: 0.75rem;
     margin-top: 20px;
+}
+
+body:not(.dark-mode) .copyright {
+    color: #66bfbf; /* Light teal color for light mode */
 }
 
 /* Button Styles */
@@ -1500,5 +1501,37 @@ html {
   }
   100% {
     box-shadow: 0 0 40px 20px rgba(255, 223, 0, 0.6), 0 0 80px 40px rgba(255, 223, 0, 0.3);
+  }
+}
+
+/* Social Links Container */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Space between icons */
+  margin-top: 20px;
+}
+
+/* Social Icons */
+.social-icon img {
+  width: 40px; /* Default size for desktop */
+  height: auto; /* Maintain aspect ratio */
+  transition: transform 0.3s ease; /* Add hover effect */
+}
+
+.social-icon img:hover {
+  transform: scale(1.2); /* Slight zoom on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .social-icon img {
+    width: 30px; /* Smaller size for mobile */
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .social-icon img {
+    width: 35px; /* Medium size for tablets */
   }
 }
