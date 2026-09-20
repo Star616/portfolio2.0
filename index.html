@@ -1,160 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anand Raj - Portfolio </title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="public/css/file.css">
-  <link rel="stylesheet" href="css/file.css?v=1.0">
-  <link rel="stylesheet" href="css/file.css">
-  <link rel="icon" href="favicon.ico">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital@1&family=Montserrat&family=Sacramento&display=swap" rel="stylesheet">
-  <meta name="description" content="Portfolio of Anand Raj, a Computer Science graduate entering Tech-Sales.">
-  <meta name="keywords" content="Anand Raj, Portfolio, Tech-Sales, Computer Science">
-  <meta name="author" content="Anand Raj">
-</head>
-<body>
-  <!-- Top Section -->
-  <div class="top-container">
-    <!-- Clouds -->
-    <div id="cloud-container">
-      <img src="images/cloud.png" alt="Cloud" class="cloud" style="top: 50px; left: -150px; animation-duration: 60s, 15s;">
-      <img src="images/cloud.png" alt="Cloud" class="cloud" style="top: 150px; left: -300px; animation-duration: 80s, 20s;">
-      <img src="images/cloud.png" alt="Cloud" class="cloud" style="top: 100px; left: -500px; animation-duration: 70s, 18s;">
-      <img src="images/cloud.png" alt="Cloud" class="cloud" style="top: 200px; left: -700px; animation-duration: 90s, 22s;">
-    </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portfolio of Anand Raj Nadar — enterprise sales development, account strategy, and AI workflow conversations."
+    />
+    <meta name="theme-color" content="#0b1020" />
+    <title>Anand Raj Nadar | Enterprise Sales</title>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/file.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <!-- Sun and Moon -->
-    <img class="sun" src="images/sun.png" alt="Sun">
-    <img class="moon" src="images/moon.png" alt="Moon">
-    
-    <!-- Stars -->
-    <img class="star star-1" src="images/stars.png" alt="Star">
-    <img class="star star-2" src="images/stars.png" alt="Star">
-    <img class="star star-3" src="images/stars.png" alt="Star">
-    <img class="star star-4" src="images/stars.png" alt="Star">
-    <img class="star star-5" src="images/stars.png" alt="Star">
+    <header class="site-header">
+      <div class="nav-shell">
+        <a class="brand" href="#top" aria-label="Anand Raj Nadar — home">
+          <span>AR</span><i aria-hidden="true">.</i>
+        </a>
 
-    <!-- Birds (Light Mode) -->
-    <!-- Birds Container -->
-    <div id="bird-container">
-      <img class="bird bird-1" src="images/bird.png" alt="Bird">
-      <img class="bird bird-2" src="images/bird.png" alt="Bird">
-      <img class="bird bird-3" src="images/bird.png" alt="Bird">
-      <img class="bird bird-4" src="images/bird.png" alt="Bird">
-      <img class="bird bird-5" src="images/bird.png" alt="Bird">
-      <img class="bird bird-6" src="images/bird.png" alt="Bird">
-    </div>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#focus">Focus</a>
+          <a href="#contact">Contact</a>
+        </nav>
 
-    <!-- Bats (Dark Mode) -->
-    <img class="bat bat-1" src="images/bat.png" alt="Bat">
-    <img class="bat bat-2" src="images/bat.png" alt="Bat">
-    <img class="bat bat-3" src="images/bat.png" alt="Bat">
-
-    <!-- Trees -->
-    <img class="tree tree-1" src="images/tree.png" alt="Tree">
-    <img class="tree tree-2" src="images/tree.png" alt="Tree">
-
-    <!-- Jungle Elements -->
-    <div class="jungle-sky"></div>
-    <div class="jungle-floor"></div>
-
-    <!-- Large Trees -->
-    <img src="images/tree.png" class="tree tree-1" alt="Tree">
-    <img src="images/tree.png" class="tree tree-2" alt="Tree">
-    <img src="images/tree.png" class="tree tree-3" alt="Tree">
-    <img src="images/tree.png" class="tree tree-4" alt="Tree">
-    <img src="images/tree.png" class="tree tree-5" alt="Tree">
-
-    <!-- Small Trees -->
-    <img src="images/tree.png" class="tree small-tree-1" alt="Small Tree">
-    <img src="images/tree.png" class="tree small-tree-2" alt="Small Tree">
-    <img src="images/tree.png" class="tree small-tree-3" alt="Small Tree">
-    <img src="images/tree.png" class="tree small-tree-4" alt="Small Tree">
-
-    <!-- Large Mountains -->
-    <img src="images/mountain.png" class="mountain mountain-1" alt="Mountain">
-    <img src="images/mountain.png" class="mountain mountain-2" alt="Mountain">
-
-    <!-- Small Mountains -->
-    <img src="images/mountain.png" class="mountain small-mountain-1" alt="Small Mountain">
-    <img src="images/mountain.png" class="mountain small-mountain-2" alt="Small Mountain">
-
-    <!-- Heading and Subheading -->
-    <h1>Welcome to my page Folks :) </h1>
-    <p class="pro">I'm a Computer Science Graduate Entering into Tech-Sales</p>
-  </div>
-
-  <!-- Middle Section -->
-  <div class="middle-container text-center">
-    <div class="profile">
-      <img class="profile-img" src="images/AR.jpg" alt="Anand Raj">
-      <h2>Hello.</h2>
-      <p class="intro">Hello there 👋 ,  I'm Anand Raj!  Welcome to my personal site. Here, you'll learn more about my skills, projects, and how to connect with me.</p>
-    </div>
-    <hr>
-
-    <!-- Hobbies Section -->
-    <div class="skills">
-      <h2>My Hobbies</h2>
-      <div class="skill-row">
-        <img class="skill-img-left" src="images/programming.png" alt="Coding icon">
-        <h3>Coding</h3>
-        <p>I’ve recently developed a passion for coding and am continuously improving my skills to build meaningful projects.</p>
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label="Switch to light theme"
+          aria-pressed="false"
+        >
+          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3.4"></circle>
+            <path d="M12 2.5v2M12 19.5v2M21.5 12h-2M4.5 12h-2M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4M18.7 18.7l-1.4-1.4M6.7 6.7L5.3 5.3"></path>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.4 14.6A8.5 8.5 0 0 1 9.4 3.6a8.5 8.5 0 1 0 11 11Z"></path>
+          </svg>
+        </button>
       </div>
-      <div class="skill-row">
-        <img class="skill-img-right" src="images/lifting.png" alt="Weightlifting icon">
-        <h3>Lifting Weights</h3>
-        <p>Weightlifting keeps me disciplined and mentally sharp. It’s a key part of my daily routine, and I highly recommend it!</p>
-      </div>
-    </div>
-    <hr>
+    </header>
 
-    <!-- Resume Section -->
-    <div class="resume-section text-center">
-      <h2>Download My Resume</h2>
-      <a href="/uploads/resume.pdf" class="btn-modern" download>Download My Resume</a>
-    </div>
-    <hr>
+    <main id="main-content">
+      <section class="hero section-shell" id="top" aria-labelledby="hero-title">
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span></span> Enterprise sales development</p>
+          <h1 id="hero-title">Turning complex enterprise priorities into clear next steps.</h1>
+          <p class="hero-intro">
+            I’m <strong>Anand Raj Nadar</strong>, a global sales development professional focused on
+            strategic account conversations across AI, workflow automation, and operational resilience.
+          </p>
 
-    <!-- Contact Section -->
-    <div class="contact-me mb-5"> <!-- Added 'mb-5' for spacing -->
-      <h2>Get In Touch</h2>
-      <h3>Feel free to reach out to me!</h3>
-      <p class="contact-message">I’d love to hear from you. Have a great day!</p>
-      <a href="mailto:anandarajnadar@gmail.com" class="btn-modern">CONTACT ME</a>
-    </div>
-  </div>
+          <div class="hero-actions">
+            <a class="button button-primary" href="mailto:anandarajnadar@gmail.com">Start a conversation <span aria-hidden="true">↗</span></a>
+            <a class="button button-quiet" href="#experience">Explore my work <span aria-hidden="true">↓</span></a>
+          </div>
 
-  <!-- Bottom Section -->
-  <div class="bottom-container text-center">
-    <div class="social-links">
-      <a href="https://www.youtube.com" target="_blank" class="social-icon">
-        <img src="images/youtube-icon.png" alt="YouTube">
-      </a>
-      <a href="https://www.linkedin.com" target="_blank" class="social-icon">
-        <img src="images/linkedin-icon.png" alt="LinkedIn">
-      </a>
-      <a href="https://www.github.com" target="_blank" class="social-icon">
-        <img src="images/github-icon.png" alt="GitHub">
-      </a>
-    </div>
-    <p class="copyright">© 2025 Anand Raj Nadar</p>
-  </div>
+          <ul class="hero-details" aria-label="Profile details">
+            <li><span>Based in</span> Bengaluru, India</li>
+            <li><span>Focus</span> Enterprise &amp; strategic accounts</li>
+          </ul>
+        </div>
 
-  <!-- Light/Dark Mode Toggle -->
-  <div class="dark-mode-toggle">
-    <button id="dark-mode-toggle" class="theme-toggle">
-      <img id="toggle-icon" src="images/light-mode.png" alt="Light Mode Icon">
-    </button>
-  </div>
+        <figure class="portrait-panel reveal" aria-label="Portrait of Anand Raj Nadar">
+          <div class="portrait-backdrop"></div>
+          <img src="images/Anand.jpg" alt="Portrait of Anand Raj Nadar" />
+          <figcaption>
+            <span class="availability-dot" aria-hidden="true"></span>
+            Building the path to an AE role
+          </figcaption>
+          <span class="portrait-mark" aria-hidden="true">AR</span>
+        </figure>
+      </section>
 
-  <!-- JavaScript for Interactivity -->
-  <script src="public/js/script.js"></script>
-  <script src="js/script.js?v=1.0"></script>
-</body>
+      <section class="proof-strip section-shell" aria-label="Career highlights">
+        <article class="proof-item reveal">
+          <p class="proof-value">$10M<span>+</span></p>
+          <p>Qualified pipeline influenced</p>
+        </article>
+        <article class="proof-item reveal">
+          <p class="proof-value">120<span>%</span></p>
+          <p>Quarterly attainment at NielsenIQ</p>
+        </article>
+        <article class="proof-item reveal">
+          <p class="proof-value">3</p>
+          <p>Core industries: Manufacturing, CPG &amp; Retail</p>
+        </article>
+      </section>
+
+      <section class="about-section section-shell" id="about" aria-labelledby="about-title">
+        <div class="section-label reveal">
+          <span>01</span>
+          <p>About</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-copy reveal">
+            <h2 id="about-title">A sales professional with a builder’s mindset.</h2>
+            <p>
+              With a computer science background and a career shaped across high-velocity and enterprise sales,
+              I enjoy taking a complicated operating problem, finding the human and business impact behind it,
+              and opening the right executive conversation.
+            </p>
+            <p>
+              Today, I work at the intersection of account strategy, research, multi-threaded outreach, and
+              outcome-led storytelling. My lens is simple: make the value relevant before asking for time.
+            </p>
+          </div>
+
+          <aside class="principles-card reveal" aria-label="How I work">
+            <p class="card-kicker">How I work</p>
+            <ol>
+              <li><span>01</span> Start with the business context.</li>
+              <li><span>02</span> Build relevance across the buying group.</li>
+              <li><span>03</span> Earn the next step with a useful point of view.</li>
+            </ol>
+          </aside>
+        </div>
+      </section>
+
+      <section class="experience-section section-shell" id="experience" aria-labelledby="experience-title">
+        <div class="section-label reveal">
+          <span>02</span>
+          <p>Experience</p>
+        </div>
+
+        <div class="experience-header reveal">
+          <h2 id="experience-title">A track record across enterprise, insights, and SaaS.</h2>
+          <p>Experience rooted in disciplined prospecting, consultative discovery, and commercial momentum.</p>
+        </div>
+
+        <div class="timeline">
+          <article class="role-card reveal">
+            <div class="role-meta">
+              <p>2025 — Present</p>
+              <span>Global sales development</span>
+            </div>
+            <div class="role-content">
+              <h3>ServiceNow</h3>
+              <p>
+                Build strategic account conversations across Manufacturing, CPG, and Retail, connecting AI,
+                workflow, IT, risk, and employee experience priorities to measurable business outcomes.
+              </p>
+              <ul class="tag-list" aria-label="ServiceNow focus areas">
+                <li>Strategic accounts</li>
+                <li>AI workflows</li>
+                <li>Multi-threading</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="role-card reveal">
+            <div class="role-meta">
+              <p>2024 — 2025</p>
+              <span>Sales development</span>
+            </div>
+            <div class="role-content">
+              <h3>NielsenIQ</h3>
+              <p>
+                Developed FMCG and consumer-market opportunities through targeted account research, structured
+                cadences, and a sharp understanding of commercial and category priorities.
+              </p>
+              <ul class="tag-list" aria-label="NielsenIQ focus areas">
+                <li>FMCG</li>
+                <li>Pipeline creation</li>
+                <li>Account research</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="role-card reveal">
+            <div class="role-meta">
+              <p>2023 — 2024</p>
+              <span>Business development &amp; AE</span>
+            </div>
+            <div class="role-content">
+              <h3>Freshworks</h3>
+              <p>
+                Worked the North American SMB market, creating and progressing customer-service and IT workflow
+                opportunities in competitive environments.
+              </p>
+              <ul class="tag-list" aria-label="Freshworks focus areas">
+                <li>NA SMB</li>
+                <li>Discovery</li>
+                <li>Competitive selling</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="focus-section section-shell" id="focus" aria-labelledby="focus-title">
+        <div class="section-label reveal">
+          <span>03</span>
+          <p>Focus</p>
+        </div>
+
+        <div class="focus-heading reveal">
+          <h2 id="focus-title">The work I’m drawn to.</h2>
+          <p>Practical commercial problems where technology needs a clear business story.</p>
+        </div>
+
+        <div class="focus-grid">
+          <article class="focus-card reveal">
+            <span class="focus-index">A</span>
+            <h3>Account strategy</h3>
+            <p>Finding the right people, buying signals, and point of view before the first outreach.</p>
+          </article>
+          <article class="focus-card reveal">
+            <span class="focus-index">B</span>
+            <h3>AI &amp; workflow</h3>
+            <p>Translating automation, employee experience, and governance into outcomes leaders can act on.</p>
+          </article>
+          <article class="focus-card reveal">
+            <span class="focus-index">C</span>
+            <h3>Industrial growth</h3>
+            <p>Building relevant conversations for complex Manufacturing, CPG, and Retail environments.</p>
+          </article>
+        </div>
+
+        <div class="method-row reveal" aria-label="Sales methods and tools">
+          <span>MEDDPICC</span><span>SPICED</span><span>TAPO</span><span>Sales Navigator</span><span>ZoomInfo</span>
+        </div>
+      </section>
+
+      <section class="contact-section section-shell" id="contact" aria-labelledby="contact-title">
+        <div class="contact-copy reveal">
+          <p class="eyebrow"><span></span> Let’s connect</p>
+          <h2 id="contact-title">Have a commercial challenge worth discussing?</h2>
+          <p>
+            I’m always glad to exchange ideas on enterprise sales, account strategy, AI workflows, and the craft
+            of creating relevance.
+          </p>
+          <a class="contact-email" href="mailto:anandarajnadar@gmail.com">anandarajnadar@gmail.com <span aria-hidden="true">↗</span></a>
+        </div>
+
+        <div class="contact-actions reveal">
+          <a class="button button-primary" href="mailto:anandarajnadar@gmail.com">Email me <span aria-hidden="true">↗</span></a>
+          <a class="button button-quiet" href="https://github.com/Star616" target="_blank" rel="noreferrer">GitHub profile <span aria-hidden="true">↗</span></a>
+          <a class="resume-link" href="uploads/resume.pdf" download>Download résumé <span aria-hidden="true">↓</span></a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer section-shell">
+      <p>© <span id="year"></span> Anand Raj Nadar</p>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
 </html>
-
-
