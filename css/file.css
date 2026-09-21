@@ -343,12 +343,10 @@ body[data-theme="light"] .portrait-panel::after { background: linear-gradient(18
   align-items: center;
   color: #fff;
   font-family: var(--mono);
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   line-height: 1.4;
   letter-spacing: 0.02em;
 }
-
-.availability-dot { width: 7px; height: 7px; border-radius: 50%; background: #6de3b0; box-shadow: 0 0 0 4px rgba(109, 227, 176, 0.16); }
 
 .portrait-mark {
   position: absolute;
@@ -459,8 +457,9 @@ h2 {
   border-bottom: 1px solid var(--line);
 }
 
-.role-meta p { margin-bottom: 0.22rem; color: var(--text); font-family: var(--mono); font-size: 0.78rem; letter-spacing: -0.03em; }
-.role-meta span { color: var(--faint); font-size: 0.79rem; }
+.role-meta p { margin-bottom: 0.22rem; color: var(--text); font-family: var(--mono); font-size: 0.875rem; letter-spacing: -0.03em; }
+.role-meta time { white-space: nowrap; }
+.role-meta span { color: var(--muted); font-size: 0.875rem; }
 
 .role-content h3 {
   margin-bottom: 0.55rem;
@@ -470,7 +469,10 @@ h2 {
   letter-spacing: -0.045em;
 }
 
-.role-content > p { max-width: 700px; margin-bottom: 1.25rem; color: var(--muted); font-size: 0.95rem; }
+.role-content > p { max-width: 700px; margin-bottom: 1.25rem; color: var(--muted); font-size: 1rem; }
+.role-content > .role-title { margin-bottom: 1rem; color: var(--text); font-weight: 700; line-height: 1.5; }
+.role-highlights { display: grid; gap: 0.65rem; max-width: 700px; padding-left: 1.15rem; margin: 0 0 1.25rem; color: var(--muted); font-size: 1rem; }
+.role-highlights li::marker { color: var(--accent); }
 .tag-list, .method-row { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; margin: 0; list-style: none; }
 
 .tag-list li, .method-row span {
@@ -479,7 +481,7 @@ h2 {
   border-radius: 999px;
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 0.66rem;
+  font-size: 0.875rem;
   line-height: 1.2;
 }
 
@@ -552,7 +554,8 @@ h2 {
 .site-footer a { display: inline-flex; gap: 0.5rem; color: var(--muted); }
 .site-footer a:hover, .site-footer a:focus-visible { color: var(--text); }
 
-.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.58s ease, transform 0.58s ease; }
+.reveal { opacity: 1; transform: translateY(0); transition: opacity 0.58s ease, transform 0.58s ease; }
+.reveal.is-pending { opacity: 0; transform: translateY(16px); }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
