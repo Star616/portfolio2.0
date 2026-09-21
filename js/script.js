@@ -3,7 +3,12 @@
   const toggle = document.querySelector('.theme-toggle');
   const header = document.querySelector('.site-header');
   const year = document.querySelector('#year');
-  const savedTheme = window.localStorage.getItem('portfolio-theme');
+  let savedTheme;
+  try {
+    savedTheme = window.localStorage.getItem('portfolio-theme');
+  } catch {
+    // Theme controls still work when browser storage is unavailable.
+  }
   const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
 
   const setTheme = (theme) => {
@@ -17,8 +22,12 @@
 
   toggle?.addEventListener('click', () => {
     const nextTheme = body.dataset.theme === 'light' ? 'dark' : 'light';
-    window.localStorage.setItem('portfolio-theme', nextTheme);
     setTheme(nextTheme);
+    try {
+      window.localStorage.setItem('portfolio-theme', nextTheme);
+    } catch {
+      // Keep the selected theme for this page even without persistent storage.
+    }
   });
 
   const updateHeader = () => {
@@ -51,5 +60,8 @@
     { threshold: 0.12, rootMargin: '0px 0px -28px' }
   );
 
-  revealItems.forEach((item) => observer.observe(item));
+  revealItems.forEach((item) => {
+    observer.observe(item);
+    item.classList.add('is-pending');
+  });
 })();
