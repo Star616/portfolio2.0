@@ -45,7 +45,7 @@ html {
 }
 
 body {
-  min-width: 320px;
+  min-width: 0;
   margin: 0;
   overflow-x: hidden;
   background:
@@ -286,6 +286,27 @@ h1 {
 .hero-details li { display: flex; gap: 0.5rem; align-items: center; }
 .hero-details span { color: var(--faint); font-family: var(--mono); font-size: 0.69rem; text-transform: uppercase; }
 
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.5rem;
+  margin-top: 1.1rem;
+}
+
+.social-links a {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+  min-height: 44px;
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.social-links a:hover,
+.social-links a:focus-visible { color: var(--accent); }
+.social-links a span { color: var(--accent); }
+
 .portrait-panel {
   position: relative;
   display: grid;
@@ -382,8 +403,8 @@ body[data-theme="light"] .portrait-panel::after { background: linear-gradient(18
 .proof-value span { color: var(--accent); }
 .proof-item > p:last-child { max-width: 185px; margin-bottom: 0; color: var(--muted); font-size: 0.83rem; line-height: 1.5; }
 
-.about-section, .experience-section, .focus-section, .contact-section { scroll-margin-top: 98px; }
-.about-section, .experience-section, .focus-section { padding-bottom: clamp(5rem, 10vw, 9.4rem); }
+.about-section, .experience-section, .focus-section, .hobbies-section, .contact-section { scroll-margin-top: 98px; }
+.about-section, .experience-section, .focus-section, .hobbies-section { padding-bottom: clamp(5rem, 10vw, 9.4rem); }
 
 .section-label {
   display: flex;
@@ -510,6 +531,37 @@ h2 {
 .focus-card p { max-width: 250px; margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
 .method-row { margin-top: 1.65rem; }
 
+.hobbies-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.hobby-card {
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface);
+}
+
+.hobby-icon {
+  display: block;
+  width: 28px;
+  height: 28px;
+  margin-bottom: 1.7rem;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hobby-card h3 { margin-bottom: 0.6rem; font-size: 1.08rem; font-weight: 800; letter-spacing: -0.035em; }
+.hobby-card p { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+.hobbies-channel { display: inline-flex; align-items: center; gap: 0.6rem; min-height: 44px; margin-top: 1rem; color: var(--muted); font-size: 0.88rem; font-weight: 700; }
+.hobbies-channel span { color: var(--accent); }
+.hobbies-channel:hover, .hobbies-channel:focus-visible { color: var(--text); }
+
 .contact-section {
   display: grid;
   grid-template-columns: minmax(0, 1.12fr) minmax(270px, 0.55fr);
@@ -559,6 +611,10 @@ h2 {
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
+@media (max-width: 1000px) {
+  .hobbies-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (max-width: 760px) {
   :root { --page-width: min(100% - 32px, 620px); }
   .nav-shell { grid-template-columns: auto 1fr auto; min-height: 68px; gap: 1rem; }
@@ -581,7 +637,13 @@ h2 {
 }
 
 @media (max-width: 460px) {
-  .site-nav a:nth-last-child(-n + 2) { display: none; }
+  .nav-shell { grid-template-columns: 1fr auto; gap: 0; padding-top: 0.75rem; }
+  .site-nav { grid-row: 2; grid-column: 1 / -1; justify-content: space-between; gap: 0.4rem; padding-block: 0.35rem; }
+  .site-nav a { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.74rem; }
+  .theme-toggle { grid-row: 1; grid-column: 2; }
+  .hobbies-grid { grid-template-columns: 1fr; }
+  .hobby-card { padding: 1.4rem; }
+  .hobby-icon { margin-bottom: 1.1rem; }
   h1 { font-size: clamp(2.5rem, 13vw, 3.55rem); }
   .hero-actions .button { width: 100%; justify-content: space-between; }
   .hero-details { flex-direction: column; gap: 0.45rem; }
