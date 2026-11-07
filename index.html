@@ -26,6 +26,8 @@
     })();
   </script>
   <link rel="stylesheet" href="css/file.css">
+<link rel="stylesheet" href="css/welcome-audio.css">
+<script defer src="js/welcome-audio.js"></script>
   <script defer src="js/script.js"></script>
   <script defer src="js/linkedin-feed.js"></script>
   <script defer src="js/interests-media.js"></script>
@@ -45,10 +47,15 @@
         <p class="ap-overline">SALES INSTINCT. BUILDER’S CURIOSITY.</p>
         <h1 id="ap-title">Technology.<br><span>With a<br>human touch.</span></h1>
         <p class="ap-introduction">I’m Anand. I connect technology with the people<br class="ap-desktop-break"> and business problems it can serve.</p>
-        <div class="ap-welcome" style="margin-top:24px;max-width:390px">
+        <div class="ap-welcome">
 <p class="ap-overline" id="welcome-voice-title">A WELCOME FROM ANAND</p>
-<audio controls preload="none" aria-labelledby="welcome-voice-title" style="width:100%;margin-top:12px"><source src="audio/anand-welcome.m4a" type="audio/mp4"><a href="audio/anand-welcome.m4a">Listen to Anand’s welcome</a></audio>
-<details style="font-size:12px;margin-top:8px;color:var(--ap-soft)"><summary style="cursor:pointer">Read the welcome — text version</summary><p>Hey, this is Anand. Thank you so much for visiting my website. This is something I’ve coded. I have a bit of computer science knowledge, and building things is a hobby I enjoy.</p><p>I hope you enjoy exploring my interests, experience, and YouTube Shorts where I’ve lifted some heavy weights. I hope that inspires you.</p><p>If you’d like to talk, connect, or simply have a conversation, feel free to get in touch. I’d love to connect with you. Cheers, and thank you!</p></details></div>
+<audio id="anand-voice" controls controlslist="nodownload noremoteplayback" disableremoteplayback preload="none" aria-labelledby="welcome-voice-title"><source src="audio/anand-welcome.m4a" type="audio/mp4">Your browser does not support audio playback. Read the welcome below.</audio>
+<div id="voice-controls" class="voice-controls" role="group" aria-label="Anand’s welcome audio player" hidden>
+<button class="voice-play" type="button" aria-label="Play Anand’s welcome" aria-pressed="false">▶</button>
+<div class="voice-track"><div class="voice-time"><span class="voice-elapsed">0:00</span><span class="voice-duration">1:38</span></div><input class="voice-seek" type="range" min="0" max="100" step=".1" value="0" disabled aria-label="Seek welcome audio"></div>
+<button class="voice-mute" type="button" aria-label="Mute welcome audio" aria-pressed="false">Mute</button></div>
+<p id="voice-status" class="voice-status" role="status"></p>
+<details class="voice-text"><summary style="cursor:pointer">Read the welcome — text version</summary><p>Hey, this is Anand. Thank you so much for visiting my website. This is something I’ve coded. I have a bit of computer science knowledge, and building things is a hobby I enjoy.</p><p>I hope you enjoy exploring my interests, experience, and YouTube Shorts where I’ve lifted some heavy weights. I hope that inspires you.</p><p>If you’d like to talk, connect, or simply have a conversation, feel free to get in touch. I’d love to connect with you. Cheers, and thank you!</p></details></div>
 <div class="ap-identity"><span class="ap-location-dot" aria-hidden="true"></span><span>Ananda Raj Nadar <span class="ap-identity-divider">/</span> Chennai, India</span></div>
       </div>
       <div class="ap-portrait-area">
