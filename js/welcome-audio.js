@@ -14,6 +14,9 @@ const sync=()=>{
  play.textContent=audio.paused?'▶':'Ⅱ';
  play.setAttribute('aria-label',audio.paused?'Play Anand’s welcome':'Pause Anand’s welcome');
  play.setAttribute('aria-pressed',String(!audio.paused));
+ controls.classList.toggle('is-playing',!audio.paused && !audio.ended);
+ const progress=Number.isFinite(audio.duration)?audio.currentTime/audio.duration:0;
+ controls.querySelectorAll('.voice-bars span').forEach((bar,index)=>bar.classList.toggle('is-heard',index/48<progress));
  elapsed.textContent=time(audio.currentTime);
  if(Number.isFinite(audio.duration)){
  duration.textContent=time(audio.duration);
