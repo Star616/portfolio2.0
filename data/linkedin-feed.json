@@ -1,0 +1,18 @@
+{
+  "profileUrl": "https://www.linkedin.com/in/anandarajnadar/",
+  "provider": { "iframeUrl": "" },
+  "posts": [
+    {
+      "id": "crm",
+      "title": "Anand’s manufacturing and CRM animation on LinkedIn",
+      "url": "https://www.linkedin.com/posts/anandarajnadar_servicenow-crm-manufacturing-activity-7504218539453759488-JKnW",
+      "embedUrl": "https://www.linkedin.com/embed/feed/update/urn:li:activity:7504218539453759488"
+    },
+    {
+      "id": "factory",
+      "title": "Anand’s factory-floor animation on LinkedIn",
+      "url": "https://www.linkedin.com/posts/anandarajnadar_servicenow-manufacturing-fmcg-activity-7502251126189252608-2UZf",
+      "embedUrl": "https://www.linkedin.com/embed/feed/update/urn:li:activity:7502251126189252608"
+    }
+  ]
+}

@@ -1,7 +1,9 @@
 """Check the static portfolio's local references without installing dependencies."""
 
 from html.parser import HTMLParser
+import json
 from pathlib import Path
+import re
 from urllib.parse import unquote, urlsplit
 
 
@@ -11,6 +13,8 @@ class PortfolioPage(HTMLParser):
         self.ids = set()
         self.references = []
         self.errors = []
+        self.controls = []
+        self.post_slots = set()
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
@@ -20,6 +24,11 @@ class PortfolioPage(HTMLParser):
             if element_id in self.ids:
                 self.errors.append(f"Line {line}: duplicate id {element_id!r}")
             self.ids.add(element_id)
+
+        if attrs.get("aria-controls"):
+            self.controls.append((attrs["aria-controls"], line))
+        if attrs.get("data-post"):
+            self.post_slots.add(attrs["data-post"])
 
         attribute = {"a": "href", "link": "href", "img": "src", "script": "src"}.get(tag)
         if attribute and attrs.get(attribute):
@@ -53,6 +62,36 @@ def check_site(root):
             if unquote(url.fragment) not in page.ids:
                 errors.append(f"Line {line}: missing section {reference!r}")
 
+    for controlled, line in page.controls:
+        for element_id in controlled.split():
+            if element_id not in page.ids:
+                errors.append(f"Line {line}: missing controlled element {element_id!r}")
+
+    config_file = root / "data/linkedin-feed.json"
+    try:
+        config = json.loads(config_file.read_text(encoding="utf-8"))
+        posts = config["posts"]
+        ids = [post["id"] for post in posts]
+        if len(ids) != len(set(ids)) or set(ids) != page.post_slots:
+            errors.append("LinkedIn configuration must match the page's unique post slots")
+        for post in posts:
+            url = urlsplit(post["url"])
+            embed = urlsplit(post["embedUrl"])
+            activity = re.search(r"activity-(\d+)-", url.path)
+            if url.scheme != "https" or url.netloc != "www.linkedin.com" or not activity:
+                errors.append(f"Invalid LinkedIn post URL for {post['id']!r}")
+            elif embed.scheme != "https" or embed.netloc != "www.linkedin.com" or embed.path != "/embed/feed/update/urn:li:activity:" + activity.group(1) or embed.query or embed.fragment:
+                errors.append(f"LinkedIn embed does not match post {post['id']!r}")
+            if not post.get("title", "").strip():
+                errors.append(f"LinkedIn post {post['id']!r} needs an accessible title")
+        provider = config.get("provider", {}).get("iframeUrl", "")
+        if provider:
+            url = urlsplit(provider)
+            if url.scheme != "https" or url.netloc != "widgets.sociablekit.com" or not re.fullmatch(r"/linkedin-profile-posts/iframe/\d+/?", url.path) or url.query or url.fragment:
+                errors.append("Automatic feed requires a public SociableKIT LinkedIn Profile Posts iframe URL")
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        errors.append(f"Invalid LinkedIn feed configuration: {error}")
+
     return errors
 
 
@@ -63,4 +102,5 @@ if __name__ == "__main__":
         for error in errors:
             print(f"  - {error}")
         raise SystemExit(1)
-    print("PASS: local assets, downloads, section links, and unique element IDs.")
+    print("PASS: assets, downloads, links, unique IDs, accessible controls, and LinkedIn configuration.")
+
