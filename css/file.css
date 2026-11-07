@@ -147,3 +147,30 @@ body { margin:0; min-width:280px; }
   #anand-portfolio-reimagined .ap-resume, #anand-portfolio-reimagined .ap-all-posts, #anand-portfolio-reimagined .ap-feed-recovery { min-height:44px; }
 }
 @media (prefers-reduced-motion:no-preference) { html { scroll-behavior:smooth; } }
+/* Interest objects respond to intentional taps, clicks, and keyboard activation. */
+#anand-portfolio-reimagined .ap-interest-object { width:100%; border:0; color:var(--ap-ink); font:inherit; transition:transform .25s,box-shadow .25s; }
+#anand-portfolio-reimagined .ap-interest-object:hover { transform:translateY(-3px); box-shadow:0 12px 28px -20px var(--ap-shadow); }
+#anand-portfolio-reimagined .ap-interest-feedback { margin:0 0 24px; color:var(--ap-soft); font-size:12px; }
+#anand-portfolio-reimagined .ap-object-conversation { font-size:30px; letter-spacing:-1px; padding:20px; }
+#anand-portfolio-reimagined .ap-object-code { font-size:48px; letter-spacing:-4px; }
+#anand-portfolio-reimagined .is-playing .ap-object-record { animation:ap-spin 3s linear infinite; }
+#anand-portfolio-reimagined [data-object="lifting"].is-acting .ap-object-bar { animation:ap-rep .85s ease-in-out; }
+#anand-portfolio-reimagined [data-object="building"].is-acting .ap-object-code { animation:ap-build .85s ease; }
+#anand-portfolio-reimagined [data-object="conversations"].is-acting .ap-object-conversation { animation:ap-build .5s ease; }
+@keyframes ap-spin { to { transform:rotate(360deg); } }
+@keyframes ap-rep { 0%,100% {transform:translateY(0) rotate(-16deg)} 45%,60% {transform:translateY(-38px) rotate(0)} }
+@keyframes ap-build { 0% {transform:scale(.8) translateY(10px)} 60% {transform:scale(1.05)} 100% {transform:scale(1)} }
+#anand-portfolio-reimagined .ap-film { margin:0 7% 36px; padding:32px 0; border-top:1px solid var(--ap-line); display:grid; grid-template-columns:1fr 210px; gap:40px; align-items:center; }
+#anand-portfolio-reimagined .ap-film h2 { margin-top:16px; }
+#anand-portfolio-reimagined .ap-film p:not(.ap-overline) { max-width:400px; color:var(--ap-soft); font-size:13px; }
+#anand-portfolio-reimagined .ap-film a { color:var(--ap-accent); font-size:12px; display:inline-block; padding-block:12px; }
+#anand-portfolio-reimagined .ap-short-player { position:relative; aspect-ratio:9/16; overflow:hidden; border-radius:18px; background:var(--ap-art); width:100%; }
+#anand-portfolio-reimagined .ap-short-load { display:grid; place-items:center; position:absolute; inset:0; width:100%; padding:0; border:0; background:var(--ap-art); color:#fff; }
+#anand-portfolio-reimagined .ap-short-load img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+#anand-portfolio-reimagined .ap-play-symbol { z-index:1; border-radius:50%; background:#171817cc; width:54px; height:54px; display:grid; place-items:center; }
+#anand-portfolio-reimagined .ap-play-label { position:absolute; bottom:18px; background:#171817dd; padding:5px 12px; border-radius:20px; font-size:12px; }
+#anand-portfolio-reimagined .ap-short-player iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+#anand-portfolio-reimagined .ap-lifting-film { margin:20px 0 0; }
+#anand-portfolio-reimagined .ap-lifting-film h3 { font-size:30px; line-height:1.2; letter-spacing:-1.2px; font-weight:500; }
+@media(max-width:560px) { #anand-portfolio-reimagined .ap-film { margin-inline:6%; grid-template-columns:1fr; gap:20px; } #anand-portfolio-reimagined .ap-short-player { max-width:230px; margin-inline:auto; } #anand-portfolio-reimagined .ap-lifting-film { margin-inline:0; } }
+@media(prefers-reduced-motion:reduce) { #anand-portfolio-reimagined .is-playing .ap-object-record { animation:none; } }
