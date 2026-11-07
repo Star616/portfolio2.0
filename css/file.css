@@ -174,3 +174,11 @@ body { margin:0; min-width:280px; }
 #anand-portfolio-reimagined .ap-lifting-film h3 { font-size:30px; line-height:1.2; letter-spacing:-1.2px; font-weight:500; }
 @media(max-width:560px) { #anand-portfolio-reimagined .ap-film { margin-inline:6%; grid-template-columns:1fr; gap:20px; } #anand-portfolio-reimagined .ap-short-player { max-width:230px; margin-inline:auto; } #anand-portfolio-reimagined .ap-lifting-film { margin-inline:0; } }
 @media(prefers-reduced-motion:reduce) { #anand-portfolio-reimagined .is-playing .ap-object-record { animation:none; } }
+
+/* A finite articulated deadlift, activated by pointer or keyboard. */
+#anand-portfolio-reimagined .ap-lifter { display:none; width:100%; max-width:300px; height:100%; }
+#anand-portfolio-reimagined [data-object="lifting"] .ap-lifter { display:block; }
+#anand-portfolio-reimagined .ap-lifter-limb { fill:none; stroke:var(--ap-accent); stroke-width:12; stroke-linejoin:round; stroke-linecap:round; }
+#anand-portfolio-reimagined .ap-lifter-rear { fill:none; stroke:var(--ap-plate); stroke-width:11; stroke-linejoin:round; stroke-linecap:round; opacity:.55; }
+#anand-portfolio-reimagined .ap-lifter-torso { fill:none; stroke:var(--ap-ink); stroke-width:20; stroke-linecap:round; }
+#anand-portfolio-reimagined .ap-lifter-arm { fill:none; stroke:var(--ap-accent); stroke-width:9; stroke-linecap:round; stroke-linejoin:round; }
