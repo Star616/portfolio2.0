@@ -59,3 +59,25 @@ ARIA control targets, and LinkedIn post/embed correspondence. External sites are
 
 `server/server.js` and `package-lock.json` belong to the earlier Express setup and are not used
 by the static deployment.
+
+
+## Traffic and search setup
+
+The static site loads Vercel Web Analytics and Speed Insights through js/analytics.js.
+Enable each product in the Vercel project dashboard, then redeploy. Instrumentation alone
+is not evidence that the dashboard is receiving data. No paid plan or subscription was enabled.
+Custom event reporting currently requires Vercel Pro/Enterprise; the wiring can remain in place
+on other plans, but reporting those events requires an eligible account.
+
+Events: Section selected, Welcome audio played/completed, Short player opened (not confirmed playback),
+Resume downloaded, Contact or social clicked, Career explored, Interest explored, LinkedIn post opened.
+The labels are fixed UI categories; URLs, emails and the audio itself are not event properties.
+The visitor privacy page describes collection, and GPC/DNT disables the measurement loader.
+
+Connect Google Search Console using the URL-prefix property
+https://portfolio2-0-eight-bice.vercel.app/ and the ownership verification method available to you.
+No verification token is fabricated or included. Submit /sitemap.xml after verification.
+Indexing and increased traffic are not guaranteed by adding metadata or a sitemap.
+
+New searchable routes: /experience/, /insights/manufacturing/, /projects/, and /privacy/.
+These pages remain static; the portfolio did not acquire a framework dependency.

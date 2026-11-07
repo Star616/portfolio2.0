@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://portfolio2-0-eight-bice.vercel.app/sitemap.xml
