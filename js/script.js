@@ -75,6 +75,10 @@
   viewButtons.forEach((button) => button.addEventListener('click', () => {
     const view = button.dataset.view;
     if (root.dataset.view === view) return;
+    // One brief pulse per deliberate section change; unsupported devices stay silent.
+    if (typeof navigator.vibrate === 'function') {
+      try { navigator.vibrate(8); } catch { /* Haptics must never block navigation. */ }
+    }
     showView(view);
     window.history.pushState(null, '', '#' + view);
   }));
