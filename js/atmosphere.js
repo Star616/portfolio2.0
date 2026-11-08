@@ -6,6 +6,7 @@
   const toggle = root.querySelector('.ap-motion-toggle');
   let paused = false;
   const scenes = [];
+  const voiceEnergy=[0,0,0];
   const TAU = Math.PI * 2;
   const mix = (a,b,t) => a+(b-a)*t;
   // A single ribbon topology: the same vertices move between personal chapters.
@@ -40,28 +41,33 @@
     const ctx=canvas.getContext('2d');
     if (!ctx) return;
     const host=canvas.parentElement;
-    const scene={canvas,kind,visible:false,frame:0,last:0,time:0,pointer:[0,0],current:[],pulse:0,start:0,active:false};
+    const scene={canvas,kind,visible:false,frame:0,last:0,time:0,pointer:[0,0],current:[],look:[0,0],pulse:0,start:0,active:false};
     const bands=kind==='hero'?27:32, samples=80;
     let width=0,height=0,dpr=1;
     function resize(){const r=canvas.getBoundingClientRect();width=r.width;height=r.height;dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);render(0,true);}
     function render(stamp,still=false){
       if(!width||!height)return;
       const moving=!paused&&!reduced.matches&&!still;
-      if(moving && (scene.kind!=='listening'||scene.active))scene.time+=.012;
+      const dt=Math.min(Math.max((stamp-scene.last)/1000,1/120),.05);
+      if(moving && (scene.kind!=='listening'||scene.active))scene.time+=dt*.65;
+      const blend=1-Math.exp(-dt*9);
+      for(let axis=0;axis<2;axis++)scene.look[axis]=mix(scene.look[axis],scene.pointer[axis],blend);
+      if(scene.kind==='hero'){const measured=window.anandVoiceVisual?.sample()||[0,0,0];for(let k=0;k<3;k++)voiceEnergy[k]=mix(voiceEnergy[k],measured[k],1-Math.exp(-dt*12));}
       if(scene.start){const p=Math.min((performance.now()-scene.start)/1900,1);scene.pulse=Math.sin(p*Math.PI);if(p===1)scene.start=0;}
       const dark=document.documentElement.dataset.theme==='dark';
       ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);
       const scale=Math.min(width,height)*.43, cx=width*.5,cy=height*.49;
-      const rotation=(scene.kind==='lifting'?-.06:scene.kind==='building'?.6:.15)+scene.pointer[0]*.12;
-      const tilt=(scene.kind==='lifting'?.05:.42)+scene.pointer[1]*.1;
+      const rotation=(scene.kind==='lifting'?-.06:scene.kind==='building'?.6:.15)+scene.look[0]*.12;
+      const tilt=(scene.kind==='lifting'?.05:.42)+scene.look[1]*.1;
       const project=(p)=>{const x=p[0]*Math.cos(rotation)+p[2]*Math.sin(rotation), z=-p[0]*Math.sin(rotation)+p[2]*Math.cos(rotation);const y=p[1]*Math.cos(tilt)-z*Math.sin(tilt);const depth=p[1]*Math.sin(tilt)+z*Math.cos(tilt);return [cx+x*scale,cy-y*scale,depth];};
       const lines=[];
       for(let j=0;j<bands;j++){
         const points=[];
         for(let i=0;i<=samples;i++){
           const idx=j*(samples+1)+i, target=form(scene.kind,i/samples,j/(bands-1),scene.time,scene.pulse+(scene.active?.45:0));
+          if(scene.kind==='hero'&&!reduced.matches&&!paused){const a=i/samples*TAU, energy=voiceEnergy[0]*.20+voiceEnergy[1]*.22;const ripple=Math.sin(a*5-scene.time*2+j*.15)*voiceEnergy[2]*.055;target[0]*=1+energy;target[1]*=1+energy;target[2]+=Math.sin(a*3+scene.time)*energy+ripple;}
           let p=scene.current[idx];if(!p)p=scene.current[idx]=target.slice();
-          const amount=still||reduced.matches?1:.075;
+          const amount=still||reduced.matches?1:1-Math.exp(-dt*8);
           for(let k=0;k<3;k++)p[k]=mix(p[k],target[k],amount);
           points.push(project(p));
         }
@@ -80,7 +86,7 @@
       // Tiny highlights define the material without an image or heavy 3D dependency.
       if(scene.kind!=='lifting')for(let n=0;n<5;n++){const p=project(form(scene.kind,(n*.193+scene.time*.007)%1,.5,scene.time,0));ctx.beginPath();ctx.arc(p[0],p[1],1.6,0,TAU);ctx.fillStyle=dark?'#e2eace':'#7e8c71';ctx.fill();}
     }
-    function tick(stamp){scene.frame=0;if(!scene.visible||document.hidden||paused||reduced.matches)return;if(stamp-scene.last>32){render(stamp);scene.last=stamp;}scene.frame=requestAnimationFrame(tick);}
+    function tick(stamp){scene.frame=0;if(!scene.visible||document.hidden||paused||reduced.matches)return;if(stamp-scene.last>15){render(stamp);scene.last=stamp;}scene.frame=requestAnimationFrame(tick);}
     scene.wake=()=>{render(0,true);if(scene.visible&&!paused&&!reduced.matches&&!document.hidden&&!scene.frame)scene.frame=requestAnimationFrame(tick);};
     scene.stop=()=>{cancelAnimationFrame(scene.frame);scene.frame=0;};
     scene.change=(next)=>{scene.kind=next;scene.start=0;scene.active=false;if(reduced.matches||paused)render(0,true);else if(scene.visible&&!scene.frame)scene.frame=requestAnimationFrame(tick);};
@@ -99,7 +105,7 @@
       canvas.parentElement.addEventListener('click',()=>scene.act());
     }
   });
-  const updateToggle=()=>{toggle.setAttribute('aria-pressed',String(paused));toggle.textContent=paused?'Resume motion':'Pause motion';toggle.disabled=reduced.matches;if(reduced.matches)toggle.textContent='Reduced motion';};
+  const updateToggle=()=>{toggle.setAttribute('aria-pressed',String(paused));toggle.textContent=paused?'Motion off':'Motion on';toggle.setAttribute('aria-label',paused?'Enable artwork motion':'Disable artwork motion');toggle.disabled=reduced.matches;if(reduced.matches)toggle.textContent='Reduced motion';};
   toggle.addEventListener('click',()=>{paused=!paused;updateToggle();scenes.forEach(scene=>paused?scene.stop():scene.wake());});
   reduced.addEventListener('change',()=>{updateToggle();scenes.forEach(scene=>{scene.stop();scene.wake();});});
   document.addEventListener('visibilitychange',()=>scenes.forEach(scene=>document.hidden?scene.stop():scene.wake()));
@@ -114,3 +120,4 @@
   voice?.addEventListener('play',()=>root.classList.add('ap-voice-playing'));
   ['pause','ended'].forEach(event=>voice?.addEventListener(event,()=>root.classList.remove('ap-voice-playing')));
 })();
+

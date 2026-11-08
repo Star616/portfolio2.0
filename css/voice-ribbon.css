@@ -1,0 +1,20 @@
+#anand-portfolio-reimagined .ap-welcome { margin-top:25px; }
+#anand-portfolio-reimagined .voice-text { font-size:12px; color:var(--ap-soft); margin-top:10px; }
+#anand-portfolio-reimagined .voice-text summary { width:fit-content; padding:7px 0; }
+#anand-portfolio-reimagined .voice-status { font-size:11px; color:var(--ap-soft); }
+#anand-portfolio-reimagined .voice-status:empty { display:none; }
+#anand-portfolio-reimagined .ap-atmosphere-stage { position:relative; }
+#anand-portfolio-reimagined .ribbon-start { position:absolute; left:50%; bottom:5%; transform:translateX(-50%); padding:12px 19px; white-space:nowrap; border:1px solid var(--ap-line); border-radius:40px; background:var(--ap-paper); color:var(--ap-ink); font-size:11px; box-shadow:0 8px 24px -17px var(--ap-shadow); }
+#anand-portfolio-reimagined .ribbon-start:hover { border-color:var(--ap-accent); }
+#anand-portfolio-reimagined .ribbon-controls { margin:0 5% 12px; }
+#anand-portfolio-reimagined .ribbon-meta { display:flex; justify-content:space-between; gap:12px; align-items:center; }
+#anand-portfolio-reimagined .ribbon-label { color:var(--ap-soft); font:9px/1.5 'DM Mono',monospace; letter-spacing:.9px; }
+#anand-portfolio-reimagined .ribbon-mute { border:0; background:transparent; color:var(--ap-ink); padding:12px 0 12px 10px; font-size:11px; white-space:nowrap; min-height:44px; }
+#anand-portfolio-reimagined .ribbon-progress { --progress:0%; height:1px; margin-top:3px; background:var(--ap-line); position:relative; }
+#anand-portfolio-reimagined .ribbon-progress:after { content:''; display:block; width:var(--progress); height:100%; background:var(--ap-accent); transition:width .25s linear; }
+#anand-portfolio-reimagined .ribbon-time { display:block; color:var(--ap-soft); font:9px/1.5 'DM Mono',monospace; margin-top:8px; font-variant-numeric:tabular-nums; }
+#anand-portfolio-reimagined .ap-art-caption { margin-top:14px; }
+#anand-portfolio-reimagined .ap-atmosphere-stage:before { transition:opacity 1s; }
+#anand-portfolio-reimagined .ap-atmosphere-stage[data-audio-state=playing]:before { opacity:.9; }
+@media(max-width:560px){#anand-portfolio-reimagined .ap-portrait-area { grid-template-columns:minmax(0,1fr) 100px; }#anand-portfolio-reimagined .ribbon-controls { grid-column:1/-1; grid-row:3; margin:12px 0 0; }#anand-portfolio-reimagined .ap-art-caption { grid-row:4; }#anand-portfolio-reimagined .ribbon-start { font-size:10px; padding:11px 12px; bottom:0; }#anand-portfolio-reimagined .ribbon-label { font-size:9px; }}
+@media(prefers-reduced-motion:reduce){#anand-portfolio-reimagined .ribbon-progress:after { transition:none; }}

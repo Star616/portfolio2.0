@@ -26,8 +26,8 @@
     })();
   </script>
   <link rel="stylesheet" href="css/file.css">
-<link rel="stylesheet" href="css/welcome-audio.css">
-<script defer src="js/welcome-audio.js"></script>
+<link rel="stylesheet" href="css/voice-ribbon.css">
+<script defer src="js/voice-ribbon.js"></script>
   <script defer src="js/script.js"></script>
   <script defer src="js/linkedin-feed.js"></script>
   <script defer src="js/interests-media.js"></script>
@@ -54,18 +54,15 @@
         <p class="ap-introduction">I’m Anand. I connect technology with the people<br class="ap-desktop-break"> and business problems it can serve.</p>
         <div class="ap-welcome">
 <p class="ap-overline" id="welcome-voice-title">A WELCOME FROM ANAND</p>
-<audio id="anand-voice" controls controlslist="nodownload noremoteplayback" disableremoteplayback preload="none" aria-labelledby="welcome-voice-title"><source src="audio/anand-welcome.m4a" type="audio/mp4">Your browser does not support audio playback. Read the welcome below.</audio>
-<div id="voice-controls" class="voice-controls" role="group" aria-label="Anand’s welcome audio player" hidden>
-<div class="voice-avatar"><img src="images/ananda-raj-profile.png" alt="" width="48" height="48" decoding="async"></div>
-<button class="voice-play" type="button" aria-label="Play Anand’s welcome" aria-pressed="false">▶</button>
-<div class="voice-track"><p class="voice-heading">A voice note from Anand</p><div class="voice-wave"><div class="voice-bars" aria-hidden="true"><span style="height:22px"></span><span style="height:25px"></span><span style="height:24px"></span><span style="height:27px"></span><span style="height:23px"></span><span style="height:24px"></span><span style="height:25px"></span><span style="height:24px"></span><span style="height:29px"></span><span style="height:23px"></span><span style="height:18px"></span><span style="height:30px"></span><span style="height:25px"></span><span style="height:29px"></span><span style="height:19px"></span><span style="height:23px"></span><span style="height:25px"></span><span style="height:25px"></span><span style="height:23px"></span><span style="height:26px"></span><span style="height:17px"></span><span style="height:30px"></span><span style="height:29px"></span><span style="height:22px"></span><span style="height:26px"></span><span style="height:27px"></span><span style="height:19px"></span><span style="height:26px"></span><span style="height:19px"></span><span style="height:25px"></span><span style="height:28px"></span><span style="height:20px"></span><span style="height:16px"></span><span style="height:23px"></span><span style="height:24px"></span><span style="height:26px"></span><span style="height:22px"></span><span style="height:26px"></span><span style="height:28px"></span><span style="height:14px"></span><span style="height:21px"></span><span style="height:22px"></span><span style="height:22px"></span><span style="height:24px"></span><span style="height:13px"></span><span style="height:28px"></span><span style="height:24px"></span><span style="height:17px"></span></div><input class="voice-seek" type="range" min="0" max="100" step=".1" value="0" disabled aria-label="Seek welcome audio"></div><div class="voice-time"><span><span class="voice-elapsed">0:00</span> / <span class="voice-duration">1:38</span></span><button class="voice-mute" type="button" aria-label="Mute welcome audio" aria-pressed="false">Mute</button></div></div></div>
+<audio id="anand-voice" controls controlslist="nodownload noremoteplayback" disableremoteplayback preload="auto" aria-labelledby="welcome-voice-title"><source src="audio/anand-welcome.m4a" type="audio/mp4">Your browser does not support audio playback. Read the welcome below.</audio>
 <p id="voice-status" class="voice-status" role="status"></p>
 <details class="voice-text"><summary style="cursor:pointer">Read instead</summary><p>Hey, this is Anand. Thank you so much for visiting my website. This is something I’ve coded. I have a bit of computer science knowledge, and building things is a hobby I enjoy.</p><p>I hope you enjoy exploring my interests, experience, and YouTube Shorts where I’ve lifted some heavy weights. I hope that inspires you.</p><p>If you’d like to talk, connect, or simply have a conversation, feel free to get in touch. I’d love to connect with you. Cheers, and thank you!</p></details></div>
 <div class="ap-identity"><span class="ap-location-dot" aria-hidden="true"></span><span>Ananda Raj Nadar <span class="ap-identity-divider">/</span> Chennai, India</span></div>
       </div>
       <div class="ap-portrait-area">
-        <div class="ap-atmosphere-stage" role="img" aria-label="An abstract ribbon sculpture in olive, silver and lavender light"><canvas class="ap-atmosphere-canvas" data-atmosphere="hero" aria-hidden="true"></canvas></div>
-        <div class="ap-art-caption"><span>MANY SIDES. ONE ANAND.</span><button class="ap-motion-toggle" type="button" aria-pressed="false">Pause motion</button></div>
+        <div class="ap-atmosphere-stage" role="group" aria-label="Anand’s voice ribbon"><canvas class="ap-atmosphere-canvas" data-atmosphere="hero" aria-hidden="true"></canvas><button class="ribbon-start" type="button" aria-label="Play Anand’s welcome" aria-describedby="voice-status" hidden>Tap to hear Anand</button></div>
+        <div id="voice-controls" class="ribbon-controls" role="group" aria-label="Anand’s welcome recording" hidden><div class="ribbon-meta"><span class="ribbon-label">A WELCOME FROM ANAND</span><button class="ribbon-mute" type="button" aria-label="Mute Anand’s welcome" aria-pressed="false">Sound on</button></div><div class="ribbon-progress" aria-hidden="true"></div><span class="ribbon-time">0:00 / 1:38</span></div>
+        <div class="ap-art-caption"><span>MANY SIDES. ONE ANAND.</span><button class="ap-motion-toggle" type="button" aria-pressed="false">Motion on</button></div>
         <button class="ap-portrait" type="button" aria-label="Turn Anand's portrait over to read his introduction" aria-pressed="false">
           <span class="ap-photo-front" aria-hidden="false">
             <img src="images/ananda-raj-profile.png" alt="Anand at an AI control at scale event, shown in the original full frame" width="960" height="1280" fetchpriority="high" decoding="async">
@@ -167,4 +164,5 @@
   <noscript><p class="no-script-note">All career and interest sections are available below. Read the original posts on LinkedIn using their links.</p></noscript>
 </body>
 </html>
+
 
