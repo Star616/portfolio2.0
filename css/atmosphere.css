@@ -50,3 +50,14 @@
   #anand-portfolio-reimagined .ribbon-controls,
   #anand-portfolio-reimagined .ap-art-caption { width:90%; max-width:378px; margin-inline:auto; }
 }
+
+/* A real milestone replaces the illustrated lifter. */
+#anand-portfolio-reimagined .ap-lift-milestone { display:none; }
+#anand-portfolio-reimagined .ap-interest-object[data-object="lifting"]>.ap-atmosphere-canvas { display:none; }
+#anand-portfolio-reimagined .ap-interest-object[data-object="lifting"]>.ap-lift-milestone { display:flex; flex-direction:column; align-items:center; gap:24px; }
+#anand-portfolio-reimagined .ap-interest-object[data-object="lifting"]:after { display:none; }
+#anand-portfolio-reimagined .ap-lift-eyebrow { font:10px 'DM Mono',monospace; letter-spacing:2px; color:var(--ap-soft); }
+#anand-portfolio-reimagined .ap-lift-number { font:400 clamp(70px,9vw,108px)/1 'Inter',sans-serif; letter-spacing:-7px; color:var(--ap-ink); }
+#anand-portfolio-reimagined .ap-lift-number>span { font-size:24px; letter-spacing:-1px; color:var(--ap-soft); }
+#anand-portfolio-reimagined .ap-lift-action { font-size:12px; color:var(--ap-accent); }
+#anand-portfolio-reimagined .ap-lifting-film { scroll-margin-top:100px; }

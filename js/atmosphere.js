@@ -12,15 +12,7 @@
   // A single ribbon topology: the same vertices move between personal chapters.
   function form(kind, u, v, time, pulse) {
     const a=u*TAU, band=v-.5;
-    if (kind === 'lifting') {
-      const lift = pulse;
-      const hip=[-.24,-.06,0], shoulder=[mix(.12,-.22,lift),mix(.36,.57,lift),0];
-      const parts=[[[0,0,0],[0,0,0]], [hip,shoulder], [hip,[-.05,-.42,.03]], [[-.05,-.42,.03],[-.23,-.8,.02]], [hip,[-.39,-.43,-.11]], [[-.39,-.43,-.11],[-.49,-.8,-.11]], [shoulder,[.19,mix(-.48,-.19,lift),.08]], [shoulder,[.02,mix(-.48,-.19,lift),-.1]]];
-      const part=Math.min(7,Math.floor(v*8));
-      if (part===0) {const r=.12;return [shoulder[0]+Math.cos(a)*r,shoulder[1]+.19+Math.sin(a)*r,Math.sin(a*2)*.035];}
-      const [start,end]=parts[part], radius=part===1?.075:.034;
-      return [mix(start[0],end[0],u)+Math.cos(v*TAU*8)*radius,mix(start[1],end[1],u),mix(start[2],end[2],u)+Math.sin(v*TAU*8)*radius];
-    }
+    if (kind === 'lifting') return [0,0,0];
     if (kind === 'building') {
       const side=Math.min(5,Math.floor(v*6)), t=u*2-1, k=(v*6%1)*2-1;
       const s=.6, cube=[[t,k,1],[t,k,-1],[1,t,k],[-1,t,k],[k,1,t],[k,-1,t]][side];
