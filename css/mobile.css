@@ -1,0 +1,101 @@
+/* Phone and tablet layouts share the same content and interactions as desktop. */
+#anand-portfolio-reimagined .ap-hero-copy,
+#anand-portfolio-reimagined .ap-interest-story,
+#anand-portfolio-reimagined .ap-career-story { min-width:0; }
+#anand-portfolio-reimagined .ap-view-switch { max-width:100%; }
+@media(max-width:820px) {
+  #anand-portfolio-reimagined .ap-hero { grid-template-columns:minmax(0,1fr); gap:26px; padding:32px 6% 36px; }
+  #anand-portfolio-reimagined h1 { font-size:clamp(42px,10.6vw,68px); margin:19px 0 23px; letter-spacing:-.065em; }
+  #anand-portfolio-reimagined .ap-introduction { max-width:520px; font-size:15px; }
+  #anand-portfolio-reimagined .ap-desktop-break { display:none; }
+  #anand-portfolio-reimagined .ap-identity { flex-wrap:wrap; font-size:12px; margin-top:20px; }
+  #anand-portfolio-reimagined .ap-portrait-area { width:100%; display:flex; flex-direction:column; align-items:center; gap:0; margin:0; }
+  #anand-portfolio-reimagined .ap-atmosphere-stage { width:100%; max-width:390px; aspect-ratio:1; flex:none; }
+  #anand-portfolio-reimagined .ribbon-start { min-height:44px; max-width:calc(100% - 24px); font-size:12px; padding:12px 18px; bottom:3%; }
+  #anand-portfolio-reimagined .ribbon-controls { width:100%; max-width:440px; margin:12px 0 0; }
+  #anand-portfolio-reimagined .ribbon-label { font-size:10px; letter-spacing:.5px; }
+  #anand-portfolio-reimagined .ribbon-time { font-size:11px; }
+  #anand-portfolio-reimagined .ribbon-mute { font-size:12px; min-width:66px; }
+  #anand-portfolio-reimagined .ap-art-caption { width:100%; max-width:440px; margin:12px 0 28px; font-size:10px; }
+  #anand-portfolio-reimagined .ap-motion-toggle { min-width:72px; min-height:44px; font-size:12px; }
+  #anand-portfolio-reimagined .ap-portrait { width:174px; margin:0 auto; flex:none; }
+  #anand-portfolio-reimagined .ap-photo-front { padding:7px; }
+  #anand-portfolio-reimagined .ap-photo-caption { font-size:9px; padding:7px 2px 0; }
+  #anand-portfolio-reimagined .ap-photo-back { padding:15px; }
+  #anand-portfolio-reimagined .ap-back-kicker { font-size:9px; }
+  #anand-portfolio-reimagined .ap-back-title { font-size:20px; line-height:1.15; margin-top:12px; }
+  #anand-portfolio-reimagined .ap-back-copy { font-size:11px; line-height:1.45; margin-top:11px; }
+  #anand-portfolio-reimagined .ap-back-return { font-size:10px; padding-top:8px; }
+  #anand-portfolio-reimagined .ap-portrait-footnote { font-size:10px; margin:16px 0 0; }
+  #anand-portfolio-reimagined .ap-film { grid-template-columns:minmax(0,1fr) minmax(150px,210px); gap:24px; }
+  #anand-portfolio-reimagined .ap-section-intro { align-items:flex-start; }
+  #anand-portfolio-reimagined .ap-company-picker { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px 8px; padding-top:20px; }
+  #anand-portfolio-reimagined .ap-company-picker:before { display:none; }
+  #anand-portfolio-reimagined .ap-company-button { min-width:0; min-height:78px; font-size:11px; padding:12px 4px; gap:7px; }
+  #anand-portfolio-reimagined .ap-company-button:before { top:-5px; }
+  #anand-portfolio-reimagined .ap-interest-detail { grid-template-columns:minmax(0,1fr); gap:22px; }
+  #anand-portfolio-reimagined .ap-interest-object { width:100%; max-width:none; height:clamp(260px,65vw,370px); margin:0; }
+  #anand-portfolio-reimagined .ap-interest-story { max-width:550px; }
+  #anand-portfolio-reimagined .ap-interest-copy { font-size:14px; line-height:1.8; }
+  #anand-portfolio-reimagined .ap-interest-feedback { font-size:13px; }
+  #anand-portfolio-reimagined .ap-note:hover { padding-left:0; }
+  #anand-portfolio-reimagined .ap-embed-slot { margin-inline:0; }
+}
+@media(max-width:560px) {
+  #anand-portfolio-reimagined .ap-header { padding:12px 6%; }
+  #anand-portfolio-reimagined .ap-header-note { display:none; }
+  #anand-portfolio-reimagined .ap-film { grid-template-columns:minmax(0,1fr); padding:26px 0; }
+  #anand-portfolio-reimagined .ap-short-player { width:min(100%,270px); max-width:270px; margin-inline:auto; }
+  #anand-portfolio-reimagined .ap-film p:not(.ap-overline) { font-size:14px; }
+  #anand-portfolio-reimagined .ap-chapter-control { padding:4px 6% 28px; }
+  #anand-portfolio-reimagined .ap-view-switch { width:100%; }
+  #anand-portfolio-reimagined .ap-view-button { min-height:46px; font-size:13px; }
+  #anand-portfolio-reimagined .ap-chapter { min-height:0; padding-top:26px; padding-bottom:26px; }
+  #anand-portfolio-reimagined h2 { font-size:clamp(29px,8vw,37px); }
+  #anand-portfolio-reimagined .ap-section-intro { display:block; }
+  #anand-portfolio-reimagined .ap-section-intro>p { font-size:13px; margin-top:16px; }
+  #anand-portfolio-reimagined .ap-small-note { font-size:12px; }
+  #anand-portfolio-reimagined .ap-career-detail { grid-template-columns:30px minmax(0,1fr); gap:14px; }
+  #anand-portfolio-reimagined .ap-career-number { font-size:32px; }
+  #anand-portfolio-reimagined .ap-career-title { font-size:clamp(24px,6.6vw,30px); }
+  #anand-portfolio-reimagined .ap-career-copy { font-size:14px; }
+  #anand-portfolio-reimagined .ap-career-role,
+  #anand-portfolio-reimagined .ap-career-result,
+  #anand-portfolio-reimagined .ap-career-tags { font-size:12px; }
+  #anand-portfolio-reimagined .ap-life-picker { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 20px; }
+  #anand-portfolio-reimagined .ap-interest-button { font-size:13px; min-height:48px; text-align:left; }
+  #anand-portfolio-reimagined .ap-interest-title { font-size:29px; }
+  #anand-portfolio-reimagined .ap-note h3 { font-size:clamp(30px,8.6vw,40px); }
+  #anand-portfolio-reimagined .ap-note-secondary h3 { font-size:30px; }
+  #anand-portfolio-reimagined .ap-note-meta { font-size:10px; line-height:1.7; }
+  #anand-portfolio-reimagined .ap-note-actions { flex-wrap:wrap; gap:8px 20px; }
+  #anand-portfolio-reimagined .ap-note-actions a,
+  #anand-portfolio-reimagined .ap-note-actions button { font-size:12px; }
+  #anand-portfolio-reimagined .discover-links { margin-inline:6%; gap:0; flex-direction:column; align-items:flex-start; }
+  #anand-portfolio-reimagined .ap-footer { align-items:flex-start; gap:8px 20px; font-size:12px; }
+  #anand-portfolio-reimagined .ap-footer>div { flex-wrap:wrap; gap:6px 22px; }
+  #anand-portfolio-reimagined .ap-contact h2 { font-size:32px; }
+  #anand-portfolio-reimagined .voice-text { font-size:13px; }
+  #anand-portfolio-reimagined .ap-contact-row { flex-direction:column; align-items:flex-start; }
+}
+@media(pointer:coarse), (max-width:820px) {
+  #anand-portfolio-reimagined .ap-appearance,
+  #anand-portfolio-reimagined .ap-wordmark,
+  #anand-portfolio-reimagined .ap-youtube,
+  #anand-portfolio-reimagined .ap-note-actions a,
+  #anand-portfolio-reimagined .ap-note-actions button,
+  #anand-portfolio-reimagined .ap-footer a,
+  #anand-portfolio-reimagined .discover-links a,
+  #anand-portfolio-reimagined .voice-text summary,
+  #anand-portfolio-reimagined .ap-resume { display:inline-flex; align-items:center; min-height:44px; }
+  #anand-portfolio-reimagined .ap-interest-object:hover { transform:none; }
+}
+@media(max-width:360px) {
+  #anand-portfolio-reimagined .ap-overline { font-size:10px; letter-spacing:.7px; }
+  #anand-portfolio-reimagined .ap-art-caption { font-size:9px; letter-spacing:.4px; }
+  #anand-portfolio-reimagined .ribbon-label { font-size:9px; }
+  #anand-portfolio-reimagined .ap-note-actions { align-items:flex-start; flex-direction:column; }
+}
+@media(max-width:820px) and (orientation:landscape) {
+  #anand-portfolio-reimagined .ap-atmosphere-stage { max-width:320px; }
+}
