@@ -40,3 +40,13 @@
 @media(max-width:780px) { #anand-portfolio-reimagined .ap-hero { gap:15px; } #anand-portfolio-reimagined .ap-interest-object { height:290px; } #anand-portfolio-reimagined .ap-company-button { flex-basis:90px; } }
 @media(max-width:560px) { #anand-portfolio-reimagined .ap-hero { grid-template-columns:1fr; gap:15px; } #anand-portfolio-reimagined .ap-portrait-area { width:100%; display:grid; grid-template-columns:1fr 105px; align-items:center; gap:0 10px; margin:0; } #anand-portfolio-reimagined .ap-atmosphere-stage { grid-column:1; grid-row:1/3; min-width:0; } #anand-portfolio-reimagined .ap-art-caption { grid-column:1/-1; grid-row:3; margin:10px 0 15px; } #anand-portfolio-reimagined .ap-portrait { grid-column:2; grid-row:1; width:96px; } #anand-portfolio-reimagined .ap-portrait-footnote { grid-column:2; grid-row:2; font-size:7px; margin-top:8px; } #anand-portfolio-reimagined .ap-back-title { font-size:12px; } #anand-portfolio-reimagined .ap-back-copy { font-size:6px; } #anand-portfolio-reimagined .ap-back-kicker { font-size:6px; } #anand-portfolio-reimagined .ap-photo-back { padding:8px; } #anand-portfolio-reimagined .ap-interest-detail { grid-template-columns:1fr; gap:20px; } #anand-portfolio-reimagined .ap-interest-object { width:100%; height:300px; } #anand-portfolio-reimagined .ap-company-picker { gap:3px; } #anand-portfolio-reimagined .ap-company-button { flex:1 1 17%; font-size:9px; word-break:normal; padding-inline:1px; } #anand-portfolio-reimagined .ap-company-button img { width:21px; height:21px; } #anand-portfolio-reimagined .ap-motion-toggle { min-height:44px; } }
 @media(prefers-reduced-motion:reduce) { #anand-portfolio-reimagined .ap-note:hover { padding-left:0; } }
+
+/* Align the introduction with the sculpture, rather than the full media stack. */
+@media(min-width:821px) {
+  #anand-portfolio-reimagined .ap-hero { align-items:start; padding-top:34px; }
+  #anand-portfolio-reimagined .ap-hero-copy { padding-top:54px; }
+  #anand-portfolio-reimagined .ap-portrait-area { align-self:start; justify-content:flex-start; }
+  #anand-portfolio-reimagined .ap-atmosphere-stage { max-width:420px; margin-inline:auto; }
+  #anand-portfolio-reimagined .ribbon-controls,
+  #anand-portfolio-reimagined .ap-art-caption { width:90%; max-width:378px; margin-inline:auto; }
+}
