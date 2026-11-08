@@ -62,7 +62,7 @@
     if(gesture)void prepareAnalysis();
     try{await audio.play();if(!gesture)void prepareAnalysis();}
     catch(error){
-      if(error.name!=='NotAllowedError')status.textContent='The recording could not start. Tap the ribbon to try again, or read the welcome.';
+      if(error.name!=='NotAllowedError')status.textContent='The recording could not start. Tap the ribbon to try again.';
     }finally{starting=false;sync();}
   }
   audio.controls=false;audio.hidden=true;controls.hidden=false;start.hidden=false;
@@ -71,7 +71,7 @@
   start.addEventListener('click',()=>begin(true));
   mute.addEventListener('click',()=>{audio.muted=!audio.muted;sync();});
   ['play','pause','ended','loadedmetadata','timeupdate','volumechange'].forEach(name=>audio.addEventListener(name,sync));
-  audio.addEventListener('error',()=>{status.textContent='The recording could not load. You can still read the welcome.';sync();});
+  audio.addEventListener('error',()=>{status.textContent='The recording could not load. Please try again later.';sync();});
   sync();
   // One autoplay attempt, with a clear opt-in when browser policy blocks sound.
   void begin();
