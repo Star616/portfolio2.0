@@ -105,7 +105,7 @@
       canvas.parentElement.addEventListener('click',()=>scene.act());
     }
   });
-  const updateToggle=()=>{toggle.setAttribute('aria-pressed',String(paused));toggle.textContent=paused?'Motion off':'Motion on';toggle.setAttribute('aria-label',paused?'Enable artwork motion':'Disable artwork motion');toggle.disabled=reduced.matches;if(reduced.matches)toggle.textContent='Reduced motion';};
+  const updateToggle=()=>{toggle.setAttribute('aria-pressed',String(paused));toggle.textContent=paused?'Motion off':'Motion on';toggle.setAttribute('aria-label',paused?'Enable artwork motion':'Disable artwork motion');toggle.disabled=reduced.matches;if(reduced.matches)toggle.textContent='Reduced motion';document.dispatchEvent(new CustomEvent('portfolio:motionchange',{detail:{enabled:!paused&&!reduced.matches}}));};
   toggle.addEventListener('click',()=>{paused=!paused;updateToggle();scenes.forEach(scene=>paused?scene.stop():scene.wake());});
   reduced.addEventListener('change',()=>{updateToggle();scenes.forEach(scene=>{scene.stop();scene.wake();});});
   document.addEventListener('visibilitychange',()=>scenes.forEach(scene=>document.hidden?scene.stop():scene.wake()));
