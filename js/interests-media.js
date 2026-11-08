@@ -5,8 +5,8 @@
   const feedback = document.getElementById('ap-interest-feedback');
   const film = document.getElementById('ap-lifting-film');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const labels = { lifting: 'Perform a deadlift', building: 'Build a small idea', listening: 'Spin the record', conversations: 'Start a conversation' };
-  const hints = { lifting: 'Tap the lifter to perform a deadlift.', building: 'Tap the brackets to build something.', listening: 'Tap the record to spin it. Tap again to pause.', conversations: 'Tap to keep the conversation going.' };
+  const labels = { lifting: 'Perform a deadlift', building: 'Build a small idea', listening: 'Animate the sound waves', conversations: 'Start a conversation' };
+  const hints = { lifting: 'Tap the lifter to perform a deadlift.', building: 'Tap the geometry to build something.', listening: 'Tap the waves to bring them to life. Tap again to pause.', conversations: 'Tap to keep the conversation going.' };
 
   const figure = object.querySelector('.ap-lifter');
   let frame;
@@ -63,7 +63,7 @@
     if (interest === 'listening') {
       const playing = object.classList.toggle('is-playing');
       object.setAttribute('aria-pressed', String(playing));
-      object.setAttribute('aria-label', playing ? 'Pause the record' : 'Spin the record');
+      object.setAttribute('aria-label', playing ? 'Pause the sound waves' : 'Animate the sound waves');
       feedback.textContent = playing ? 'A little music. A different perspective.' : 'Paused. Take a breath.';
       return;
     }
@@ -108,3 +108,4 @@
   });
   reset();
 })();
+
