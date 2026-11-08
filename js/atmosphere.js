@@ -31,7 +31,7 @@
     }
     if (kind === 'conversations') {
       const side=v<.5?-1:1, b=(v*2%1)-.5, r=.35+b*.16;
-      return [side*.36+Math.cos(a)*r,Math.sin(a)*.55,Math.sin(a+side*time*.15)*.2+b*.12];
+      return [side*(.36-pulse*.08)+Math.cos(a)*(r+pulse*.035),Math.sin(a)*.55,Math.sin(a+side*time*.15)*.2+b*.12];
     }
     const r=.57+Math.cos(a*3+time*.1)*.11;
     return [Math.cos(a)*(r+band*.38*Math.cos(a*1.5)),Math.sin(a)*(r+band*.38*Math.cos(a*1.5)),Math.sin(a*1.5)*band*.6+Math.sin(a*2)*.18];
@@ -47,7 +47,7 @@
     function render(stamp,still=false){
       if(!width||!height)return;
       const moving=!paused&&!reduced.matches&&!still;
-      if(moving)scene.time+=.012;
+      if(moving && (scene.kind!=='listening'||scene.active))scene.time+=.012;
       if(scene.start){const p=Math.min((performance.now()-scene.start)/1900,1);scene.pulse=Math.sin(p*Math.PI);if(p===1)scene.start=0;}
       const dark=document.documentElement.dataset.theme==='dark';
       ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);
