@@ -13,39 +13,6 @@
       { duration: 380, easing: 'cubic-bezier(.2,.7,.2,1)' }
     );
   };
-  const careers = {
-    servicenow: {
-      number: '01', sector: 'ENTERPRISE\n& STRATEGIC', role: 'ServiceNow / Account management',
-      title: 'Complex accounts.\nClear next steps.',
-      copy: 'Enterprise and strategic account engagement across manufacturing. Territory planning, executive conversations, and progressing opportunities.',
-      tags: ['Manufacturing', 'Account strategy', 'Executive engagement'],
-      result: '$10M+ in qualified sales pipeline generated.'
-    },
-    niq: {
-      number: '02', sector: 'INDIA\n& APAC', role: 'NielsenIQ / Retail & CPG',
-      title: 'Start with insight.\nFind the opportunity.',
-      copy: 'Prospecting and account development across India and APAC. Turning retail and consumer-goods market context into relevant customer conversations.',
-      tags: ['Retail & CPG', 'Market insights', 'Pipeline creation'], result: ''
-    },
-    freshworks: {
-      number: '03', sector: 'NORTH AMERICA\nSMB', role: 'Freshworks / North America, SMB',
-      title: 'Better conversations.\nBetter customer experiences.',
-      copy: 'Working with small and medium-sized businesses in North America, connecting customer priorities with SaaS solutions and progressing commercial conversations.',
-      tags: ['SaaS', 'North America', 'SMB'], result: ''
-    },
-    blockchain: {
-      number: '04', sector: 'AUSTRALIA\n& NEW ZEALAND', role: 'Blockchain App Factory / Business development',
-      title: 'Emerging technology.\nReal business needs.',
-      copy: 'Connecting clients and technical teams on blockchain-based products and services, with a focus on understanding requirements and building long-term relationships.',
-      tags: ['Technology services', 'ANZ', 'Client relationships'], result: ''
-    },
-    skilllync: {
-      number: '05', sector: 'INSIDE\nSALES', role: 'Skill-Lync / Inside sales',
-      title: 'Learn the craft.\nEarn the conversation.',
-      copy: 'The foundations: prospecting, cold calling, understanding a customer’s goals, negotiating, and converting interest into revenue.',
-      tags: ['Prospecting', 'Discovery', 'Negotiation'], result: ''
-    }
-  };
   const interests = {
     lifting: { kicker: 'DISCIPLINE', title: 'A little stronger.\nEvery week.', copy: 'Training keeps me disciplined, motivated, and mentally sharp. There’s something satisfying about showing up and making steady progress.' },
     building: { kicker: 'CURIOSITY', title: 'An idea. A few lines.\nSomething that works.', copy: 'I enjoy learning to code, experimenting with ideas, and building things with my own hands. This portfolio is part of that curiosity.' },
@@ -69,7 +36,7 @@
     root.dataset.view = view;
     setSelected(viewButtons, viewButtons.find((button) => button.dataset.view === view));
     panels.forEach((panel) => { panel.hidden = panel.id !== view; });
-    if (shouldAnimate) animateIn(document.getElementById(view));
+    if (shouldAnimate && view !== 'work') animateIn(document.getElementById(view));
     document.dispatchEvent(new CustomEvent('portfolio:viewchange', { detail: { view } }));
   };
   viewButtons.forEach((button) => button.addEventListener('click', () => {
@@ -86,22 +53,6 @@
   window.addEventListener('hashchange', () => showView(viewFromHash(), false));
   showView(viewFromHash(), false);
   root.dataset.enhanced = 'true';
-  const companyButtons = Array.from(root.querySelectorAll('.ap-company-button'));
-  companyButtons.forEach((button) => button.addEventListener('click', () => {
-    const career = careers[button.dataset.company];
-    if (!career) return;
-    setSelected(companyButtons, button);
-    const detail = select('#ap-career-detail');
-    detail.setAttribute('aria-labelledby', button.id);
-    setText('.ap-career-number', career.number); setText('.ap-career-sector', career.sector);
-    setText('.ap-career-role', career.role); setText('.ap-career-title', career.title);
-    setText('.ap-career-copy', career.copy); setText('.ap-career-result', career.result);
-    select('.ap-career-result').hidden = !career.result;
-    const tags = career.tags.map((text) => {
-      const span = document.createElement('span'); span.textContent = text; return span;
-    });
-    select('.ap-career-tags').replaceChildren(...tags); animateIn(detail);
-  }));
   const interestButtons = Array.from(root.querySelectorAll('.ap-interest-button'));
   interestButtons.forEach((button) => button.addEventListener('click', () => {
     const interest = interests[button.dataset.interest];
