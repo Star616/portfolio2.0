@@ -44,10 +44,11 @@
   function rebuild(){
     if(work.hidden||!stories.getBoundingClientRect().width)return;
     const rect=stories.getBoundingClientRect();
-    const xs=[40,57,31,54,40];
+    const xs=[27,70,18,65,30];
     positions=chapters.map((chapter,i)=>{
-      const company=chapter.querySelector('.cj-company').getBoundingClientRect();
-      return {x:xs[i%xs.length],y:company.top-rect.top+company.height/2};
+      const company=chapter.querySelector('.cj-company');
+      // Use layout positions so an entrance transform never displaces a marker.
+      return {x:xs[i%xs.length],y:chapter.offsetTop+company.offsetTop+company.offsetHeight/2};
     });
     const points=[{x:44,y:8},...positions,{x:44,y:rect.height-22}];
     let path='M'+points[0].x+' '+points[0].y;
