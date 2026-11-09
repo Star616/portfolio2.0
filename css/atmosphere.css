@@ -61,3 +61,7 @@
 #anand-portfolio-reimagined .ap-lift-number>span { font-size:24px; letter-spacing:-1px; color:var(--ap-soft); }
 #anand-portfolio-reimagined .ap-lift-action { font-size:12px; color:var(--ap-accent); }
 #anand-portfolio-reimagined .ap-lifting-film { scroll-margin-top:100px; }
+
+/* A softly lit field of particles replaces the hero ribbon. */
+#anand-portfolio-reimagined .ap-atmosphere-stage[data-visual="particle-wave"]:before { inset:19% 1% 23%; opacity:.38; }
+#anand-portfolio-reimagined .ap-atmosphere-stage[data-visual="particle-wave"][data-audio-state="playing"]:before { opacity:.55; }

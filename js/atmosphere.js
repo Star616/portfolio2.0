@@ -6,10 +6,9 @@
   const toggle = root.querySelector('.ap-motion-toggle');
   let paused = false;
   const scenes = [];
-  const voiceEnergy=[0,0,0];
   const TAU = Math.PI * 2;
   const mix = (a,b,t) => a+(b-a)*t;
-  // A single ribbon topology: the same vertices move between personal chapters.
+  // Shared geometry for the off-duty artwork; the welcome has its own particle renderer.
   function form(kind, u, v, time, pulse) {
     const a=u*TAU, band=v-.5;
     if (kind === 'lifting') return [0,0,0];
@@ -44,7 +43,6 @@
       if(moving && (scene.kind!=='listening'||scene.active))scene.time+=dt*.65;
       const blend=1-Math.exp(-dt*9);
       for(let axis=0;axis<2;axis++)scene.look[axis]=mix(scene.look[axis],scene.pointer[axis],blend);
-      if(scene.kind==='hero'){const measured=window.anandVoiceVisual?.sample()||[0,0,0];for(let k=0;k<3;k++)voiceEnergy[k]=mix(voiceEnergy[k],measured[k],1-Math.exp(-dt*12));}
       if(scene.start){const p=Math.min((performance.now()-scene.start)/1900,1);scene.pulse=Math.sin(p*Math.PI);if(p===1)scene.start=0;}
       const dark=document.documentElement.dataset.theme==='dark';
       ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);
@@ -57,7 +55,6 @@
         const points=[];
         for(let i=0;i<=samples;i++){
           const idx=j*(samples+1)+i, target=form(scene.kind,i/samples,j/(bands-1),scene.time,scene.pulse+(scene.active?.45:0));
-          if(scene.kind==='hero'&&!reduced.matches&&!paused){const a=i/samples*TAU, energy=voiceEnergy[0]*.20+voiceEnergy[1]*.22;const ripple=Math.sin(a*5-scene.time*2+j*.15)*voiceEnergy[2]*.055;target[0]*=1+energy;target[1]*=1+energy;target[2]+=Math.sin(a*3+scene.time)*energy+ripple;}
           let p=scene.current[idx];if(!p)p=scene.current[idx]=target.slice();
           const amount=still||reduced.matches?1:1-Math.exp(-dt*8);
           for(let k=0;k<3;k++)p[k]=mix(p[k],target[k],amount);
@@ -90,6 +87,7 @@
     scenes.push(scene);return scene;
   }
   root.querySelectorAll('[data-atmosphere]').forEach(canvas=>{
+    if(canvas.dataset.atmosphere==='hero')return;
     const scene=createScene(canvas,canvas.dataset.atmosphere);
     if(!scene)return;
     if(canvas.dataset.atmosphere==='lifting'){

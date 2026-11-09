@@ -10,7 +10,7 @@
   const progress=controls.querySelector('.ribbon-progress');
   const clock=controls.querySelector('.ribbon-time');
   const status=document.getElementById('voice-status');
-  let context,source,analyser,bins,preparing;
+  let context,source,analyser,bins,waveform,preparing;
   let starting=false;
   const time=n=>Number.isFinite(n)?Math.floor(n/60)+':'+String(Math.floor(n%60)).padStart(2,'0'):'0:00';
   // Analysis stays on-device and uses this recording only. No microphone is opened.
@@ -26,6 +26,7 @@
         if(context.state!=='running'||source)return;
         analyser=context.createAnalyser();analyser.fftSize=512;analyser.smoothingTimeConstant=.78;
         bins=new Uint8Array(analyser.frequencyBinCount);
+        waveform=new Uint8Array(analyser.fftSize);
         source=context.createMediaElementSource(audio);
         source.connect(analyser);analyser.connect(context.destination);
         stage.dataset.audioReactive='true';
@@ -34,10 +35,13 @@
     }catch{return Promise.resolve();}
   };
   window.anandVoiceVisual={sample(){
-    if(!analyser||audio.paused||audio.ended||context.state!=='running')return [0,0,0];
+    if(!analyser||audio.paused||audio.ended||context.state!=='running')return [0,0,0,0];
     analyser.getByteFrequencyData(bins);
     const average=(from,to)=>{let sum=0;for(let i=from;i<to;i++)sum+=bins[i];return sum/(to-from)/255;};
-    return [average(1,8),average(8,36),average(36,100)];
+    analyser.getByteTimeDomainData(waveform);
+    let sum=0;for(const value of waveform){const n=(value-128)/128;sum+=n*n;}
+    const loudness=Math.min(1,Math.sqrt(sum/waveform.length)*5);
+    return [average(1,8),average(8,36),average(36,100),loudness];
   }};
   function sync(){
     const playing=!audio.paused&&!audio.ended;
@@ -62,7 +66,7 @@
     if(gesture)void prepareAnalysis();
     try{await audio.play();if(!gesture)void prepareAnalysis();}
     catch(error){
-      if(error.name!=='NotAllowedError')status.textContent='The recording could not start. Tap the ribbon to try again.';
+      if(error.name!=='NotAllowedError')status.textContent='The recording could not start. Tap the wave to try again.';
     }finally{starting=false;sync();}
   }
   audio.controls=false;audio.hidden=true;controls.hidden=false;start.hidden=false;
