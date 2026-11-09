@@ -16,6 +16,41 @@
   let pointer=[0,0],look=[0,0];
   const pulses=[];
 
+  // Cache small shaded spheres once. Rendering stays light even with many beads.
+  let materials=[],materialTheme;
+  const colourText=rgb=>`rgb(${rgb.map(Math.round).join(',')})`;
+  const blendColour=(a,b,t)=>a.map((value,i)=>mix(value,b[i],t));
+  function createMaterials(dark){
+    const sage=dark?[155,224,112]:[105,178,65];
+    const mint=dark?[129,218,186]:[68,169,143];
+    const lavender=dark?[197,155,255]:[155,112,222];
+    const pearl=[250,252,239];
+    materials=[];materialTheme=dark;
+    for(let step=0;step<28;step++){
+      const t=step/27,base=t<.4?blendColour(sage,mint,t/.4):blendColour(mint,lavender,(t-.4)/.6);
+      const sprite=document.createElement('canvas');sprite.width=64;sprite.height=64;
+      const surface=sprite.getContext('2d');
+      if(!surface){materials.push(null);continue;}
+      // All spheres share an upper-left light source and a lower-right shadow.
+      const shade=surface.createRadialGradient(36,43,0,36,43,24);
+      shade.addColorStop(0,dark?'rgba(0,0,0,.36)':'rgba(46,58,40,.23)');shade.addColorStop(1,'rgba(0,0,0,0)');
+      surface.save();surface.translate(0,28);surface.scale(1,.38);surface.fillStyle=shade;surface.fillRect(8,15,54,60);surface.restore();
+      const body=surface.createRadialGradient(24,22,1,32,32,22);
+      body.addColorStop(0,colourText(blendColour(base,pearl,.72)));
+      body.addColorStop(.22,colourText(blendColour(base,pearl,.22)));
+      body.addColorStop(.52,colourText(base));
+      body.addColorStop(.84,colourText(blendColour(base,[29,44,35],.3)));
+      body.addColorStop(1,colourText(blendColour(base,[18,27,25],.55)));
+      surface.beginPath();surface.arc(32,32,22,0,Math.PI*2);surface.fillStyle=body;surface.fill();
+      const gleam=surface.createRadialGradient(25,23,0,25,23,9);
+      gleam.addColorStop(0,'rgba(255,255,249,.98)');gleam.addColorStop(.27,'rgba(255,255,249,.7)');gleam.addColorStop(1,'rgba(255,255,249,0)');
+      surface.beginPath();surface.arc(25,23,9,0,Math.PI*2);surface.fillStyle=gleam;surface.fill();
+      // A restrained reflected edge gives the lower half a polished finish.
+      surface.beginPath();surface.arc(32,32,20,.12*Math.PI,.72*Math.PI);surface.strokeStyle=colourText(blendColour(base,pearl,.48));surface.globalAlpha=.45;surface.lineWidth=1.4;surface.stroke();
+      materials.push(sprite);
+    }
+  }
+
   function waveHeight(x,z,t,energy,fronts){
     const distance=Math.hypot(x*.85,z);
     let y=Math.sin(x*2.6+t*.35)*.11+Math.cos(z*3.1+t*.23)*.07;
@@ -27,7 +62,7 @@
     return y;
   }
   function buildPoints(){
-    const columns=phone.matches?47:69, rows=phone.matches?31:45;
+    const columns=phone.matches?37:57, rows=phone.matches?25:37;
     points=[];
     for(let row=0;row<rows;row++)for(let col=0;col<columns;col++){
       const u=col/(columns-1),v=row/(rows-1),x=(u-.5)*2.3,z=(v-.5)*1.7;
@@ -68,17 +103,22 @@
     const energy=enabled&&!reduced.matches?level:0;
     const fronts=enabled&&!reduced.matches?pulses:[];
     const hueMix=enabled&&!reduced.matches?colour:0;
-    const sage=dark?[168,189,145]:[100,126,83];
-    const lavender=dark?[190,180,219]:[134,119,162];
-    const pearl=dark?[235,239,223]:[167,179,151];
+    if(materialTheme!==dark)createMaterials(dark);
     const yaw=.19+look[0]*.12, tilt=.86+look[1]*.10;
     const sy=Math.sin(yaw),cy=Math.cos(yaw),st=Math.sin(tilt),ct=Math.cos(tilt);
     const scale=Math.min(width,height)*.355;
     ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);
-    // Shallow light beneath the surface gives depth without a solid outline.
-    const glow=ctx.createRadialGradient(width*.5,height*.47,0,width*.5,height*.47,width*.45);
-    glow.addColorStop(0,dark?'rgba(155,177,130,.07)':'rgba(155,177,130,.055)');
-    glow.addColorStop(1,'rgba(155,177,130,0)');ctx.fillStyle=glow;ctx.fillRect(0,0,width,height);
+    // A soft cast shadow anchors the floating surface without darkening the beads.
+    ctx.save();ctx.translate(width*.51,height*.67);ctx.scale(1,.20);
+    const shadow=ctx.createRadialGradient(0,0,0,0,0,width*.37);
+    shadow.addColorStop(0,dark?'rgba(0,0,0,.32)':'rgba(45,59,41,.15)');
+    shadow.addColorStop(.45,dark?'rgba(0,0,0,.14)':'rgba(45,59,41,.055)');
+    shadow.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=shadow;ctx.fillRect(-width*.5,-width*.5,width,width);ctx.restore();
+    const glow=ctx.createRadialGradient(width*.49,height*.43,0,width*.49,height*.43,width*.43);
+    glow.addColorStop(0,dark?'rgba(145,220,138,.09)':'rgba(145,210,128,.06)');
+    glow.addColorStop(1,'rgba(145,210,128,0)');ctx.fillStyle=glow;ctx.fillRect(0,0,width,height);
+    const projected=[];
     for(const p of points){
       const x=p.x+Math.sin(p.seed*3.17)*.003,z=p.z+Math.cos(p.seed*1.91)*.003;
       const y=waveHeight(x,z,time,energy,fronts);
@@ -86,15 +126,22 @@
       const py=y*ct-rz*st,depth=y*st+rz*ct;
       const perspective=3.7/(3.7-depth*.4);
       const sx=width*.5+rx*scale*perspective,screenY=height*.45-py*scale*perspective;
-      const crest=clamp((y+.12)*1.8),shift=clamp(hueMix*(.45+p.u*.65));
-      const highlight=clamp(crest*.22+energy*.12+(p.seed%97===0?.22:0));
-      const rgb=sage.map((value,i)=>Math.round(mix(mix(value,lavender[i],shift),pearl[i],highlight)));
-      const alpha=clamp((dark?.74:.66)+depth*.13+crest*.14)*p.edge;
-      const radius=(phone.matches?.95:.89)+(depth+.7)*.30+crest*.20;
-      ctx.beginPath();ctx.arc(sx,screenY,radius*perspective,0,Math.PI*2);
-      ctx.fillStyle=`rgba(${rgb.join(',')},${alpha.toFixed(3)})`;ctx.fill();
-      if(p.seed%97===0){ctx.beginPath();ctx.arc(sx,screenY,radius*2.6,0,Math.PI*2);ctx.fillStyle=`rgba(${rgb.join(',')},${(.07*p.edge).toFixed(3)})`;ctx.fill();}
+      const crest=clamp((y+.12)*1.8);
+      const shift=clamp(.10+p.u*.12+hueMix*(.48+p.u*.57));
+      const alpha=clamp(.90+depth*.05+crest*.07)*p.edge;
+      const radius=((phone.matches?1.35:1.45)+(depth+.7)*.48+crest*.32)*perspective;
+      projected.push({x:sx,y:screenY,depth,alpha,radius,colour:Math.round(shift*(materials.length-1))});
     }
+    // Draw back to front so the nearer spheres correctly overlap the distant ones.
+    projected.sort((a,b)=>a.depth-b.depth);
+    for(const p of projected){
+      const sprite=materials[p.colour];
+      if(!sprite)continue;
+      const size=p.radius*64/22;
+      ctx.globalAlpha=p.alpha;
+      ctx.drawImage(sprite,p.x-size*.5,p.y-size*.5,size,size);
+    }
+    ctx.globalAlpha=1;
   }
   function tick(stamp){
     frame=0;if(!visible||document.hidden||!enabled||reduced.matches)return;
@@ -120,5 +167,5 @@
   phone.addEventListener('change',resize);
   document.addEventListener('visibilitychange',()=>document.hidden?stop():wake());
   new MutationObserver(()=>render(0,true)).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-  host.dataset.visual='particle-wave';
+  host.dataset.visual='particle-wave';host.dataset.material='gloss';
 })();
