@@ -40,7 +40,7 @@
     const average=(from,to)=>{let sum=0;for(let i=from;i<to;i++)sum+=bins[i];return sum/(to-from)/255;};
     analyser.getByteTimeDomainData(waveform);
     let sum=0;for(const value of waveform){const n=(value-128)/128;sum+=n*n;}
-    const loudness=Math.min(1,Math.sqrt(sum/waveform.length)*5);
+    const loudness=Math.min(1,Math.sqrt(sum/waveform.length)*8);
     return [average(1,8),average(8,36),average(36,100),loudness];
   }};
   function sync(){
@@ -80,3 +80,4 @@
   // One autoplay attempt, with a clear opt-in when browser policy blocks sound.
   void begin();
 })();
+

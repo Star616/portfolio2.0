@@ -18,11 +18,11 @@
 
   function waveHeight(x,z,t,energy,fronts){
     const distance=Math.hypot(x*.85,z);
-    let y=Math.sin(x*2.6+t*.35)*.075+Math.cos(z*3.1+t*.23)*.045;
-    y+=energy*Math.sin(x*4-z*2-t*1.4)*.065;
+    let y=Math.sin(x*2.6+t*.35)*.11+Math.cos(z*3.1+t*.23)*.07;
+    y+=energy*Math.sin(x*4-z*2-t*1.4)*.09;
     for(const front of fronts){
       const age=t-front.born, delta=distance-age*.72;
-      y+=Math.cos(delta*11)*Math.exp(-delta*delta*13)*front.strength*.24*Math.exp(-age*.65);
+      y+=Math.cos(delta*11)*Math.exp(-delta*delta*13)*front.strength*.29*Math.exp(-age*.65);
     }
     return y;
   }
@@ -31,7 +31,7 @@
     points=[];
     for(let row=0;row<rows;row++)for(let col=0;col<columns;col++){
       const u=col/(columns-1),v=row/(rows-1),x=(u-.5)*2.3,z=(v-.5)*1.7;
-      const edge=clamp(1-Math.pow(x/1.24,4)-Math.pow(z/.99,4));
+      const edge=clamp(1-Math.pow(x/1.24,2)-Math.pow(z/.99,2));
       if(edge<.02)continue;
       points.push({x,z,edge:Math.sqrt(edge),seed:row*columns+col,u,v});
     }
@@ -56,7 +56,7 @@
       level=mix(level,measured,1-Math.exp(-dt*(measured>level?15:4)));
       const tone=clamp((mid*.55+high*1.4)/(bass+mid+high+.03));
       timbre=mix(timbre,tone,1-Math.exp(-dt*1.9));
-      colour=mix(colour,clamp(level*.6+timbre*level),1-Math.exp(-dt*2.4));
+      colour=mix(colour,clamp(level*.85+timbre*level*1.1),1-Math.exp(-dt*2.4));
       if(level>.10&&level-previousLevel>.012&&time-lastPulse>.18){
         pulses.push({born:time,strength:level});lastPulse=time;
         if(pulses.length>6)pulses.shift();
