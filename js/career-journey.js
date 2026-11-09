@@ -25,7 +25,7 @@
     chapters.forEach((chapter,i)=>chapter.classList.toggle('is-current',i===index));
     links.forEach((link,i)=>{if(i===index)link.setAttribute('aria-current','step');else link.removeAttribute('aria-current');});
     [...nodes.children].forEach((node,i)=>node.classList.toggle('is-current',i===index));
-    currentLabel.textContent=String(index+1).padStart(2,'0');
+    currentLabel.textContent=String(chapters[index].dataset.chapter).padStart(2,'0');
   }
   function update(){
     frame=0;if(work.hidden||!positions.length)return;
