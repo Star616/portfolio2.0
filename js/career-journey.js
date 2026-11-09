@@ -12,6 +12,8 @@
   const cursor=rail.querySelector('.cj-path-cursor');
   const nodes=rail.querySelector('.cj-path-nodes');
   const currentLabel=work.querySelector('.cj-position-current');
+  const totalLabel=work.querySelector('.cj-position-total');
+  if(totalLabel)totalLabel.textContent=String(chapters.length).padStart(2,'0');
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   let enabled=true,frame=0,length=0,positions=[],selected=-1;
   const entrances=new Set();
@@ -44,7 +46,7 @@
   function rebuild(){
     if(work.hidden||!stories.getBoundingClientRect().width)return;
     const rect=stories.getBoundingClientRect();
-    const xs=[27,70,18,65,30];
+    const xs=[27,70,18,65,30,61];
     positions=chapters.map((chapter,i)=>{
       const company=chapter.querySelector('.cj-company');
       // Use layout positions so an entrance transform never displaces a marker.
@@ -95,3 +97,4 @@
   document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;}else schedule();});
   motion();rebuild();
 })();
+

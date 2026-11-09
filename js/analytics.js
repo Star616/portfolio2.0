@@ -27,7 +27,7 @@ document.addEventListener('click',event=>{
   const link=event.target.closest('a');
   if(link){
     const chapter=link.dataset.careerJump;
-    if(['servicenow','niq','freshworks','blockchain','skilllync'].includes(chapter))track('Career explored',{company:chapter});
+    if(['freshworks-current','servicenow','niq','freshworks','blockchain','skilllync'].includes(chapter))track('Career explored',{company:chapter});
     if(link.hasAttribute('download'))track('Resume downloaded');
     else {
       const href=link.getAttribute('href')||'';
