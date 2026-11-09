@@ -15,7 +15,7 @@
   const totalLabel=work.querySelector('.cj-position-total');
   if(totalLabel)totalLabel.textContent=String(chapters.length).padStart(2,'0');
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-  let enabled=true,frame=0,length=0,positions=[],selected=-1;
+  let enabled=true,frame=0,length=0,positions=[],selected=-1,lastAmount=-1;
   const entrances=new Set();
   const clamp=n=>Math.max(0,Math.min(1,n));
   const canMove=()=>enabled&&!reduced.matches;
@@ -32,15 +32,17 @@
     const focus=Math.min(innerHeight*.38,310);
     const rect=stories.getBoundingClientRect();
     let index=0,score=Infinity;
-    chapters.forEach((chapter,i)=>{
-      const r=chapter.getBoundingClientRect();
-      const distance=Math.abs(r.top+Math.min(r.height*.28,135)-focus);
+    positions.forEach((position,i)=>{
+      const distance=Math.abs(rect.top+position.readAt-focus);
       if(distance<score){score=distance;index=i;}
     });
     select(index);
     const amount=canMove()?clamp((focus-rect.top-8)/Math.max(1,rect.height-30)):1;
-    progress.style.strokeDashoffset=String(1-amount);
-    if(length){const point=base.getPointAtLength(length*amount);cursor.setAttribute('cx',point.x);cursor.setAttribute('cy',point.y);}
+    if(Math.abs(amount-lastAmount)>.0002){
+      progress.style.strokeDashoffset=String(1-amount);
+      if(length){const point=base.getPointAtLength(length*amount);cursor.setAttribute('cx',point.x);cursor.setAttribute('cy',point.y);}
+      lastAmount=amount;
+    }
   }
   function schedule(){if(!frame&&!document.hidden)frame=requestAnimationFrame(update);}
   function rebuild(){
@@ -50,7 +52,7 @@
     positions=chapters.map((chapter,i)=>{
       const company=chapter.querySelector('.cj-company');
       // Use layout positions so an entrance transform never displaces a marker.
-      return {x:xs[i%xs.length],y:chapter.offsetTop+company.offsetTop+company.offsetHeight/2};
+      return {x:xs[i%xs.length],y:chapter.offsetTop+company.offsetTop+company.offsetHeight/2,readAt:chapter.offsetTop+Math.min(chapter.offsetHeight*.28,135)};
     });
     const points=[{x:44,y:8},...positions,{x:44,y:rect.height-22}];
     let path='M'+points[0].x+' '+points[0].y;
@@ -65,7 +67,7 @@
       node.setAttribute('cx',position.x);node.setAttribute('cy',position.y);node.setAttribute('r','5');
       node.setAttribute('class','cj-path-node'+(i===selected?' is-current':''));return node;
     });
-    nodes.replaceChildren(...markers);length=base.getTotalLength();update();
+    nodes.replaceChildren(...markers);length=base.getTotalLength();lastAmount=-1;update();
   }
   const reveal=new IntersectionObserver(entries=>entries.forEach(entry=>{
     if(!entry.isIntersecting)return;
@@ -97,4 +99,5 @@
   document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;}else schedule();});
   motion();rebuild();
 })();
+
 

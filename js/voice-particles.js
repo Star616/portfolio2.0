@@ -10,7 +10,7 @@
   const finePointer=matchMedia('(pointer:fine)');
   const clamp=(n,min=0,max=1)=>Math.max(min,Math.min(max,n));
   const mix=(a,b,t)=>a+(b-a)*t;
-  let width=0,height=0,dpr=1,points=[];
+  let width=0,height=0,dpr=1,points=[],projected=[];
   let frame=0,last=0,time=0,visible=false,enabled=true;
   let level=0,previousLevel=0,timbre=0,colour=0,lastPulse=-1;
   let pointer=[0,0],look=[0,0];
@@ -51,25 +51,28 @@
     }
   }
 
-  function waveHeight(x,z,t,energy,fronts){
-    const distance=Math.hypot(x*.85,z);
-    let y=Math.sin(x*2.6+t*.35)*.11+Math.cos(z*3.1+t*.23)*.07;
-    y+=energy*Math.sin(x*4-z*2-t*1.4)*.09;
+  function waveHeight(point,t,energy,fronts){
+    let y=Math.sin(point.phaseX+t*.35)*.11+Math.cos(point.phaseZ+t*.23)*.07;
+    y+=energy*Math.sin(point.phaseEnergy-t*1.4)*.09;
     for(const front of fronts){
-      const age=t-front.born, delta=distance-age*.72;
+      const age=t-front.born, delta=point.distance-age*.72;
       y+=Math.cos(delta*11)*Math.exp(-delta*delta*13)*front.strength*.29*Math.exp(-age*.65);
     }
     return y;
   }
   function buildPoints(){
-    const columns=phone.matches?37:57, rows=phone.matches?25:37;
+    const columns=phone.matches?31:47, rows=phone.matches?21:31;
     points=[];
     for(let row=0;row<rows;row++)for(let col=0;col<columns;col++){
       const u=col/(columns-1),v=row/(rows-1),x=(u-.5)*2.3,z=(v-.5)*1.7;
       const edge=clamp(1-Math.pow(x/1.24,2)-Math.pow(z/.99,2));
       if(edge<.02)continue;
-      points.push({x,z,edge:Math.sqrt(edge),seed:row*columns+col,u,v});
+      const seed=row*columns+col,px=x+Math.sin(seed*3.17)*.003,pz=z+Math.cos(seed*1.91)*.003;
+      points.push({x:px,z:pz,edge:Math.sqrt(edge),u,v,
+        phaseX:px*2.6,phaseZ:pz*3.1,phaseEnergy:px*4-pz*2,distance:Math.hypot(px*.85,pz),
+        screenX:0,screenY:0,depth:0,alpha:0,radius:0,colour:0});
     }
+    projected=points.slice();
   }
   function resize(){
     const rect=canvas.getBoundingClientRect();width=rect.width;height=rect.height;
@@ -80,7 +83,7 @@
   function render(stamp,still=false){
     if(!width||!height)return;
     const motion=enabled&&!reduced.matches&&!still;
-    const dt=clamp((stamp-last)/1000,1/120,.05);
+    const dt=clamp((stamp-last)/1000,0,.05);
     if(motion){
       time+=dt;
       const sample=window.anandVoiceVisual?.sample()||[0,0,0,0];
@@ -92,7 +95,7 @@
       const tone=clamp((mid*.55+high*1.4)/(bass+mid+high+.03));
       timbre=mix(timbre,tone,1-Math.exp(-dt*1.9));
       colour=mix(colour,clamp(level*.85+timbre*level*1.1),1-Math.exp(-dt*2.4));
-      if(level>.10&&level-previousLevel>.012&&time-lastPulse>.18){
+      if(level>.10&&(level-previousLevel)/Math.max(dt,.001)>.72&&time-lastPulse>.18){
         pulses.push({born:time,strength:level});lastPulse=time;
         if(pulses.length>6)pulses.shift();
       }
@@ -118,10 +121,9 @@
     const glow=ctx.createRadialGradient(width*.49,height*.43,0,width*.49,height*.43,width*.43);
     glow.addColorStop(0,dark?'rgba(145,220,138,.09)':'rgba(145,210,128,.06)');
     glow.addColorStop(1,'rgba(145,210,128,0)');ctx.fillStyle=glow;ctx.fillRect(0,0,width,height);
-    const projected=[];
     for(const p of points){
-      const x=p.x+Math.sin(p.seed*3.17)*.003,z=p.z+Math.cos(p.seed*1.91)*.003;
-      const y=waveHeight(x,z,time,energy,fronts);
+      const x=p.x,z=p.z;
+      const y=waveHeight(p,time,energy,fronts);
       const rx=x*cy+z*sy,rz=-x*sy+z*cy;
       const py=y*ct-rz*st,depth=y*st+rz*ct;
       const perspective=3.7/(3.7-depth*.4);
@@ -130,7 +132,7 @@
       const shift=clamp(.10+p.u*.12+hueMix*(.48+p.u*.57));
       const alpha=clamp(.90+depth*.05+crest*.07)*p.edge;
       const radius=((phone.matches?1.35:1.45)+(depth+.7)*.48+crest*.32)*perspective;
-      projected.push({x:sx,y:screenY,depth,alpha,radius,colour:Math.round(shift*(materials.length-1))});
+      p.screenX=sx;p.screenY=screenY;p.depth=depth;p.alpha=alpha;p.radius=radius;p.colour=Math.round(shift*(materials.length-1));
     }
     // Draw back to front so the nearer spheres correctly overlap the distant ones.
     projected.sort((a,b)=>a.depth-b.depth);
@@ -139,13 +141,14 @@
       if(!sprite)continue;
       const size=p.radius*64/22;
       ctx.globalAlpha=p.alpha;
-      ctx.drawImage(sprite,p.x-size*.5,p.y-size*.5,size,size);
+      ctx.drawImage(sprite,p.screenX-size*.5,p.screenY-size*.5,size,size);
     }
     ctx.globalAlpha=1;
   }
   function tick(stamp){
     frame=0;if(!visible||document.hidden||!enabled||reduced.matches)return;
-    if(stamp-last>=(phone.matches?30:15)){render(stamp);last=stamp;}
+    // Use the browser's display cadence, including high-refresh displays.
+    render(stamp);last=stamp;
     frame=requestAnimationFrame(tick);
   }
   function wake(){
@@ -169,3 +172,4 @@
   new MutationObserver(()=>render(0,true)).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
   host.dataset.visual='particle-wave';host.dataset.material='gloss';
 })();
+

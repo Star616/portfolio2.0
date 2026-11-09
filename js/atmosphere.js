@@ -3,6 +3,7 @@
   const root = document.getElementById('anand-portfolio-reimagined');
   if (!root) return;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const compact = matchMedia('(max-width:820px)');
   const toggle = root.querySelector('.ap-motion-toggle');
   let paused = false;
   const scenes = [];
@@ -32,14 +33,14 @@
     const ctx=canvas.getContext('2d');
     if (!ctx) return;
     const host=canvas.parentElement;
-    const scene={canvas,kind,visible:false,frame:0,last:0,time:0,pointer:[0,0],current:[],look:[0,0],pulse:0,start:0,active:false};
-    const bands=kind==='hero'?27:32, samples=80;
+    const scene={canvas,kind,visible:false,frame:0,last:0,time:0,pointer:[0,0],current:[],look:[0,0],pulse:0,start:0,active:false,settleUntil:0};
+    let bands=compact.matches?18:26,samples=compact.matches?52:64;
     let width=0,height=0,dpr=1;
-    function resize(){const r=canvas.getBoundingClientRect();width=r.width;height=r.height;dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);render(0,true);}
+    function resize(){const r=canvas.getBoundingClientRect();width=r.width;height=r.height;dpr=Math.min(devicePixelRatio||1,compact.matches?1.5:2);const nextBands=compact.matches?18:26,nextSamples=compact.matches?52:64;if(nextBands!==bands||nextSamples!==samples){bands=nextBands;samples=nextSamples;scene.current=[];}canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);render(0,true);}
     function render(stamp,still=false){
       if(!width||!height)return;
       const moving=!paused&&!reduced.matches&&!still;
-      const dt=Math.min(Math.max((stamp-scene.last)/1000,1/120),.05);
+      const dt=Math.min(Math.max((stamp-scene.last)/1000,0),.05);
       if(moving && (scene.kind!=='listening'||scene.active))scene.time+=dt*.65;
       const blend=1-Math.exp(-dt*9);
       for(let axis=0;axis<2;axis++)scene.look[axis]=mix(scene.look[axis],scene.pointer[axis],blend);
@@ -75,13 +76,19 @@
       // Tiny highlights define the material without an image or heavy 3D dependency.
       if(scene.kind!=='lifting')for(let n=0;n<5;n++){const p=project(form(scene.kind,(n*.193+scene.time*.007)%1,.5,scene.time,0));ctx.beginPath();ctx.arc(p[0],p[1],1.6,0,TAU);ctx.fillStyle=dark?'#e2eace':'#7e8c71';ctx.fill();}
     }
-    function tick(stamp){scene.frame=0;if(!scene.visible||document.hidden||paused||reduced.matches)return;if(stamp-scene.last>15){render(stamp);scene.last=stamp;}scene.frame=requestAnimationFrame(tick);}
-    scene.wake=()=>{render(0,true);if(scene.visible&&!paused&&!reduced.matches&&!document.hidden&&!scene.frame)scene.frame=requestAnimationFrame(tick);};
+    function tick(stamp){
+      scene.frame=0;if(!scene.visible||document.hidden||paused||reduced.matches)return;
+      render(stamp);scene.last=stamp;
+      const settled=scene.look.every((value,i)=>Math.abs(value-scene.pointer[i])<.001);
+      if(scene.kind==='listening'&&!scene.active&&!scene.start&&stamp>scene.settleUntil&&settled)return;
+      scene.frame=requestAnimationFrame(tick);
+    }
+    scene.wake=()=>{if(paused||reduced.matches){render(0,true);return;}if(scene.visible&&!document.hidden&&!scene.frame){scene.last=performance.now();scene.frame=requestAnimationFrame(tick);}};
     scene.stop=()=>{cancelAnimationFrame(scene.frame);scene.frame=0;};
-    scene.change=(next)=>{scene.kind=next;scene.start=0;scene.active=false;if(reduced.matches||paused)render(0,true);else if(scene.visible&&!scene.frame)scene.frame=requestAnimationFrame(tick);};
-    scene.act=()=>{scene.start=performance.now();if(scene.kind==='listening')scene.active=!scene.active;if(reduced.matches||paused)render(0,true);};
-    host.addEventListener('pointermove',e=>{const r=host.getBoundingClientRect();scene.pointer=[(e.clientX-r.left)/r.width-.5,(e.clientY-r.top)/r.height-.5];});
-    host.addEventListener('pointerleave',()=>{scene.pointer=[0,0];});
+    scene.change=(next)=>{scene.kind=next;scene.start=0;scene.active=false;scene.settleUntil=performance.now()+800;scene.wake();};
+    scene.act=()=>{scene.start=performance.now();if(scene.kind==='listening')scene.active=!scene.active;scene.wake();};
+    host.addEventListener('pointermove',e=>{if(e.pointerType&&e.pointerType!=='mouse')return;const r=host.getBoundingClientRect();scene.pointer=[(e.clientX-r.left)/r.width-.5,(e.clientY-r.top)/r.height-.5];scene.wake();},{passive:true});
+    host.addEventListener('pointerleave',()=>{scene.pointer=[0,0];scene.wake();});
     new ResizeObserver(resize).observe(canvas);
     new IntersectionObserver(entries=>{scene.visible=entries[0].isIntersecting;if(scene.visible)scene.wake();else scene.stop();},{threshold:.05}).observe(canvas);
     scenes.push(scene);return scene;
@@ -110,4 +117,5 @@
   voice?.addEventListener('play',()=>root.classList.add('ap-voice-playing'));
   ['pause','ended'].forEach(event=>voice?.addEventListener(event,()=>root.classList.remove('ap-voice-playing')));
 })();
+
 
