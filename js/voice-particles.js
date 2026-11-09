@@ -89,8 +89,8 @@
       const crest=clamp((y+.12)*1.8),shift=clamp(hueMix*(.45+p.u*.65));
       const highlight=clamp(crest*.22+energy*.12+(p.seed%97===0?.22:0));
       const rgb=sage.map((value,i)=>Math.round(mix(mix(value,lavender[i],shift),pearl[i],highlight)));
-      const alpha=clamp((dark?.52:.55)+depth*.13+crest*.14)*p.edge;
-      const radius=(phone.matches?.78:.69)+(depth+.7)*.27+crest*.16;
+      const alpha=clamp((dark?.74:.66)+depth*.13+crest*.14)*p.edge;
+      const radius=(phone.matches?.95:.89)+(depth+.7)*.30+crest*.20;
       ctx.beginPath();ctx.arc(sx,screenY,radius*perspective,0,Math.PI*2);
       ctx.fillStyle=`rgba(${rgb.join(',')},${alpha.toFixed(3)})`;ctx.fill();
       if(p.seed%97===0){ctx.beginPath();ctx.arc(sx,screenY,radius*2.6,0,Math.PI*2);ctx.fillStyle=`rgba(${rgb.join(',')},${(.07*p.edge).toFixed(3)})`;ctx.fill();}
