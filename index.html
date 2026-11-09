@@ -42,6 +42,8 @@
 <script defer src="/js/scroll-experience.js"></script>
 <link rel="stylesheet" href="/css/career-journey.css">
 <script defer src="/js/career-journey.js"></script>
+<link rel="stylesheet" href="/css/section-experience.css">
+<script defer src="/js/section-experience.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -84,7 +86,8 @@
     <noscript><nav class="ap-no-script-nav" aria-label="Portfolio sections"><a href="#work">Work</a><a href="#notes">Notes</a><a href="#off-duty">Off duty</a></nav></noscript>
     <div class="ap-chapter-control">
       <div class="ap-view-switch" role="tablist" aria-label="Explore Anand's portfolio">
-        <span class="ap-switch-thumb" aria-hidden="true"></span>
+        <span class="ap-switch-halo" aria-hidden="true"></span>
+        <span class="ap-switch-thumb" aria-hidden="true"><span class="ap-switch-surface"></span></span>
         <button id="ap-work-tab" class="ap-view-button" type="button" role="tab" aria-selected="true" aria-controls="work" tabindex="0" data-view="work">Work</button>
         <button id="ap-notes-tab" class="ap-view-button" type="button" role="tab" aria-selected="false" aria-controls="notes" tabindex="-1" data-view="notes">Notes</button>
         <button id="ap-life-tab" class="ap-view-button" type="button" role="tab" aria-selected="false" aria-controls="off-duty" tabindex="-1" data-view="off-duty">Off duty</button>
@@ -92,6 +95,14 @@
     </div>
 
     <div class="ap-panels">
+      <header class="ap-scene" aria-labelledby="ap-scene-title" hidden>
+        <div class="ap-scene-copy">
+          <p class="ap-overline ap-scene-kicker">PEOPLE. TECHNOLOGY. POSSIBILITY.</p>
+          <h2 class="ap-scene-title" id="ap-scene-title">A career.<br><span>Many conversations.</span></h2>
+          <p class="ap-scene-description">Different markets. Different challenges. The same starting point: understand people.</p>
+        </div>
+        <div class="ap-scene-art" aria-hidden="true"><canvas class="ap-scene-canvas"></canvas></div>
+      </header>
       <section id="work" role="tabpanel" aria-labelledby="ap-work-tab" class="ap-chapter">
         <div class="ap-section-top"><span class="ap-overline">01 / THE WORK</span><span class="ap-small-note">Enterprise · Mid-market · SMB</span></div>
         <div class="cj-summary" aria-label="Overall experience">
@@ -103,6 +114,7 @@
           <aside class="cj-overview" aria-labelledby="cj-title">
             <p class="ap-overline">SIX CHAPTERS. ONE THREAD.</p>
             <h2 id="cj-title">A career.<br><span>Many conversations.</span></h2>
+            <h3 class="cj-overview-title" id="cj-overview-title" hidden>Explore the chapters.</h3>
             <p class="cj-intro">Different markets. Different challenges.<br>The same starting point: understand people.</p>
             <nav class="cj-navigation" aria-label="Career chapters">
               <ol><li><a class="cj-jump" data-career-jump="freshworks-current" href="#career-freshworks-current" aria-current="step"><span class="cj-nav-number">06</span><img src="images/companies/freshworks.webp" alt="" width="22" height="22"><span class="cj-nav-copy">Freshworks<small>2026 — Now</small></span><span class="cj-nav-dot" aria-hidden="true"></span></a></li>
@@ -242,6 +254,7 @@ Earn the conversation.</h3>
   <noscript><p class="no-script-note">All career and interest sections are available below. Read the original posts on LinkedIn using their links.</p></noscript>
 </body>
 </html>
+
 
 
 

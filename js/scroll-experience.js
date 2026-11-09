@@ -46,10 +46,11 @@
   window.addEventListener('resize',schedule,{passive:true});
   nav.addEventListener('click',event=>{
     const button=event.target.closest('.ap-view-button');
-    if(!button||!nav.classList.contains('is-docked'))return;
-    // A deliberate tab change keeps the newly selected story beneath the bar.
+    if(!button)return;
+    // Keep the shared scene beneath the dock when navigating by touch, mouse, or keyboard.
     const panel=document.getElementById(button.dataset.view);
-    if(panel&&!panel.hidden)panel.scrollIntoView({block:'start',behavior:canMove()?'smooth':'auto'});
+    const destination=root.querySelector('.ap-scene:not([hidden])')||panel;
+    if(panel&&!panel.hidden&&destination)destination.scrollIntoView({block:'start',behavior:canMove()?'smooth':'instant'});
   });
   document.addEventListener('portfolio:viewchange',schedule);
   document.addEventListener('portfolio:motionchange',event=>{
@@ -63,3 +64,4 @@
   document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;}else schedule();});
   update();
 })();
+

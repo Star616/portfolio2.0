@@ -3,15 +3,21 @@
   const root = document.getElementById('anand-portfolio-reimagined');
   if (!root) return;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let motionEnabled = true;
+  const sectionAnimations = new Set();
+  const canMove = () => motionEnabled && !reducedMotion.matches;
+  const stopAnimations = () => { sectionAnimations.forEach(animation => animation.cancel()); sectionAnimations.clear(); };
   const select = (selector) => root.querySelector(selector);
   const setText = (selector, value) => { select(selector).textContent = value; };
   const animateIn = (element) => {
-    if (reducedMotion.matches || typeof element.animate !== 'function') return;
+    if (!canMove() || typeof element.animate !== 'function') return;
     element.getAnimations().forEach((animation) => animation.cancel());
-    element.animate(
+    const animation = element.animate(
       [{ transform: 'translateY(9px)', opacity: 0.6 }, { transform: 'translateY(0)', opacity: 1 }],
       { duration: 380, easing: 'cubic-bezier(.2,.7,.2,1)' }
     );
+    sectionAnimations.add(animation);
+    animation.onfinish = animation.oncancel = () => sectionAnimations.delete(animation);
   };
   const interests = {
     lifting: { kicker: 'DISCIPLINE', title: 'A little stronger.\nEvery week.', copy: 'Training keeps me disciplined, motivated, and mentally sharp. There’s something satisfying about showing up and making steady progress.' },
@@ -26,6 +32,9 @@
   const viewButtons = Array.from(root.querySelectorAll('.ap-view-button'));
   const panels = Array.from(root.querySelectorAll('.ap-chapter'));
   const validViews = new Set(panels.map((panel) => panel.id));
+  const panelArea = select('.ap-panels');
+  let layoutTimer;
+  const releaseLayout = () => { clearTimeout(layoutTimer); panelArea.style.minHeight = ''; };
   const legacyViews = { about: 'work', experience: 'work', focus: 'work', hobbies: 'off-duty' };
   const viewFromHash = () => {
     const hash = window.location.hash.slice(1);
@@ -33,12 +42,36 @@
   };
   const showView = (view, shouldAnimate = true) => {
     if (!validViews.has(view)) return;
+    const previousView = root.dataset.view;
+    stopAnimations();
+    // Reserve the outgoing height while the selected section returns beneath the dock.
+    // This prevents a long career chapter from collapsing the document mid-transition.
+    if (shouldAnimate && canMove() && previousView !== view && select('.ap-scene')) {
+      clearTimeout(layoutTimer);
+      panelArea.style.minHeight = panelArea.getBoundingClientRect().height + 'px';
+      layoutTimer = setTimeout(releaseLayout, 950);
+    } else releaseLayout();
     root.dataset.view = view;
     setSelected(viewButtons, viewButtons.find((button) => button.dataset.view === view));
     panels.forEach((panel) => { panel.hidden = panel.id !== view; });
-    if (shouldAnimate && view !== 'work') animateIn(document.getElementById(view));
-    document.dispatchEvent(new CustomEvent('portfolio:viewchange', { detail: { view } }));
+    document.dispatchEvent(new CustomEvent('portfolio:viewchange', { detail: { view, previousView, animate: shouldAnimate && canMove() } }));
+    if (shouldAnimate && canMove()) {
+      const panel = document.getElementById(view);
+      if (typeof panel.animate === 'function') {
+        const animation = panel.animate(
+          [{ opacity: 0.3, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }],
+          { duration: 420, delay: 65, easing: 'cubic-bezier(.2,.8,.2,1)' }
+        );
+        sectionAnimations.add(animation);
+        animation.onfinish = animation.oncancel = () => sectionAnimations.delete(animation);
+      }
+    }
   };
+  document.addEventListener('portfolio:motionchange', event => {
+    motionEnabled = event.detail.enabled;
+    if (!canMove()) { stopAnimations(); releaseLayout(); }
+  });
+  reducedMotion.addEventListener('change', () => { if (!canMove()) { stopAnimations(); releaseLayout(); } });
   viewButtons.forEach((button) => button.addEventListener('click', () => {
     const view = button.dataset.view;
     if (root.dataset.view === view) return;
@@ -107,4 +140,5 @@
     if (!['light', 'dark'].includes(savedTheme)) setTheme(event.matches ? 'dark' : 'light');
   });
 })();
+
 
