@@ -60,6 +60,14 @@ ARIA control targets, and LinkedIn post/embed correspondence. External sites are
 `server/server.js` and `package-lock.json` belong to the earlier Express setup and are not used
 by the static deployment.
 
+## Updating the résumé
+
+Edit `data/resume.json` and run `python3 scripts/build_resume.py` with ReportLab and the
+DejaVu Sans fonts installed. This generates the two-page `uploads/resume.pdf` and updates
+all three download links with a content version and a readable filename. Render and check
+both pages before committing the PDF, source data, script, and changed HTML together.
+This manual editorial step does not add a dependency to the static deployment.
+
 
 ## Traffic and search setup
 

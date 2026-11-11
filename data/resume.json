@@ -1,0 +1,94 @@
+{
+  "name": "Ananda Raj Nadar",
+  "headline": "Senior Account Manager | B2B Technology Sales",
+  "location": "Chennai, India",
+  "email": "anandarajnadar@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/anandarajnadar/",
+  "portfolio": "https://portfolio2-0-eight-bice.vercel.app/",
+  "updated": "November 2026",
+  "summary": "Senior Account Manager at Freshworks with 4+ years in sales and account management across enterprise, strategic, mid-market and SMB accounts. Combines a computer science background with end-to-end sales, account planning and consultative customer engagement. Experience spans India/APAC and North America, with a current focus on retention, renewals and expansion.",
+  "capabilities": "Customer retention and renewals | Account expansion | Consultative discovery | Territory and account planning | Executive engagement | Pipeline generation | Multi-threaded prospecting | Negotiation and closing | Cross-functional collaboration",
+  "current_experience": [
+    {
+      "company": "Freshworks",
+      "role": "Senior Account Manager",
+      "dates": "Nov 2026 - Present",
+      "scope": "Chennai, India | Existing-customer account management",
+      "bullets": [
+        "Manage existing-customer relationships with a focus on retention, renewals and account expansion.",
+        "Partner with a dedicated Customer Success Manager to understand customer priorities, strengthen relationships and identify new business within existing accounts."
+      ]
+    },
+    {
+      "company": "ServiceNow",
+      "role": "Account Management - Enterprise & Strategic Accounts",
+      "dates": "Aug 2025 - Nov 2026",
+      "scope": "Manufacturing | Enterprise and strategic accounts",
+      "bullets": [
+        "Generated $10M+ in qualified sales pipeline through outbound prospecting, executive engagement and account-based selling.",
+        "Executed territory planning, account mapping and multi-threaded engagement across enterprise manufacturing and retail accounts, including Godrej, TVS Motor Company, JSW, Mahindra and L&T.",
+        "Worked with account executives, solution consultants and partners to develop relevant customer conversations and progress high-value opportunities."
+      ]
+    },
+    {
+      "company": "NielsenIQ",
+      "role": "Account Management - Retail & CPG",
+      "dates": "Sep 2024 - Apr 2025",
+      "scope": "India and APAC | SMB and mid-market",
+      "bullets": [
+        "Built approximately $350K in sales pipeline and achieved 120% of target in Q4 2024.",
+        "Prospected retail and consumer-goods accounts for retail measurement, consumer intelligence and market-insight solutions.",
+        "Used market and category research to personalise outreach, engage commercial and insights stakeholders, and collaborate with sellers on opportunity progression."
+      ]
+    }
+  ],
+  "earlier_experience": [
+    {
+      "company": "Freshworks",
+      "role": "Account Management - North America, SMB",
+      "dates": "May 2023 - Aug 2024",
+      "scope": "SaaS | Customer service and IT service management",
+      "bullets": [
+        "Managed inbound and outbound sales conversations with North American SMB customers for Freshdesk, Freshchat, Customer Service Suite and Freshservice.",
+        "Led discovery, product demonstrations, qualification, commercial discussions and deal closure; used MEDDPICC and BANT to assess fit and progress opportunities.",
+        "Selected wins included an omnichannel customer-support engagement at $538 MRR and an ITSM engagement at $2,000 MRR."
+      ]
+    },
+    {
+      "company": "Blockchain App Factory",
+      "role": "Account Management - ANZ, SMB",
+      "dates": "Feb 2023 - Apr 2023",
+      "scope": "Technology services | Australia and New Zealand",
+      "bullets": [
+        "Managed sales conversations for blockchain-based IT services, translating customer requirements between clients and technical teams.",
+        "Supported solution discussions spanning ICO, STO and IDO dashboards, NFT marketplaces and DeFi exchanges, with a focus on long-term client relationships."
+      ]
+    },
+    {
+      "company": "Skill-Lync",
+      "role": "Inside Sales Executive",
+      "dates": "Feb 2022 - Jul 2022",
+      "scope": "EdTech | Inside sales",
+      "bullets": [
+        "Built prospect pipelines through approximately 150 cold calls per day, product demonstrations, and structured email and WhatsApp follow-up.",
+        "Handled discovery, negotiation and conversion while maintaining prospect and opportunity records in CRM."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "qualification": "B.E., Computer Science and Engineering",
+      "institution": "SSN College of Engineering",
+      "dates": "2018 - 2021"
+    },
+    {
+      "qualification": "Diploma, Computer Engineering",
+      "institution": "Bharath Polytechnic College",
+      "dates": "2015 - 2018"
+    }
+  ],
+  "tools": "Microsoft Dynamics CRM | LinkedIn Sales Navigator | ZoomInfo | Apollo | Excel",
+  "methods": "MEDDPICC | BANT | Account-based prospecting | Stakeholder mapping",
+  "selected_work": "Created short AI-assisted manufacturing stories about order fulfilment, pricing mismatches and factory downtime to make technology-led business conversations more tangible. View examples on my portfolio.",
+  "languages": "English, Tamil and Hindi; Marathi (working knowledge); Spanish (basic)."
+}
