@@ -14,6 +14,11 @@
   --glass-lilac:light-dark(#e5dcf388,#72628e33);
   --glass-shine:inset 0 1px 0 var(--glass-edge),inset 0 -1px 0 light-dark(#ffffff80,#00000033);
   --glass-depth:0 12px 32px -23px var(--glass-shadow),0 2px 5px -3px var(--glass-shadow);
+  --glass-button-face:linear-gradient(180deg,light-dark(#ffffffcc,#ffffff14),transparent 58%),linear-gradient(180deg,light-dark(#fcfdf9,#3a4234),light-dark(#edf1e6,#292f24));
+  --glass-button-rim:inset 0 1px 0 light-dark(#ffffff,#ffffff40),inset 0 -1px 1px light-dark(#53644126,#00000066);
+  --glass-button-depth:0 2px 3px light-dark(#263b2314,#00000044),0 6px 12px -4px light-dark(#263b2338,#00000088);
+  --glass-button-hover:0 3px 5px light-dark(#263b231a,#00000055),0 9px 17px -5px light-dark(#263b2342,#000000aa);
+  --glass-panel-depth:0 3px 7px -4px light-dark(#263b232b,#00000066),0 16px 28px -19px light-dark(#263b2338,#00000088);
 }
 body { background:var(--glass-paper); }
 html:has(#anand-portfolio-reimagined[data-section-motion=still]) { scroll-behavior:auto; }
@@ -393,3 +398,42 @@ html:has(#anand-portfolio-reimagined[data-section-motion=still]) { scroll-behavi
 }
 #anand-portfolio-reimagined[data-section-motion=still] :is(.ap-primary-action,.ap-secondary-action) { transition:none; }
 #anand-portfolio-reimagined[data-section-motion=still] :is(.ap-primary-action,.ap-secondary-action):hover { transform:none; }
+
+/* A consistent top light, rounded edge and soft contact shadow give controls depth. */
+#anand-portfolio-reimagined :is(.ap-appearance,.ap-primary-action,.ap-secondary-action,.ribbon-start,.ribbon-pause,.ribbon-mute,.ap-note-actions button,.ap-note-actions a,.ap-all-posts,.ap-feed-recovery,.ap-resume,.ap-contact-button,.ap-footer a),
+.article-page nav a {
+  background:var(--glass-button-face);
+  box-shadow:var(--glass-button-rim),var(--glass-button-depth);
+  transition-property:transform,border-color,background-color,box-shadow;
+}
+#anand-portfolio-reimagined :is(.ap-primary-action,.ap-contact-button) {
+  background:linear-gradient(180deg,#ffffff30,transparent 58%),linear-gradient(180deg,light-dark(#58713e,#d1e7b6),light-dark(#415a2c,#b2cc91));
+  box-shadow:inset 0 1px 0 #ffffff70,inset 0 -1px 1px #19220c55,var(--glass-button-depth);
+}
+#anand-portfolio-reimagined :is(.ap-header,.ap-header.is-docked,.ap-welcome-panel,.ap-contact,.discover-links,.cj-navigation) {
+  box-shadow:var(--glass-shine),var(--glass-panel-depth);
+}
+#anand-portfolio-reimagined :is(.ap-view-switch,.ap-life-picker) {
+  background:linear-gradient(180deg,light-dark(#f9fbf5e6,#353c2fe6),light-dark(#e6ebdfe6,#252b20e6));
+  box-shadow:inset 0 1px 3px light-dark(#4356331c,#00000055),inset 0 -1px 0 light-dark(#ffffffcc,#ffffff14),0 5px 12px -7px var(--glass-shadow);
+}
+#anand-portfolio-reimagined .ap-switch-surface,
+#anand-portfolio-reimagined .ap-interest-button[aria-selected=true],
+#anand-portfolio-reimagined .cj-jump[aria-current=step] {
+  background:linear-gradient(180deg,light-dark(#ffffffd9,#ffffff1a),transparent 60%),linear-gradient(180deg,color-mix(in srgb,var(--section-light) 9%,var(--glass-fill)),color-mix(in srgb,var(--section-light) 15%,var(--glass-fill)));
+  box-shadow:var(--glass-button-rim),var(--glass-button-depth);
+}
+#anand-portfolio-reimagined .ap-switch-surface { border:1px solid light-dark(#ffffffcc,#ffffff26); }
+@media(hover:hover) and (pointer:fine) {
+  #anand-portfolio-reimagined :is(.ap-appearance,.ap-primary-action,.ap-secondary-action,.ribbon-start,.ribbon-pause,.ribbon-mute,.ap-note-actions button,.ap-note-actions a,.ap-all-posts,.ap-feed-recovery,.ap-resume,.ap-contact-button,.ap-footer a):hover,
+  .article-page nav a:hover { box-shadow:var(--glass-button-rim),var(--glass-button-hover); }
+}
+#anand-portfolio-reimagined :is(.ap-appearance,.ap-primary-action,.ap-secondary-action,.ribbon-start,.ribbon-pause,.ribbon-mute,.ap-note-actions button,.ap-note-actions a,.ap-all-posts,.ap-feed-recovery,.ap-resume,.ap-contact-button,.ap-footer a):active,
+#anand-portfolio-reimagined .ap-interest-button[aria-selected=true]:active,
+.article-page nav a:active {
+  box-shadow:inset 0 2px 4px light-dark(#263b2329,#00000066),inset 0 1px 0 light-dark(#ffffff88,#ffffff20),0 1px 3px var(--glass-shadow);
+}
+@media(prefers-reduced-transparency:reduce), (prefers-contrast:more) {
+  #anand-portfolio-reimagined :is(.ap-appearance,.ap-secondary-action,.ribbon-start,.ribbon-pause,.ribbon-mute,.ap-note-actions button,.ap-note-actions a,.ap-all-posts,.ap-feed-recovery,.ap-resume,.ap-footer a,.ap-switch-surface,.ap-view-switch,.ap-life-picker,.ap-interest-button[aria-selected=true],.cj-jump[aria-current=step]),
+  .article-page nav a { background:var(--glass-paper); }
+}
