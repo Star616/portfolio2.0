@@ -219,3 +219,169 @@ html:has(#anand-portfolio-reimagined[data-section-motion=still]) { scroll-behavi
   :root { --glass-fill:var(--glass-paper); --glass-control:var(--glass-paper); --glass-border:var(--glass-soft); }
   #anand-portfolio-reimagined :is(.ap-view-switch,.ribbon-start,.ap-appearance,.ap-play-symbol,.ap-play-label) { backdrop-filter:none; -webkit-backdrop-filter:none; }
 }
+
+/* Editorial layout: identity and useful actions lead; the glass material supports them. */
+.skip-link { z-index:100; }
+#anand-portfolio-reimagined .ap-header {
+  position:sticky; top:12px; z-index:40; display:grid;
+  grid-template-columns:minmax(90px,1fr) auto minmax(185px,1fr);
+  gap:16px; padding:10px 16px; margin-top:16px;
+  background:var(--glass-fill);
+}
+#anand-portfolio-reimagined .ap-header.is-docked { box-shadow:var(--glass-shine),0 10px 30px -18px var(--glass-shadow); }
+#anand-portfolio-reimagined .ap-header .ap-chapter-control {
+  position:static; top:auto; padding:0; margin:0; background:none;
+  backdrop-filter:none; -webkit-backdrop-filter:none;
+}
+#anand-portfolio-reimagined .ap-header .ap-view-switch { width:330px; }
+#anand-portfolio-reimagined .ap-header-actions { display:flex; align-items:center; justify-content:flex-end; gap:14px; }
+#anand-portfolio-reimagined .ap-header-contact { display:inline-flex; gap:8px; align-items:center; min-height:44px; font-size:13px; }
+#anand-portfolio-reimagined .ap-hero {
+  grid-template-columns:minmax(0,1.35fr) minmax(0,.9fr);
+  gap:clamp(35px,5vw,70px); padding:48px 7% 34px; align-items:center;
+  scroll-margin-top:110px;
+}
+#anand-portfolio-reimagined .ap-hero-copy { padding-top:0; }
+#anand-portfolio-reimagined h1 { font-size:clamp(52px,6vw,72px); line-height:1.04; letter-spacing:-.065em; margin:20px 0 24px; }
+#anand-portfolio-reimagined .ap-current-role { margin:0 0 14px; font-size:15px; font-weight:500; line-height:1.9; }
+#anand-portfolio-reimagined .ap-current-role>span:first-child { color:var(--ap-soft); font-weight:400; }
+#anand-portfolio-reimagined .ap-current-company { display:inline-flex; align-items:center; gap:6px; vertical-align:middle; white-space:nowrap; }
+#anand-portfolio-reimagined .ap-current-company img { width:22px; height:22px; object-fit:contain; }
+#anand-portfolio-reimagined .ap-introduction { max-width:455px; font-size:16px; line-height:1.8; color:var(--ap-soft); }
+#anand-portfolio-reimagined .ap-hero-actions { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:25px; }
+#anand-portfolio-reimagined :is(.ap-primary-action,.ap-secondary-action) {
+  display:inline-flex; align-items:center; justify-content:center; gap:20px;
+  min-height:48px; padding:11px 19px; border:1px solid var(--glass-border); border-radius:100px;
+  font-size:13px; line-height:1.6; box-shadow:var(--glass-shine),var(--glass-depth);
+  transition:transform .2s,border-color .2s;
+}
+#anand-portfolio-reimagined :is(.ap-primary-action,.ap-contact-button) {
+  background:light-dark(#4b6235,#c2dba3); color:light-dark(#ffffff,#202a16);
+  border-color:light-dark(#4b6235,#c2dba3);
+}
+#anand-portfolio-reimagined .ap-secondary-action { background:var(--glass-fill); color:var(--ap-ink); }
+#anand-portfolio-reimagined .ap-identity { font-size:12px; margin-top:22px; }
+#anand-portfolio-reimagined .ap-portrait-area { width:auto; margin:0; align-self:center; align-items:center; justify-content:center; padding:0; }
+#anand-portfolio-reimagined .ap-portrait { width:310px; max-width:100%; margin:0 auto; transform:rotate(2deg); }
+#anand-portfolio-reimagined .ap-photo-front { padding:8px; }
+#anand-portfolio-reimagined .ap-photo-caption { font-size:11px; padding:10px 4px 0; }
+#anand-portfolio-reimagined .ap-photo-caption>span:last-child { font-size:16px; }
+#anand-portfolio-reimagined .ap-photo-back { padding:26px; }
+#anand-portfolio-reimagined .ap-back-kicker { font-size:11px; }
+#anand-portfolio-reimagined .ap-back-title { font-size:32px; line-height:1.15; margin-top:22px; letter-spacing:-1.3px; }
+#anand-portfolio-reimagined .ap-back-copy { font-size:14px; line-height:1.7; margin-top:20px; }
+#anand-portfolio-reimagined .ap-back-return { font-size:12px; padding-top:15px; }
+#anand-portfolio-reimagined .ap-portrait-footnote { font-size:11px; margin:22px auto 0; }
+#anand-portfolio-reimagined .ap-proof {
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px;
+  margin:0 7% 26px; padding:25px 0; border-top:1px solid var(--ap-line); border-bottom:1px solid var(--ap-line);
+}
+#anand-portfolio-reimagined .ap-proof>div { min-width:0; }
+#anand-portfolio-reimagined .ap-proof>div+div { padding-left:24px; border-left:1px solid var(--ap-line); }
+#anand-portfolio-reimagined .ap-proof dt { font:11px/1.5 'DM Mono',monospace; letter-spacing:.8px; color:var(--ap-soft); }
+#anand-portfolio-reimagined .ap-proof dd { margin:9px 0 0; display:grid; gap:6px; }
+#anand-portfolio-reimagined .ap-proof strong { font-size:23px; font-weight:500; line-height:1.2; letter-spacing:-.8px; }
+#anand-portfolio-reimagined .ap-proof dd>span { font-size:12px; line-height:1.7; color:var(--ap-soft); }
+#anand-portfolio-reimagined .ap-welcome-panel {
+  display:grid; grid-template-columns:190px minmax(0,1fr); align-items:center; gap:24px;
+  margin:0 7% 28px; padding:16px 24px 16px 12px;
+  border:1px solid var(--glass-border); border-radius:24px; background:var(--glass-fill); box-shadow:var(--glass-shine);
+}
+#anand-portfolio-reimagined .ap-welcome-copy { min-width:0; }
+#anand-portfolio-reimagined .ap-welcome-heading { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+#anand-portfolio-reimagined .ap-welcome-heading h2 { font-size:23px; line-height:1.25; letter-spacing:-.8px; margin:6px 0 0; }
+#anand-portfolio-reimagined .ap-welcome-heading .ap-overline { font-size:10px; letter-spacing:.8px; }
+#anand-portfolio-reimagined .ap-welcome-panel .ap-atmosphere-stage { width:190px; max-width:none; height:156px; aspect-ratio:auto; margin:0; }
+#anand-portfolio-reimagined .ap-welcome-panel .ribbon-start { bottom:0; padding:8px 12px; font-size:12px; min-height:40px; }
+#anand-portfolio-reimagined .ap-welcome-panel .ribbon-controls { width:100%; max-width:none; margin:12px 0 0; padding:0; border:0; border-radius:0; background:none; box-shadow:none; }
+#anand-portfolio-reimagined .ribbon-buttons { display:flex; align-items:center; gap:8px; }
+#anand-portfolio-reimagined .ribbon-pause { min-height:44px; padding:8px 14px; border:1px solid var(--glass-border); border-radius:100px; background:var(--glass-control); color:var(--ap-ink); font-size:12px; }
+#anand-portfolio-reimagined .ribbon-label { font-size:10px; }
+#anand-portfolio-reimagined .ribbon-time { font-size:12px; }
+#anand-portfolio-reimagined .ap-panels { padding-top:0; }
+#anand-portfolio-reimagined .ap-scene { min-height:220px; padding:12px 0 24px; scroll-margin-top:110px; }
+#anand-portfolio-reimagined .ap-scene-art { height:200px; }
+#anand-portfolio-reimagined .ap-scene-title { font-size:clamp(32px,3.7vw,43px); margin-bottom:15px; }
+#anand-portfolio-reimagined .ap-scene-kicker { margin-bottom:16px; }
+#anand-portfolio-reimagined .ap-scene-description { font-size:14px; }
+#anand-portfolio-reimagined .ap-chapter { scroll-margin-top:110px; }
+#anand-portfolio-reimagined .cj-chapter { min-height:0; padding-bottom:64px; scroll-margin-top:110px; }
+#anand-portfolio-reimagined .cj-copy { font-size:14px; }
+#anand-portfolio-reimagined :is(.cj-role,.cj-dates,.cj-kicker,.cj-tags) { font-size:12px; }
+#anand-portfolio-reimagined .cj-nav-copy { font-size:12px; }
+#anand-portfolio-reimagined .cj-nav-copy small { font-size:10px; }
+#anand-portfolio-reimagined #linkedin-curated { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; align-items:start; }
+#anand-portfolio-reimagined .ap-note,#anand-portfolio-reimagined .ap-note:hover { padding:20px; margin:0; border-radius:24px; }
+#anand-portfolio-reimagined .ap-note-preview { display:block; margin:-8px -8px 22px; border-radius:16px; overflow:hidden; background:#073c4c; }
+#anand-portfolio-reimagined .ap-note-preview img { display:block; width:100%; height:auto; aspect-ratio:1000/563; object-fit:contain; }
+#anand-portfolio-reimagined .ap-note-meta { font-size:11px; line-height:1.7; gap:6px; }
+#anand-portfolio-reimagined .ap-note h3 { font-size:clamp(27px,2.7vw,32px); letter-spacing:-1.3px; line-height:1.15; margin:18px 0 14px; }
+#anand-portfolio-reimagined .ap-note p { font-size:14px; line-height:1.8; }
+#anand-portfolio-reimagined .ap-note-actions { gap:9px; margin-top:22px; }
+#anand-portfolio-reimagined .ap-note:has(.ap-embed-slot:not([hidden])) { grid-column:1/-1; }
+#anand-portfolio-reimagined .ap-note:has(.ap-embed-slot:not([hidden])) .ap-note-preview { max-width:480px; }
+#anand-portfolio-reimagined .ap-all-posts { margin-top:20px; }
+#anand-portfolio-reimagined .ap-interest-copy { font-size:14px; }
+#anand-portfolio-reimagined #contact { scroll-margin-top:110px; }
+@media(hover:hover) and (pointer:fine) {
+  #anand-portfolio-reimagined :is(.ap-primary-action,.ap-secondary-action):hover { transform:translateY(-2px); border-color:var(--ap-accent); }
+  #anand-portfolio-reimagined :is(.ap-header-contact,.ap-note-preview):hover { outline:1px solid var(--ap-accent); outline-offset:4px; border-radius:16px; }
+}
+@media(max-width:820px) {
+  #anand-portfolio-reimagined .ap-header { grid-template-columns:1fr auto; gap:8px 16px; top:8px; margin:10px 6% 0; padding:10px 12px; }
+  #anand-portfolio-reimagined .ap-header-actions { grid-column:2; grid-row:1; gap:12px; }
+  #anand-portfolio-reimagined .ap-header .ap-chapter-control { grid-column:1/-1; grid-row:2; }
+  #anand-portfolio-reimagined .ap-header .ap-view-switch { width:100%; }
+  #anand-portfolio-reimagined .ap-hero { grid-template-columns:minmax(0,1fr); padding:34px 6% 28px; gap:34px; scroll-margin-top:155px; }
+  #anand-portfolio-reimagined .ap-hero-copy { max-width:560px; width:100%; margin-inline:auto; }
+  #anand-portfolio-reimagined h1 { font-size:clamp(44px,8.5vw,68px); }
+  #anand-portfolio-reimagined .ap-portrait-area { width:100%; }
+  #anand-portfolio-reimagined .ap-portrait { width:250px; flex:none; }
+  #anand-portfolio-reimagined .ap-back-title { font-size:26px; margin-top:15px; }
+  #anand-portfolio-reimagined .ap-back-copy { font-size:12px; margin-top:14px; }
+  #anand-portfolio-reimagined .ap-photo-back { padding:20px; }
+  #anand-portfolio-reimagined .ap-proof { margin-inline:6%; gap:18px; }
+  #anand-portfolio-reimagined .ap-proof>div+div { padding-left:18px; }
+  #anand-portfolio-reimagined .ap-proof strong { font-size:21px; }
+  #anand-portfolio-reimagined .ap-welcome-panel { margin-inline:6%; gap:16px; grid-template-columns:145px minmax(0,1fr); padding:14px 18px 14px 6px; }
+  #anand-portfolio-reimagined .ap-welcome-panel .ap-atmosphere-stage { width:145px; height:145px; }
+  #anand-portfolio-reimagined :is(.ap-scene,.ap-chapter,.cj-chapter,#contact) { scroll-margin-top:155px; }
+  #anand-portfolio-reimagined #linkedin-curated { grid-template-columns:minmax(0,1fr); }
+}
+@media(max-width:560px) {
+  #anand-portfolio-reimagined .ap-overline { font-size:11px; letter-spacing:.9px; }
+  #anand-portfolio-reimagined h1 { font-size:clamp(43px,12vw,64px); margin:18px 0 22px; }
+  #anand-portfolio-reimagined .ap-current-role { font-size:14px; }
+  #anand-portfolio-reimagined .ap-introduction { font-size:15px; line-height:1.8; }
+  #anand-portfolio-reimagined .ap-hero-actions { gap:10px; }
+  #anand-portfolio-reimagined :is(.ap-primary-action,.ap-secondary-action) { font-size:12px; gap:14px; padding-inline:16px; }
+  #anand-portfolio-reimagined .ap-identity { font-size:11px; }
+  #anand-portfolio-reimagined .ap-proof { grid-template-columns:minmax(0,1fr); gap:18px; padding:24px 0; }
+  #anand-portfolio-reimagined .ap-proof>div { display:grid; grid-template-columns:110px minmax(0,1fr); gap:12px; align-items:start; }
+  #anand-portfolio-reimagined .ap-proof>div+div { padding:0; border:0; }
+  #anand-portfolio-reimagined .ap-proof dt { padding-top:3px; font-size:10px; }
+  #anand-portfolio-reimagined .ap-proof dd { margin:0; gap:3px; }
+  #anand-portfolio-reimagined .ap-proof strong { font-size:20px; }
+  #anand-portfolio-reimagined .ap-proof dd>span { font-size:12px; }
+  #anand-portfolio-reimagined .ap-welcome-panel { grid-template-columns:minmax(0,1fr); gap:12px; padding:20px; }
+  #anand-portfolio-reimagined .ap-welcome-panel .ap-atmosphere-stage { width:100%; height:130px; }
+  #anand-portfolio-reimagined .ap-welcome-copy { grid-row:1; }
+  #anand-portfolio-reimagined .ap-welcome-heading h2 { font-size:20px; }
+  #anand-portfolio-reimagined .ap-motion-toggle { min-width:70px; padding-inline:10px; font-size:11px; }
+  #anand-portfolio-reimagined .ap-welcome-panel .ribbon-start { min-height:44px; }
+  #anand-portfolio-reimagined .ap-welcome-panel .ribbon-meta { gap:6px; flex-wrap:wrap; }
+  #anand-portfolio-reimagined .ap-scene { grid-template-columns:minmax(0,1fr) 88px; gap:12px; padding:8px 0 24px; min-height:0; }
+  #anand-portfolio-reimagined .ap-scene-art { order:0; width:88px; height:130px; margin:0; }
+  #anand-portfolio-reimagined .ap-scene-title { font-size:30px; letter-spacing:-1.3px; }
+  #anand-portfolio-reimagined .ap-scene-description { font-size:13px; }
+  #anand-portfolio-reimagined .cj-nav-copy { font-size:11px; }
+  #anand-portfolio-reimagined .cj-nav-copy small { font-size:10px; }
+  #anand-portfolio-reimagined .ap-note,#anand-portfolio-reimagined .ap-note:hover { padding:18px; }
+  #anand-portfolio-reimagined .ap-note h3 { font-size:28px; }
+  #anand-portfolio-reimagined .ap-note-actions :is(button,a) { font-size:12px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  #anand-portfolio-reimagined :is(.ap-primary-action,.ap-secondary-action):hover { transform:none; }
+}
+#anand-portfolio-reimagined[data-section-motion=still] :is(.ap-primary-action,.ap-secondary-action) { transition:none; }
+#anand-portfolio-reimagined[data-section-motion=still] :is(.ap-primary-action,.ap-secondary-action):hover { transform:none; }

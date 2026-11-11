@@ -38,7 +38,10 @@
   const legacyViews = { about: 'work', experience: 'work', focus: 'work', hobbies: 'off-duty' };
   const viewFromHash = () => {
     const hash = window.location.hash.slice(1);
-    return validViews.has(hash) ? hash : (legacyViews[hash] || 'work');
+    if (validViews.has(hash)) return hash;
+    if (legacyViews[hash]) return legacyViews[hash];
+    if (hash.startsWith('career-')) return 'work';
+    return root.dataset.view || 'work';
   };
   const showView = (view, shouldAnimate = true) => {
     if (!validViews.has(view)) return;

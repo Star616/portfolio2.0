@@ -6,6 +6,7 @@
   if(!audio||!stage||!controls)return;
   const start=stage.querySelector('.ribbon-start');
   const mute=controls.querySelector('.ribbon-mute');
+  const pause=controls.querySelector('.ribbon-pause');
   const label=controls.querySelector('.ribbon-label');
   const progress=controls.querySelector('.ribbon-progress');
   const clock=controls.querySelector('.ribbon-time');
@@ -49,8 +50,9 @@
     rootPlaying(playing);
     label.textContent=playing?(audio.muted?'ANAND’S WELCOME · MUTED':'ANAND’S WELCOME · PLAYING'):audio.ended?'THANK YOU FOR LISTENING':'A WELCOME FROM ANAND';
     start.hidden=playing;
-    start.textContent=audio.ended?'Hear Anand again':'Tap to hear Anand';
-    start.setAttribute('aria-label',audio.ended?'Replay Anand’s welcome':'Play Anand’s welcome');
+    start.textContent=audio.ended?'Hear it again':audio.currentTime>0?'Resume welcome':'Hear my welcome';
+    start.setAttribute('aria-label',audio.ended?'Replay Anand’s welcome':audio.currentTime>0?'Resume Anand’s welcome':'Play Anand’s welcome');
+    if(pause)pause.hidden=!playing;
     clock.textContent=time(audio.currentTime)+' / '+(Number.isFinite(audio.duration)?time(audio.duration):'1:38');
     progress.style.setProperty('--progress',Number.isFinite(audio.duration)?(audio.currentTime/audio.duration*100)+'%':'0%');
     mute.textContent=audio.muted?'Sound off':'Sound on';
@@ -70,14 +72,14 @@
     }finally{starting=false;sync();}
   }
   audio.controls=false;audio.hidden=true;controls.hidden=false;start.hidden=false;
-  audio.preload='auto';
+  audio.preload='metadata';
   audio.addEventListener('contextmenu',event=>event.preventDefault());
   start.addEventListener('click',()=>begin(true));
+  pause?.addEventListener('click',()=>audio.pause());
   mute.addEventListener('click',()=>{audio.muted=!audio.muted;sync();});
   ['play','pause','ended','loadedmetadata','timeupdate','volumechange'].forEach(name=>audio.addEventListener(name,sync));
   audio.addEventListener('error',()=>{status.textContent='The recording could not load. Please try again later.';sync();});
   sync();
-  // One autoplay attempt, with a clear opt-in when browser policy blocks sound.
-  void begin();
+  // The welcome starts only after a deliberate tap.
 })();
 

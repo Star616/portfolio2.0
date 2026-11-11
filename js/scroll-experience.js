@@ -5,12 +5,10 @@
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const compact=matchMedia('(max-width:820px)');
   const nav=root.querySelector('.ap-chapter-control');
-  const hero=root.querySelector('.ap-hero');
+  const header=root.querySelector('.ap-header');
+  const hero=root.querySelector('.ap-welcome-panel');
   const stage=root.querySelector('.ap-atmosphere-stage');
   const art=stage?.querySelector('canvas');
-  const sentinel=document.createElement('span');
-  sentinel.className='ap-nav-sentinel';sentinel.setAttribute('aria-hidden','true');
-  nav.before(sentinel);
   let frame=0,enabled=true,heroVisible=true;
   const animations=new Set();
   const canMove=()=>enabled&&!reduced.matches;
@@ -32,8 +30,7 @@
   // Passive scroll sampling. Only artwork moves; text and controls keep their positions.
   function update(){
     frame=0;
-    const top=sentinel.getBoundingClientRect().top;
-    nav.classList.toggle('is-docked',top<12);
+    header.classList.toggle('is-docked',window.scrollY>24);
     if(heroVisible&&hero&&stage&&art){
       const rect=hero.getBoundingClientRect();
       const progress=canMove()?Math.max(0,Math.min(1,-rect.top/Math.max(1,rect.height*.8))):0;
@@ -50,7 +47,9 @@
     // Keep the shared scene beneath the dock when navigating by touch, mouse, or keyboard.
     const panel=document.getElementById(button.dataset.view);
     const destination=root.querySelector('.ap-scene:not([hidden])')||panel;
-    if(panel&&!panel.hidden&&destination)destination.scrollIntoView({block:'start',behavior:canMove()?'smooth':'instant'});
+    if(panel&&!panel.hidden&&destination){
+      destination.scrollIntoView({block:'start',behavior:canMove()?'smooth':'instant'});
+    }
   });
   document.addEventListener('portfolio:viewchange',schedule);
   document.addEventListener('portfolio:motionchange',event=>{

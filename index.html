@@ -51,8 +51,19 @@
 <div id="anand-portfolio-reimagined" data-view="work" aria-label="Ananda Raj Nadar’s portfolio">
   <header class="ap-header">
     <a class="ap-wordmark" href="#top" aria-label="Anand home">anand<span>.</span></a>
-    <span class="ap-header-note">A PERSONAL PORTFOLIO</span>
-    <button class="ap-appearance" type="button" aria-label="Change appearance"><span class="ap-appearance-orb" aria-hidden="true"></span><span class="ap-appearance-label">Appearance</span></button>
+    <nav class="ap-chapter-control" aria-label="Portfolio sections">
+      <div class="ap-view-switch" role="tablist" aria-label="Explore Anand's portfolio">
+        <span class="ap-switch-halo" aria-hidden="true"></span>
+        <span class="ap-switch-thumb" aria-hidden="true"><span class="ap-switch-surface"></span></span>
+        <button id="ap-work-tab" class="ap-view-button" type="button" role="tab" aria-selected="true" aria-controls="work" tabindex="0" data-view="work">Work</button>
+        <button id="ap-notes-tab" class="ap-view-button" type="button" role="tab" aria-selected="false" aria-controls="notes" tabindex="-1" data-view="notes">Notes</button>
+        <button id="ap-life-tab" class="ap-view-button" type="button" role="tab" aria-selected="false" aria-controls="off-duty" tabindex="-1" data-view="off-duty">Off duty</button>
+      </div>
+    </nav>
+    <div class="ap-header-actions">
+      <a class="ap-header-contact" href="#contact">Contact <span aria-hidden="true">↗</span></a>
+      <button class="ap-appearance" type="button" aria-label="Change appearance"><span class="ap-appearance-orb" aria-hidden="true"></span><span class="ap-appearance-label">Appearance</span></button>
+    </div>
   </header>
 
   <main id="main-content">
@@ -60,18 +71,15 @@
       <div class="ap-hero-copy">
         <p class="ap-overline">SALES INSTINCT. BUILDER’S CURIOSITY.</p>
         <h1 id="ap-title">Technology.<br><span>With a<br>human touch.</span></h1>
-        <p class="ap-introduction">I’m Anand. I connect technology with the people<br class="ap-desktop-break"> and business problems it can serve.</p>
-        <div class="ap-welcome">
-<p class="ap-overline" id="welcome-voice-title">A WELCOME FROM ANAND</p>
-<audio id="anand-voice" controls controlslist="nodownload noremoteplayback" disableremoteplayback preload="auto" aria-labelledby="welcome-voice-title"><source src="audio/anand-welcome.m4a" type="audio/mp4">Your browser does not support audio playback.</audio>
-<p id="voice-status" class="voice-status" role="status"></p>
-</div>
-<div class="ap-identity"><span class="ap-location-dot" aria-hidden="true"></span><span>Ananda Raj Nadar <span class="ap-identity-divider">/</span> Chennai, India</span></div>
+        <p class="ap-current-role">Senior Account Manager <span>at</span> <span class="ap-current-company"><img src="images/companies/freshworks.webp" alt="" width="22" height="22">Freshworks</span></p>
+        <p class="ap-introduction">I’m Anand. I bring a computer science mind and a people-first approach to end-to-end sales and account strategy.</p>
+        <div class="ap-hero-actions">
+          <a class="ap-primary-action" href="mailto:anandarajnadar@gmail.com">Let’s connect <span aria-hidden="true">↗</span></a>
+          <a class="ap-secondary-action" href="uploads/resume.pdf" download>Download résumé <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="ap-identity"><span class="ap-location-dot" aria-hidden="true"></span><span>Ananda Raj Nadar <span class="ap-identity-divider">/</span> Chennai, India</span></div>
       </div>
       <div class="ap-portrait-area">
-        <div class="ap-atmosphere-stage" role="group" aria-label="Anand’s voice-reactive particle wave"><canvas class="ap-atmosphere-canvas" data-atmosphere="hero" aria-hidden="true"></canvas><button class="ribbon-start" type="button" aria-label="Play Anand’s welcome" aria-describedby="voice-status" hidden>Tap to hear Anand</button></div>
-        <div id="voice-controls" class="ribbon-controls" role="group" aria-label="Anand’s welcome recording" hidden><div class="ribbon-meta"><span class="ribbon-label">A WELCOME FROM ANAND</span><button class="ribbon-mute" type="button" aria-label="Mute Anand’s welcome" aria-pressed="false">Sound on</button></div><div class="ribbon-progress" aria-hidden="true"></div><span class="ribbon-time">0:00 / 1:38</span></div>
-        <div class="ap-art-caption"><span>MANY SIDES. ONE ANAND.</span><button class="ap-motion-toggle" type="button" aria-pressed="false">Motion on</button></div>
         <button class="ap-portrait" type="button" aria-label="Turn Anand's portrait over to read his introduction" aria-pressed="false">
           <span class="ap-photo-front" aria-hidden="false">
             <img src="images/ananda-raj-profile.png" alt="Anand at an AI control at scale event, shown in the original full frame" width="960" height="1280" fetchpriority="high" decoding="async">
@@ -84,15 +92,21 @@
     </section>
 
     <noscript><nav class="ap-no-script-nav" aria-label="Portfolio sections"><a href="#work">Work</a><a href="#notes">Notes</a><a href="#off-duty">Off duty</a></nav></noscript>
-    <div class="ap-chapter-control">
-      <div class="ap-view-switch" role="tablist" aria-label="Explore Anand's portfolio">
-        <span class="ap-switch-halo" aria-hidden="true"></span>
-        <span class="ap-switch-thumb" aria-hidden="true"><span class="ap-switch-surface"></span></span>
-        <button id="ap-work-tab" class="ap-view-button" type="button" role="tab" aria-selected="true" aria-controls="work" tabindex="0" data-view="work">Work</button>
-        <button id="ap-notes-tab" class="ap-view-button" type="button" role="tab" aria-selected="false" aria-controls="notes" tabindex="-1" data-view="notes">Notes</button>
-        <button id="ap-life-tab" class="ap-view-button" type="button" role="tab" aria-selected="false" aria-controls="off-duty" tabindex="-1" data-view="off-duty">Off duty</button>
+    <dl class="ap-proof" aria-label="Experience at a glance">
+      <div><dt>EXPERIENCE</dt><dd><strong>4+ years</strong><span>Sales &amp; account management</span></dd></div>
+      <div><dt>ACCOUNT FOCUS</dt><dd><strong>Enterprise to SMB</strong><span>Enterprise · Mid-market · SMB</span></dd></div>
+      <div><dt>MARKETS WORKED</dt><dd><strong>India &amp; APAC</strong><span>Plus North America</span></dd></div>
+    </dl>
+
+    <aside class="ap-welcome-panel" aria-labelledby="welcome-voice-title">
+      <div class="ap-atmosphere-stage" role="group" aria-label="Anand’s voice-reactive particle wave"><canvas class="ap-atmosphere-canvas" data-atmosphere="hero" aria-hidden="true"></canvas><button class="ribbon-start" type="button" aria-label="Play Anand’s welcome" aria-describedby="voice-status" hidden>Hear my welcome</button></div>
+      <div class="ap-welcome-copy">
+        <div class="ap-welcome-heading"><div><p class="ap-overline">A PERSONAL INTRODUCTION</p><h2 id="welcome-voice-title">A voice behind the work.</h2></div><button class="ap-motion-toggle" type="button" aria-pressed="false">Motion on</button></div>
+        <audio id="anand-voice" controls controlslist="nodownload noremoteplayback" disableremoteplayback preload="metadata" aria-labelledby="welcome-voice-title"><source src="audio/anand-welcome.m4a" type="audio/mp4">Your browser does not support audio playback.</audio>
+        <div id="voice-controls" class="ribbon-controls" role="group" aria-label="Anand’s welcome recording" hidden><div class="ribbon-meta"><span class="ribbon-label">A WELCOME FROM ANAND</span><div class="ribbon-buttons"><button class="ribbon-pause" type="button" aria-label="Pause Anand’s welcome" hidden>Pause</button><button class="ribbon-mute" type="button" aria-label="Mute Anand’s welcome" aria-pressed="false">Sound on</button></div></div><div class="ribbon-progress" aria-hidden="true"></div><span class="ribbon-time">0:00 / 1:38</span></div>
+        <p id="voice-status" class="voice-status" role="status"></p>
       </div>
-    </div>
+    </aside>
 
     <div class="ap-panels">
       <header class="ap-scene" aria-labelledby="ap-scene-title" hidden>
@@ -105,11 +119,6 @@
       </header>
       <section id="work" role="tabpanel" aria-labelledby="ap-work-tab" class="ap-chapter">
         <div class="ap-section-top"><span class="ap-overline">01 / THE WORK</span><span class="ap-small-note">Enterprise · Mid-market · SMB</span></div>
-        <div class="cj-summary" aria-label="Overall experience">
-          <p class="cj-experience"><strong>4+ <span>years</span></strong><span>in sales &amp; account management</span></p>
-          <p class="cj-summary-copy">From the first conversation<br>to lasting customer relationships.</p>
-          <p class="cj-summary-since">CAREER SINCE <time datetime="2022-02">FEB 2022</time></p>
-        </div>
         <div class="cj-layout">
           <aside class="cj-overview" aria-labelledby="cj-title">
             <p class="ap-overline">SIX CHAPTERS. ONE THREAD.</p>
@@ -211,6 +220,7 @@ Earn the conversation.</h3>
           <div id="linkedin-provider" hidden></div>
           <div id="linkedin-curated">
             <article class="ap-note" data-post="crm">
+              <a class="ap-note-preview" href="https://www.linkedin.com/posts/anandarajnadar_servicenow-crm-manufacturing-activity-7504218539453759488-JKnW" target="_blank" rel="noopener noreferrer" aria-label="Watch Anand’s manufacturing CRM story on LinkedIn"><img src="images/stories/manufacturing-crm.webp" alt="Where’s my order? Cover of Anand’s manufacturing CRM story" width="1000" height="563" loading="lazy" decoding="async"></a>
               <div class="ap-note-meta"><span>MANUFACTURING / CRM</span><span>From LinkedIn</span></div>
               <h3>Every order carries<br>a customer promise<span>.</span></h3>
               <p>A short animation exploring how a pricing mismatch can hold up an order—and how connected teams can move it forward. An illustrative Indian FMCG story I created to make the business problem tangible.</p>
@@ -218,6 +228,7 @@ Earn the conversation.</h3>
               <div id="linkedin-crm" class="ap-embed-slot" hidden></div>
             </article>
             <article class="ap-note ap-note-secondary" data-post="factory">
+              <a class="ap-note-preview" href="https://www.linkedin.com/posts/anandarajnadar_servicenow-manufacturing-fmcg-activity-7502251126189252608-2UZf" target="_blank" rel="noopener noreferrer" aria-label="Watch Anand’s factory response story on LinkedIn"><img src="images/stories/factory-response.webp" alt="One fault. A dispatch at risk. Cover of Anand’s factory response story" width="1000" height="563" loading="lazy" decoding="async"></a>
               <div class="ap-note-meta"><span>MANUFACTURING / OPERATIONS</span><span>From LinkedIn</span></div>
               <h3>When a line stops,<br>the response matters<span>.</span></h3>
               <p>One equipment fault can affect production, dispatch, and the customer’s shelf. My factory-floor animation explores what a coordinated response across maintenance, IT, and production could look like.</p>
