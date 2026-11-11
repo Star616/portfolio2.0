@@ -4,7 +4,7 @@
   const stage=document.querySelector('.ap-atmosphere-stage');
   const controls=document.getElementById('voice-controls');
   if(!audio||!stage||!controls)return;
-  const start=stage.querySelector('.ribbon-start');
+  const start=controls.querySelector('.ribbon-start');
   const mute=controls.querySelector('.ribbon-mute');
   const pause=controls.querySelector('.ribbon-pause');
   const label=controls.querySelector('.ribbon-label');

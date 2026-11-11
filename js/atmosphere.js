@@ -4,8 +4,6 @@
   if (!root) return;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const compact = matchMedia('(max-width:820px)');
-  const toggle = root.querySelector('.ap-motion-toggle');
-  let paused = false;
   const scenes = [];
   const TAU = Math.PI * 2;
   const mix = (a,b,t) => a+(b-a)*t;
@@ -39,7 +37,7 @@
     function resize(){const r=canvas.getBoundingClientRect();width=r.width;height=r.height;dpr=Math.min(devicePixelRatio||1,compact.matches?1.5:2);const nextBands=compact.matches?18:26,nextSamples=compact.matches?52:64;if(nextBands!==bands||nextSamples!==samples){bands=nextBands;samples=nextSamples;scene.current=[];}canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);render(0,true);}
     function render(stamp,still=false){
       if(!width||!height)return;
-      const moving=!paused&&!reduced.matches&&!still;
+      const moving=!reduced.matches&&!still;
       const dt=Math.min(Math.max((stamp-scene.last)/1000,0),.05);
       if(moving && (scene.kind!=='listening'||scene.active))scene.time+=dt*.65;
       const blend=1-Math.exp(-dt*9);
@@ -77,13 +75,13 @@
       if(scene.kind!=='lifting')for(let n=0;n<5;n++){const p=project(form(scene.kind,(n*.193+scene.time*.007)%1,.5,scene.time,0));ctx.beginPath();ctx.arc(p[0],p[1],1.6,0,TAU);ctx.fillStyle=dark?'#e2eace':'#7e8c71';ctx.fill();}
     }
     function tick(stamp){
-      scene.frame=0;if(!scene.visible||document.hidden||paused||reduced.matches)return;
+      scene.frame=0;if(!scene.visible||document.hidden||reduced.matches)return;
       render(stamp);scene.last=stamp;
       const settled=scene.look.every((value,i)=>Math.abs(value-scene.pointer[i])<.001);
       if(scene.kind==='listening'&&!scene.active&&!scene.start&&stamp>scene.settleUntil&&settled)return;
       scene.frame=requestAnimationFrame(tick);
     }
-    scene.wake=()=>{if(paused||reduced.matches){render(0,true);return;}if(scene.visible&&!document.hidden&&!scene.frame){scene.last=performance.now();scene.frame=requestAnimationFrame(tick);}};
+    scene.wake=()=>{if(reduced.matches){render(0,true);return;}if(scene.visible&&!document.hidden&&!scene.frame){scene.last=performance.now();scene.frame=requestAnimationFrame(tick);}};
     scene.stop=()=>{cancelAnimationFrame(scene.frame);scene.frame=0;};
     scene.change=(next)=>{scene.kind=next;scene.start=0;scene.active=false;scene.settleUntil=performance.now()+800;scene.wake();};
     scene.act=()=>{scene.start=performance.now();if(scene.kind==='listening')scene.active=!scene.active;scene.wake();};
@@ -102,13 +100,12 @@
       canvas.parentElement.addEventListener('click',()=>scene.act());
     }
   });
-  const updateToggle=()=>{toggle.setAttribute('aria-pressed',String(paused));toggle.textContent=paused?'Motion off':'Motion on';toggle.setAttribute('aria-label',paused?'Enable artwork motion':'Disable artwork motion');toggle.disabled=reduced.matches;if(reduced.matches)toggle.textContent='Reduced motion';document.dispatchEvent(new CustomEvent('portfolio:motionchange',{detail:{enabled:!paused&&!reduced.matches}}));};
-  toggle.addEventListener('click',()=>{paused=!paused;updateToggle();scenes.forEach(scene=>paused?scene.stop():scene.wake());});
-  reduced.addEventListener('change',()=>{updateToggle();scenes.forEach(scene=>{scene.stop();scene.wake();});});
+  const syncMotion=()=>document.dispatchEvent(new CustomEvent('portfolio:motionchange',{detail:{enabled:!reduced.matches}}));
+  reduced.addEventListener('change',()=>{syncMotion();scenes.forEach(scene=>{scene.stop();scene.wake();});});
   document.addEventListener('visibilitychange',()=>scenes.forEach(scene=>document.hidden?scene.stop():scene.wake()));
   new MutationObserver(()=>scenes.forEach(scene=>scene.wake())).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
   document.addEventListener('portfolio:viewchange',()=>{for(const scene of scenes){scene.active=false;scene.start=0;}});
-  updateToggle();
+  syncMotion();
   root.dataset.atmosphereReady='true';
   // Career points reuse the real, keyboard-accessible company controls.
   const companies=Array.from(root.querySelectorAll('.ap-company-button'));

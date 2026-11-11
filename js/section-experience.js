@@ -22,7 +22,7 @@
   const mix=(a,b,t)=>a+(b-a)*t;
   const ease=t=>1-Math.pow(1-t,3);
   const animations=new Set();
-  let enabled=root.querySelector('.ap-motion-toggle')?.getAttribute('aria-pressed')!=='true';
+  let enabled=true;
   let view=content[root.dataset.view]?root.dataset.view:'work';
   let width=0,height=0,dpr=1,visible=false,frame=0,start=0,pending=false,last=0;
   let points=[],from=[],target=[],weights=tones[view].slice(),fromWeights=weights.slice(),targetWeights=weights.slice();
